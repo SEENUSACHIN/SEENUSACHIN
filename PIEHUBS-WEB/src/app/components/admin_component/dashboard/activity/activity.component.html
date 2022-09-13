@@ -1,0 +1,124 @@
+<div class="modal fade" id="createGoal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Create Activity</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" #closebutton aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div *ngIf="errorShow!=''" class="alert alert-danger">
+            <div>
+              {{errorShow}}
+            </div>
+          </div>
+          <div class="col-md-12 row">
+            <div class="col-md-6  mt-4">
+              <input class="form-control" [(ngModel)]="activityName" type="text" name="activity_name" placeholder="Activity Name">
+            </div>
+            <div class="col-md-6  mt-4">
+              <input class="form-control" [(ngModel)]="atoms"  type="number" name="atoms" placeholder="Atoms">
+            </div>
+          </div>
+          <div class="col-md-12 row">
+            <div class="col-md-6 mt-4">
+              <input class="form-control" [(ngModel)]="url"  type="text" name="url" placeholder="Url">
+            </div>
+            <div class="col-md-6 mt-4">
+              <select placeholder="Select Class"  #classSelect class="form-select" (change)="getSubjects(classSelect.value)" aria-label="Default select example">
+                <option selected value="" disabled>Select Class</option>
+                <option *ngFor="let cls of classes" [value]="cls['id']">{{cls['class_name']}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-12 row">
+            <div class="col-md-6 mt-4">
+              <select placeholder="Select Subject" #subSelect class="form-select" (change)="getChapter(subSelect.value)" aria-label="Default select example">
+                <option selected value="" disabled>Select Subject</option>
+                <option *ngFor="let sub of subjects" [value]="sub['id']">{{sub['subject_name']}}</option>
+              </select>
+            </div>
+            <div class="col-md-6 mt-4">
+              <select placeholder="Select Class" #chapSelect (change)="chapterId=chapSelect.value" class="form-select" aria-label="Default select example">
+                <option class="dropdown-item" selected value="" disabled>Select Chapter</option>
+                <option class="dropdown-item" *ngFor="let chapter of chapters" [value]="chapter['id']">{{chapter['chapter_name']}}</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="createActivity()">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<body id="page-top">
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <app-header></app-header>
+        <div class="container-fluid">
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+              <h1 class="h3 mb-0 text-gray-800">Activities</h1>
+              <div class="d-sm-flex align-items-center justify-content-between">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control  small"
+                            placeholder="Search..." aria-label="Search"
+                            aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <button data-bs-toggle="modal" data-bs-target="#createGoal" style="padding: 6.5px 12px" class="ml-2 d-sm-inline-block btn btn-sm btn-primary">Create</button>
+              </div>
+          </div>
+          <div *ngIf="activitylist.length != 0">
+            <table class="table table-borderless align-middle">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Activity Name</th>
+                  <th scope="col">Atoms</th>
+                  <th scope="col">Url</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Created On</th>
+                  <th scope="col">Updated On</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of activitylist">
+                  <td>{{item['activity_name']}}</td>
+                  <td>{{item['atoms']}}</td>
+                  <td width="10">{{item['url']}}</td>
+                  <td>{{item['status']}}</td>
+                  <td>{{item['created_on'] | date:'medium'}}</td>
+                  <td>{{item['updated_on'] | date:'medium'}}</td>
+                  <td>
+                    <i style="color:red" class="bi bi-trash3"></i> &nbsp;
+                    <i style="color:#04445D" class="bi bi-pencil"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="text-align: center" *ngIf="activitylist.length == 0">
+            No data found.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>

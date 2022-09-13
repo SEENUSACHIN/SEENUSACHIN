@@ -1,0 +1,166 @@
+<div class="signInPageclass">
+  <div class="signInclass">
+    <div class='logoArea'>
+      <img class="mylogo" src="../assets/myLogo.png" alt="">
+    </div>
+    <div class="card cardSize">
+      <div class="row logButtons">
+        <div class="col-auto">
+          <h3 class="signup"> <a type="button" (click)="signin()">Login</a> </h3>
+          <div class="underline"></div>
+        </div>
+        <div class="col-auto">
+          <h3 class="signup"> <a type="button" (click)="signup()">Sign Up</a> </h3>
+          <div class="underline"></div>
+        </div>
+      </div>
+      <form>
+        <div *ngIf="initialPage && !otpPage" class="card-body">
+          <br>
+          <div class="container">
+            <form [formGroup]="signinform" #formDir="ngForm">
+              <div [hidden]="formDir.submitted">
+                <div class="cross-validation"
+                  [class.cross-validation-error]="signinform.errors?.['identityRevealed'] && (signinform.touched || signinform.dirty)">
+                  <div class="mb-3 form-group">
+                    <input type="email" name="email" class=" emailInput" formControlName="email" id="email"
+                      placeholder="Email or Phone Number" required>
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                      <div *ngIf="email.errors?.['required']">
+                        Email is required.
+                      </div>
+                      <div *ngIf="email.errors?.['email']">
+                        Email format is wrong.
+                      </div>
+                    </div>
+                  </div>
+                  <!-- <div class="mb-3 form-group">
+                            <input type="text" name="username" class="form-control" formControlName="username" id="username" placeholder="Username" required>
+                            <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
+                              <div *ngIf="username.errors?.['required']">
+                                Username is required.
+                              </div>
+                            </div>
+                        </div> -->
+                  <div class="mb-3 form-group">
+                    <input type="password" name="password" class=" passwordInput" formControlName="password"
+                      id="password" placeholder="Password" required>
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+                      <!-- <i class="bi bi-eye"></i> -->
+                      <div *ngIf="password.errors?.['required']">
+                        Password is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between ">
+                    <div class="checkbox">
+                      <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                      <label for="vehicle1">Remember Me</label>
+                    </div>
+                    <a class="d-flex justify-content-end" href="#">Forgot password?</a>
+                  </div>
+                  <br>
+                </div>
+                <div class="center">
+                  <button type="submit" [disabled]="signinform.invalid" class="btn signBtn">Login</button>
+                </div>
+                <br>
+                <div class="othersignin">
+                  <h5 class="socialicon"><span>SOCIAL LOGIN</span></h5>
+                  <p>Connect With Social Media</p>
+                  <div class="social-container">
+                    <a class="social">
+                      <i class="bi bi-google" style="font-size: 25px;"></i>
+                    </a>
+                    <a class="social">
+                      <i class="bi bi-facebook" style="font-size: 25px;"></i>
+                    </a>
+                    <a class="social">
+                      <i class="bi bi-linkedin" style="font-size: 25px;"></i>
+
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="center">
+                <span>New to Pi-Hubs? </span>
+                <a type="button" class="card-link " (click)="signup()">Sign Up</a>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div *ngIf="!initialPage && !otpPage" class="card-body">
+          <br>
+          <div class="container">
+            <form [formGroup]="signupform" #formDir="ngForm">
+              <div [hidden]="formDir.submitted">
+                <div class="cross-validation"
+                  [class.cross-validation-error]="signupform.errors?.['identityRevealed'] && (signupform.touched || signupform.dirty)">
+                  <div class="mb-3 form-group">
+                    <input type="email" name="email" class="emailInput" formControlName="email" id="email"
+                      placeholder="Email" required>
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                      <div *ngIf="email.errors?.['required']">
+                        Email is required.
+                      </div>
+                      <div *ngIf="email.errors?.['email']">
+                        Email format is wrong.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3 form-group">
+                    <input type="tel" name="phone" class="emailInput
+                          passwordInput" formControlName="phone" id="phone" placeholder="Phone" required>
+                    <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger">
+                      <div *ngIf="phone.errors?.['required']">
+                        Phone number is required.
+                      </div>
+                      <div *ngIf="phone.errors?.['minLength']">
+                        Phone number must be at least 10 characters long..
+                      </div>
+                      <div *ngIf="phone.errors?.['pattern']">
+                        Phone number must be a numeric..
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="center">
+                  <button type="submit" [disabled]="signupform.invalid" (click)="sendOTP()" class="btn signBtn ">Sign
+                    Up</button>
+                </div>
+                <br>
+              </div>
+              <div class="center">
+                <span>Already have an account? </span>
+                <a type="button" class="card-link" (click)="signin()">Sign In</a>
+              </div>
+
+            </form>
+          </div>
+        </div>
+        <div *ngIf="otpPage" class="card-body">
+          <h5 class="card-title">OTP Verification</h5>
+          <div class="container">
+            <form>
+              <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
+              <div class="d-flex justify-content-center">
+                <a type="button" class="card-link" (click)="signin()">Resend OTP</a>
+              </div>
+              <br>
+              <div class="center">
+                <button type="button" class="btn btn-success" (click)="verifyOTP()">Verify</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="bodyDesign">
+    <div class="rightContent">
+      <div class="half-circle"></div>
+      <div class="half-circle1"></div>
+      <div class="half-circle2"></div>
+    </div>
+  </div>
+</div>

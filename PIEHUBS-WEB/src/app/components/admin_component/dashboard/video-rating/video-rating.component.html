@@ -1,0 +1,150 @@
+<div class="modal fade" id="rateVideo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Rate this video</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="ratingform" #formDir="ngForm">
+        <div class="modal-body">
+          <div class="cross-validation"
+          [class.cross-validation-error]="ratingform.errors?.['identityRevealed'] && (ratingform.touched || ratingform.dirty)">
+            <div class="col-md-12 row mt-4 form-group">
+              <input class="form-control" name="rate" id="rate" formControlName="rate" placeholder="Enter Rate"  type="number" max="100" min="0"/>
+              <div *ngIf="rate.invalid && (rate.dirty || rate.touched)" class="alert alert-danger">
+                <div *ngIf="rate.errors?.['required']">
+                  Please rate this video.
+                </div>
+                <div *ngIf="rate.errors?.['min'] || rate.errors?.['max']">
+                  The value should be in 0 to 100..
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 row mt-4 form-group">
+              <textarea class="form-control" aria-label="With textarea" placeholder="Enter comments" name="comments" id="comments" formControlName="comments"></textarea>
+              <div *ngIf="comments.invalid && (comments.dirty || comments.touched)" class="alert alert-danger">
+                <div *ngIf="comments.errors?.['required']">
+                  Please enter the comments.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="viewRating"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">View Rating</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form  [formGroup]="ratingform" #formDir="ngForm">
+        <div class="modal-body">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-3">
+                <label>Rating : </label>
+              </div>
+              <div class="col-md-8">
+                <label>30</label>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-3">
+                <label>Comments : </label>
+              </div>
+              <div class="col-md-8">
+                <label>abc</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" *ngIf="!editRating" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="viewVideo1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Project Video</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close" (click)="playvdo(false)"></button>
+      </div>
+      <div class="modal-body">
+        <div style="text-align: center;">
+          <video (playing)="vdoPlay" controls src="../../../../../assets/sample.mp4"></video>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<body id="page-top">
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <app-header></app-header>
+        <div class="container-fluid">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Video Rating</h1>
+            <div class="d-sm-flex align-items-center justify-content-between">
+              <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+                      <input type="text" class="form-control  small"
+                          placeholder="Search..." aria-label="Search"
+                          aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                          <button class="btn btn-primary" type="button">
+                              <i class="bi bi-search"></i>
+                          </button>
+                      </div>
+                  </div>
+              </form>
+            </div>
+          </div>
+          <table class="table table-borderless align-middle">
+            <tbody>
+              <tr data-bs-toggle="modal" data-bs-target="#viewVideo1" *ngFor="let item of vdolist">
+                <td [width]="10">
+                  <img class="round" *ngIf="item.profile =='' || item.profile ==null" src="../../../../../assets/default.png">
+                  <img class="round"*ngIf="item.profile !='' && item.profile != null" src=`${item.profile}`>
+                </td>
+                <td>
+                  <div><span style="color: black; font-weight: 500;">Name : </span>{{item.name}}</div>
+                  <div><span style="color: black; font-weight: 500;">Class : </span>{{item.class}}</div>
+                  <div><span style="color: black; font-weight: 500;">School : </span>{{item.school}}</div>
+                  <!-- <div>Name : {{item.date}}</div> -->
+                </td>
+                <td>{{item.activity_name}}</td>
+                <td>{{item.score}}</td>
+                <td>
+                  <div class="topDateClass">
+                    Uploaded on: 08-09-2022
+                  </div>
+                  <br>
+                  <div style="text-align: end">
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#rateVideo">Rate</button>&nbsp;
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewRating">View</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

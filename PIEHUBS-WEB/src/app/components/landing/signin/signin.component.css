@@ -1,0 +1,181 @@
+.cardSize {
+    width: 26rem;
+    border: none;
+}
+.signInclass {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.center {
+    text-align: center;
+}
+
+.login,
+.signup{
+  color: #04445D;
+/* text-decoration: underline; */
+}
+.underline{
+  border-bottom: 5px solid #04445D ;
+}
+.mylogo{
+  height: 100px;
+}
+.logoArea{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: center;
+  /* padding-top: 50px; */
+}
+.logButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.signInPageclass{
+display: grid;
+background-color: #EDF3F3;
+grid-template-columns: 50% 50%;
+justify-items: end;
+align-items: center;
+/* margin-top: 0rem; */
+}
+.half-circle {
+  position:absolute;
+    width: 60vh;
+    height: 100%;
+    background-color: #04445D;
+    border-bottom-left-radius: 600px;
+    border-top-left-radius: 600px;
+    /* border: 5px solid gray; */
+    border-left: 0;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index:3;
+    /* top:10px;
+    left:20px; */
+}
+.half-circle2 {
+  position:absolute;
+    width: 70vh;
+    height: 100%;
+    background-color: #618899;
+    border-bottom-left-radius: 600px;
+    border-top-left-radius: 600px;
+    /* border: 5px solid gray; */
+    border-left: 0;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /* top:10px;
+    left:20px; */
+    z-index:2;
+}
+.half-circle1 {
+    position:absolute;
+    width: 80vh;
+    height: 100%;
+    background-color: #BDCFD3;
+    border-bottom-left-radius: 600px;
+    border-top-left-radius: 600px;
+    /* border: 5px solid gray; */
+    border-left: 0;
+    /* top:10px;
+    left:20px; */
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index:1;
+}
+.leftContent{
+
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+  /* margin-top: 150px; */
+
+}
+.rightContent{
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+}
+.emailInput,
+.passwordInput{
+  width: 100%;
+  /* background-color: white; */
+  outline: 0;
+  border: none;
+  border-bottom: 2px solid lightgray;
+  padding: 8px 0px;
+  border-radius: 0;
+}
+.signBtn{
+  background-color: #04445D;
+  border-radius: 20px;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+.resetPassword{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+.checkbox{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding-right: 3px;
+}
+ .socialicon{
+  width: 100%;
+  text-align: center;
+  border-bottom: 2px solid lightgray;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+  color: #04445D;
+}
+
+.socialicon span {
+   /* background:#fff; */
+   padding:0 10px;
+}
+.social-container {
+	margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+.social-container a {
+	border: 1px solid #04445D;
+	border-radius: 50%;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 5px;
+	height: 50px;
+	width: 50px;
+
+}
+.othersignin, p{
+  text-align: center;
+}

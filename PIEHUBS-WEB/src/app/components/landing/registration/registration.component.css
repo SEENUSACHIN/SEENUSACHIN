@@ -1,0 +1,13 @@
+.cardSize {
+  width: 25rem;
+}
+.signInclass {
+  display: flex;
+  justify-content: center;
+}
+.center {
+  text-align: center;
+}
+.signInPageclass {
+  margin-top: 5rem;
+}

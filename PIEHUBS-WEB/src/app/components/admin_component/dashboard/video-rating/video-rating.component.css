@@ -1,0 +1,18 @@
+.round {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  padding: 7px;
+}
+ngb-rating {
+  color: #04445D;
+  font-size: 30px;
+}
+.starRating{
+  text-align: center;
+}
+.topDateClass {
+  text-align: end;
+  color: #04445D;
+  font-size: 12px;
+}
