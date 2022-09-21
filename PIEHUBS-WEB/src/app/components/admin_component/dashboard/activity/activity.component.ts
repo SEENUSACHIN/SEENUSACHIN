@@ -3,6 +3,7 @@ import { IDropdownSettings, } from 'ng-multiselect-dropdown';
 import {Router} from '@angular/router';
 import { ManageServiceService } from '../../manage-service.service';
 import { NotificationService } from '../../../../notification.service'
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-activity',
@@ -21,11 +22,22 @@ export class ActivityComponent implements OnInit {
   subId = ''
   chapterId = ''
   errorShow = ''
+  createActivityform!: FormGroup
 
   @ViewChild('closebutton') closebutton : any;
-  constructor(private route:Router, private manage: ManageServiceService, private notifyService : NotificationService) { }
+  constructor(
+    private route:Router,
+    private manage: ManageServiceService,
+    private notifyService : NotificationService,
+    private fb: FormBuilder
+    ) { }
 
   ngOnInit(): void {
+    this.createActivityform = new FormGroup({
+      activity_name: new FormControl("", Validators.required),
+      atoms: new FormControl("", Validators.required),
+      url: new FormControl("", Validators.required),
+    })
     this.getActivities()
     this.getClasses()
   }
@@ -78,11 +90,11 @@ export class ActivityComponent implements OnInit {
   }
   createActivity () {
     console.log('classId', this.classId)
-    if(this.activityName == '') {
+    if(this.createActivityform.value.activity_name == '') {
       this.errorShow = "Please enter the Activity name."
-    } else if (this.atoms == '') {
+    } else if (this.createActivityform.value.atoms == '') {
       this.errorShow = "Please enter the Atoms."
-    } else if (this.url == '') {
+    } else if (this.createActivityform.value.url == '') {
       this.errorShow = "Please enter the Url."
     } else if (this.classId == '') {
       this.errorShow = "Please select the Class."
@@ -92,9 +104,9 @@ export class ActivityComponent implements OnInit {
       this.errorShow = "Please select the Chapter."
     } else {
       var data = {
-        activity_name : this.activityName,
-        atoms : this.atoms,
-        url : this.url,
+        activity_name : this.createActivityform.value.activity_name,
+        atoms : this.createActivityform.value.atoms,
+        url : this.createActivityform.value.url,
         class_id : this.classId,
         subject_id : this.subId,
         chapter_id : this.chapterId

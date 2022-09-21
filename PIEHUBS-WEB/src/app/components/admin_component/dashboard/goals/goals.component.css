@@ -12,3 +12,8 @@
   border-color: #04445D;
   box-shadow: 0 0 3px #04445D;
 }
+.ng-select.custom ::ng-deep .ng-select-container  {
+  min-height: 0px;
+  border-radius: 0;
+  height: 35px;
+}

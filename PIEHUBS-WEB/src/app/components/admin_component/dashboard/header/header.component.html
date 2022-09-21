@@ -1,9 +1,16 @@
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
   <!-- Topbar Search -->
+  <!-- <button id="check">click me </button> -->
+  <div class="sidebarButton"  id="accordionSidebarHidden">
+    <!-- Sidebar - Brand -->
+    <div class="sidebarHideIcon" id="sidebarToggle" (click)="sidebarToggle()">
+      <i class="bi bi-list"></i>
+    </div>
+  </div>
+  <h1 class="h3 mb-0 text-gray-800">{{header}}</h1>
   <ul class="navbar-nav ml-auto">
     <!-- Nav Item - User Information -->
     <!-- Example single danger button -->
-
     <li class="nav-item dropdown no-arrow">
       <div class="dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"

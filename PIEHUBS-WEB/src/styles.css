@@ -203,6 +203,29 @@ button.toast-close-button {
 body {
   font-size: 0.9rem;
 }
-input {
+/* input {
   font-size: 0.9rem;
+} */
+label {
+  color: #363636;
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.form-control , .form-select{
+  color: #999999 !important;
+  font-size: 0.9rem !important;
+  border-radius: 0rem !important
+ }
+.searchClass {
+  border: 1px solid lightgrey;
+  padding-left: 10px;
+}
+.searchClass:focus {
+  outline: 1px solid rgb(151, 151, 151);
+}
+
+.form-control:focus, .form-select:focus, .btn:focus {
+  box-shadow:none !important;
+  border: 1px solid rgb(151, 151, 151) !important;
 }

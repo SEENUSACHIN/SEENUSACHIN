@@ -52,7 +52,7 @@ export class AdminSigninComponent implements OnInit {
         if (response.success == true) {
           this.signinRes = response;
           localStorage.setItem('token', this.signinRes.token)
-          localStorage.setItem('user_id', '74c5fcac-4b28-49bc-b0f1-880784376936')
+          localStorage.setItem('user_id', this.signinRes.user_id)
           this.route.navigate(['/admin_dashboard']);
           this.notifyService.showSuccess("Login success!", "")
         } else {

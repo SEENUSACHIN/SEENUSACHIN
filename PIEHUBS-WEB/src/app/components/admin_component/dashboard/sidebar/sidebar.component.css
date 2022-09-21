@@ -1,0 +1,51 @@
+.sidebarButton {
+  /* display: none; */
+  z-index: 1;
+  position: relative;
+  /* margin-top: 10px; */
+  /* margin-left: 10px; */
+}
+.sidebarHideIcon {
+  background-color: #04445D;
+  border-radius: 50%;
+  color: white;
+  font-size: 24px;
+  padding: 7px 13px;
+}
+.sidebarIcon {
+  /* background-color: white;
+  border-radius: 50%; */
+  color: white;
+  /* font-size: 17px; */
+  margin-right:10px;
+}
+.bottomSidebar {
+  bottom: 0px;
+}
+.sidebarText {
+  /* display: none !important; */
+}
+/* @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  #accordionSidebarHidden {
+    display: block;
+  }
+  #accordionSidebar {
+    display: none;
+  }
+}
+@media only screen and (min-device-width: 481px) and (max-device-width: 768px) {
+  #accordionSidebarHidden {
+    display: block;
+  }
+  #accordionSidebar {
+    display: none;
+  }
+}
+@media only screen and (min-device-width: 769px) and (max-device-width: 1024px) {
+  #accordionSidebarHidden {
+    display: block;
+  }
+  #accordionSidebar {
+    display: none;
+  }
+} */

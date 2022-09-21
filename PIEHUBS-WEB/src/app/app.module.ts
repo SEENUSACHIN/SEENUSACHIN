@@ -22,6 +22,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ActivityComponent } from './components/admin_component/dashboard/activity/activity.component';
 import { HeaderComponent } from './components/admin_component/dashboard/header/header.component';
 import { SidebarComponent } from './components/admin_component/dashboard/sidebar/sidebar.component';
+import { ClassesComponent } from './components/admin_component/dashboard/classes/classes.component';
+import { SubjectsComponent } from './components/admin_component/dashboard/subjects/subjects.component';
+import { ChaptersComponent } from './components/admin_component/dashboard/chapters/chapters.component';
+import { TopicsComponent } from './components/admin_component/dashboard/topics/topics.component';
+import { SubTopicsComponent } from './components/admin_component/dashboard/sub-topics/sub-topics.component';
 
 const routes: Routes = [
   {path:'', redirectTo: localStorage.getItem('token') != null && localStorage.getItem('token') != '' ? 'admin_dashboard' : 'admin_signin', pathMatch: 'full'},
@@ -33,9 +38,18 @@ const routes: Routes = [
   {path:'admin_dashboard', component: DashboardLayoutComponent},
   {path:'admin_goals', component: GoalsComponent},
   {path:'video_rating', component: VideoRatingComponent},
-  {path:'admin_activity', component: ActivityComponent}
+  {path:'admin_activity', component: ActivityComponent},
+  {path:'admin_classes', component: ClassesComponent},
+  {path:'admin_subjects', component: SubjectsComponent},
+  {path:'admin_chapters', component: ChaptersComponent},
+  {path:'admin_topics', component: TopicsComponent},
+  {path:'admin_subtopics', component: SubTopicsComponent}
 ];
-
+declare global {
+  interface Window {
+    resize?: any;
+  }
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +62,12 @@ const routes: Routes = [
     VideoRatingComponent,
     ActivityComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    ClassesComponent,
+    SubjectsComponent,
+    ChaptersComponent,
+    TopicsComponent,
+    SubTopicsComponent
   ],
   imports: [
     CommonModule,
@@ -65,7 +84,9 @@ const routes: Routes = [
     ToastrModule.forRoot(),
     NgSelectModule
   ],
-  providers: [],
+  providers: [
+    { provide: Window, useValue: window }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

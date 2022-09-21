@@ -58,3 +58,15 @@
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
 }
+.btn-primary:hover {
+  color: #fff;
+  background-color: #04445D;
+  border-color: #04445D;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+  color: #fff;
+  background-color: #04445D;
+  border-color: #04445D;
+  box-shadow: 0 0 0 0.2rem rgba(105, 136, 228, 0.5);
+}

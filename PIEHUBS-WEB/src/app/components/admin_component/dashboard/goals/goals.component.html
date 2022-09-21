@@ -14,9 +14,11 @@
           </div>
           <div class="col-md-12 row">
             <div class="col-md-6 form-group">
+              <label>Goal Name</label>
               <input class="form-control" formControlName="goalname" type="text" name="goalname" placeholder="Goal Name">
             </div>
             <div class="col-md-6 form-group">
+              <label>Class</label>
               <select placeholder="Select Class"  #classSelect class="form-select" (change)="getSubjects(classSelect.value)" aria-label="Default select example">
                 <option selected value="" disabled>Select Class</option>
                 <option *ngFor="let cls of classes" [value]="cls['id']">{{cls['class_name']}}</option>
@@ -25,27 +27,32 @@
           </div>
           <div class="col-md-12 row">
             <div class="col-md-6 form-group">
+              <label>Subject</label>
               <select placeholder="Select Subject" #subSelect class="form-select" (change)="getChapter(subSelect.value)" aria-label="Default select example">
                 <option selected value="" disabled>Select Subject</option>
                 <option *ngFor="let sub of subjects" [value]="sub['id']">{{sub['subject_name']}}</option>
               </select>
             </div>
             <div class="col-md-6 form-group">
-              <select placeholder="Select Class" #chapSelect (change)="chapterId=chapSelect.value" class="form-select" aria-label="Default select example">
-                <option class="dropdown-item" selected value="" disabled>Select Chapter</option>
-                <option class="dropdown-item" *ngFor="let chapter of chapters" [value]="chapter['id']">{{chapter['chapter_name']}}</option>
+              <label>Chapter</label>
+              <select placeholder="Select Chapter" #chapSelect (change)="getActivities(chapSelect.value)" class="form-select" aria-label="Default select example">
+                <option selected value="" disabled>Select Chapter</option>
+                <option *ngFor="let chapter of chapters" [value]="chapter['id']">{{chapter['chapter_name']}}</option>
               </select>
             </div>
           </div>
           <div class="col-md-12 row">
             <div class="col-md-6 form-group">
+              <label>Week</label>
               <select placeholder="Select Week" #weekSelect (change)="weekId=weekSelect.value" class="form-select" aria-label="Default select example">
                 <option selected value="" disabled>Select Week</option>
                 <option *ngFor="let week of weeks" :value="week">{{week}}</option>
               </select>
             </div>
-            <div class="col-md-6 form-group">
+            <div class="col-md-6 form-group ">
+              <label>Activity</label>
               <ng-select
+                class="custom"
                 [items]="activitylist"
                 bindLabel="activity_name"
                 bindValue="id"
@@ -53,7 +60,6 @@
                 [multiple]="true"
                 [closeOnSelect] = "false"
                 (change)="onSelect($event)"
-
                 dropdownPosition="auto"
                 formControlName="selectedAct"
                 >
@@ -62,7 +68,7 @@
           </div>
           <div class="col-md-12">
             <div class="col-md-8" *ngIf="selectedCar.length != 0">
-              <label style="font-weight:bold">Selected Activities</label>
+              <label>Selected Activities</label>
               <div *ngFor="let item of selectedCar">
                 <div class="d-flex">
                   <span class="doc-name col-md-8 p-1">{{ item['activity_name'] }}</span>
@@ -89,33 +95,34 @@
 <body id="page-top">
   <div id="wrapper">
     <!-- Sidebar -->
-    <app-sidebar></app-sidebar>
+    <app-sidebar activiTab="goals"></app-sidebar>
     <!-- End of Sidebar -->
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
       <div id="content">
-        <app-header></app-header>
+        <app-header header="Weekly Goals"></app-header>
         <div class="container-fluid">
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-              <h1 class="h3 mb-0 text-gray-800">Weekly Goals</h1>
+            <span></span>
               <div class="d-sm-flex align-items-center justify-content-between">
                 <form class="form-inline mr-auto w-100 navbar-search">
                     <div class="input-group">
-                        <input type="text" class="form-control  small"
+                        <input type="text" class="searchClass"
                             placeholder="Search..." aria-label="Search"
                             aria-describedby="basic-addon2">
                         <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
+                            <button class="btn btn-primary">
                                 <i class="bi bi-search"></i>
                             </button>
                         </div>
+                        <button data-bs-toggle="modal"  type="button" data-bs-target="#createGoal" style="padding: 6.5px 12px" class="ml-2 d-sm-inline-block btn btn-sm btn-primary">Create</button>
                     </div>
                 </form>
-                <button data-bs-toggle="modal" data-bs-target="#createGoal" style="padding: 6.5px 12px" class="ml-2 d-sm-inline-block btn btn-sm btn-primary">Create</button>
+                <!-- <button data-bs-toggle="modal" data-bs-target="#createGoal" style="padding: 6.5px 12px" class="ml-2 d-sm-inline-block btn btn-sm btn-primary">Create</button> -->
               </div>
           </div>
-          <div *ngIf="goalslist.length != 0">
+          <div class="table_wrapper" *ngIf="goalslist.length != 0">
             <table class="table table-borderless align-middle">
               <thead class="thead-light">
                 <tr>
@@ -126,7 +133,7 @@
                   <th scope="col">Class</th>
                   <th scope="col">Project Name</th>
                   <th scope="col">Activities List</th>
-                  <th scope="col">Action</th>
+                  <!-- <th scope="col">Action</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -142,10 +149,10 @@
                       {{act}}
                     </div>
                   </td>
-                  <td>
+                  <!-- <td>
                     <button class="btn btn-sm btn-light"><i style="color:red" class="bi bi-trash3"></i></button> &nbsp;
                     <button class="btn btn-sm btn-light"><i style="color:#4e73df" class="bi bi-pencil"></i></button>
-                  </td>
+                  </td> -->
                 </tr>
               </tbody>
             </table>

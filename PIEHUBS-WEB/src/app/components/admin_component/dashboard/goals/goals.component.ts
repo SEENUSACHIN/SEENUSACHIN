@@ -41,19 +41,6 @@ export class GoalsComponent implements OnInit {
     this.getGoals()
     this.getClasses()
   }
-
-  gotoGoals () {
-    this.route.navigate(['/admin_goals']);
-  }
-  gotoVdoRating () {
-    this.route.navigate(['/video_rating']);
-  }
-  gotoDashboard () {
-    this.route.navigate(['/admin_dashboard']);
-  }
-  gotoActivity () {
-    this.route.navigate(['/admin_activity']);
-  }
   onSelect (e : any) {
     this.selectedCar = e
   }
@@ -98,9 +85,10 @@ export class GoalsComponent implements OnInit {
       });
     }
   }
-  getActivities () {
-    this.manage.getActivity().subscribe((response: any) => {
-      console.log('getActivity', response);
+  getActivities (id : any) {
+    this.chapterId = id
+    this.manage.getAdminActivity(this.chapterId).subscribe((response: any) => {
+      console.log('getAdminActivity', response);
       if(response.success) {
         this.activitylist = response.activity
       }
@@ -112,7 +100,7 @@ export class GoalsComponent implements OnInit {
         this.goalslist = response.goal
       }
     });
-    this.getActivities()
+    // this.getActivities()
   }
   getClasses () {
     this.manage.getClasses().subscribe((response: any) => {
