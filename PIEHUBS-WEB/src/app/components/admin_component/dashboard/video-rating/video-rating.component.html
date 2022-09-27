@@ -126,14 +126,14 @@
                     <img class="round"*ngIf="item.profile !='' && item.profile != null" src=`${item.profile}`>
                   </td>
                   <td>
-                    <div><span style="color: black; font-weight: 500;">Name : </span>{{item.name}}</div>
-                    <div><span style="color: black; font-weight: 500;">Class : </span>{{item.class}}</div>
-                    <div><span style="color: black; font-weight: 500;">School : </span>{{item.school}}</div>
+                    <div><label>Name :</label> {{item.name}}</div>
+                    <div><label>Class :</label> {{item.class}}</div>
+                    <div><label>School :</label> {{item.school}}</div>
                     <!-- <div>Name : {{item.date}}</div> -->
                   </td>
                   <td>
                     <span>
-                      {{item.activity_name}}
+                      <label>Activity :</label> {{item.activity_name}}
                     </span>
                     <div style="text-align: start">
                       <a  data-bs-toggle="modal" data-bs-target="#viewVideo1"  href="#"><i class="bi bi-play-circle-fill" style="color: #04445D;"></i></a>

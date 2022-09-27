@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,6 +28,7 @@ import { SubjectsComponent } from './components/admin_component/dashboard/subjec
 import { ChaptersComponent } from './components/admin_component/dashboard/chapters/chapters.component';
 import { TopicsComponent } from './components/admin_component/dashboard/topics/topics.component';
 import { SubTopicsComponent } from './components/admin_component/dashboard/sub-topics/sub-topics.component';
+import { VideoUploadComponent } from './components/admin_component/dashboard/video-upload/video-upload.component';
 
 const routes: Routes = [
   {path:'', redirectTo: localStorage.getItem('token') != null && localStorage.getItem('token') != '' ? 'admin_dashboard' : 'admin_signin', pathMatch: 'full'},
@@ -43,7 +45,8 @@ const routes: Routes = [
   {path:'admin_subjects', component: SubjectsComponent},
   {path:'admin_chapters', component: ChaptersComponent},
   {path:'admin_topics', component: TopicsComponent},
-  {path:'admin_subtopics', component: SubTopicsComponent}
+  {path:'admin_subtopics', component: SubTopicsComponent},
+  {path:'video_upload', component: VideoUploadComponent}
 ];
 declare global {
   interface Window {
@@ -67,7 +70,8 @@ declare global {
     SubjectsComponent,
     ChaptersComponent,
     TopicsComponent,
-    SubTopicsComponent
+    SubTopicsComponent,
+    VideoUploadComponent
   ],
   imports: [
     CommonModule,
@@ -85,7 +89,8 @@ declare global {
     NgSelectModule
   ],
   providers: [
-    { provide: Window, useValue: window }
+    { provide: Window, useValue: window },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

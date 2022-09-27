@@ -1,0 +1,137 @@
+<div class="modal fade" id="uploadVideo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Upload Video</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form>
+        <div class="modal-body">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="file" (click)="uploadFiles()" (change)="getFileDetails($event)" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<body id="page-top">
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <app-sidebar activiTab="uploadVideo"></app-sidebar>
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <app-header header="Upload Video"></app-header>
+        <div class="container-fluid">
+          <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <span></span>
+            <div class="d-sm-flex align-items-center justify-content-between">
+              <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+                      <input type="text" class="searchClass"
+                          placeholder="Search..." aria-label="Search"
+                          aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                          <button class="btn btn-primary">
+                              <i class="bi bi-search"></i>
+                          </button>
+                      </div>
+                  </div>
+              </form>
+            </div>
+          </div> -->
+
+          <form [formGroup]="selectform">
+            <div class="col-md-12 row">
+              <div class="col-md-4">
+                <label>User</label>
+                <input class="form-control" formControlName="username" type="text" name="username" placeholder="Search User">
+              </div>
+              <div class="col-md-4">
+                <label>Class</label>
+                <select placeholder="Select Class"  #classSelect class="form-select" (change)="getSubjects(classSelect.value)" aria-label="Default select example">
+                  <option selected value="" disabled>Select Class</option>
+                  <option *ngFor="let cls of classes" [value]="cls['id']">{{cls['class_name']}}</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label>Subject</label>
+                <select placeholder="Select Subject" #subSelect class="form-select" (change)="getChapter(subSelect.value)" aria-label="Default select example">
+                  <option selected value="" disabled>Select Subject</option>
+                  <option *ngFor="let sub of subjects" [value]="sub['id']">{{sub['subject_name']}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-12 row mb-5">
+              <div class="col-md-4">
+                <label>Chapter</label>
+                <select placeholder="Select Chapter" #chapSelect (change)="getActivities(chapSelect.value)" class="form-select" aria-label="Default select example">
+                  <option selected value="" disabled>Select Chapter</option>
+                  <option *ngFor="let chapter of chapters" [value]="chapter['id']">{{chapter['chapter_name']}}</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label>Activity</label>
+                <ng-select
+                  class="custom"
+                  [items]="activitylist"
+                  bindLabel="activity_name"
+                  bindValue="id"
+                  placeholder="Select Activity"
+                  [multiple]="false"
+                  [closeOnSelect] = "false"
+                  dropdownPosition="auto"
+                  formControlName="selectedAct"
+                  >
+                </ng-select>
+              </div>
+              <div class="col-md-1">
+                <label>&nbsp;</label><br>
+                <button type="button"style="padding: 6px 6.5px" class=" btn btn-sm btn-primary">
+                  <i class="bi bi-funnel-fill"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          <div class="table_wrapper">
+            <table class="table table-borderless align-middle">
+              <tbody>
+                <tr *ngFor="let item of vdolist">
+                  <td [width]="10">
+                    <img class="round" *ngIf="item.profile =='' || item.profile ==null" src="../../../../../assets/default.png">
+                    <img class="round"*ngIf="item.profile !='' && item.profile != null" src=`${item.profile}`>
+                  </td>
+                  <td>
+                    <div><label>Name : </label> {{item.name}}</div>
+                    <div><label>Class : </label> {{item.class}}</div>
+                    <div><label>School : </label> {{item.school}}</div>
+                    <!-- <div>Name : {{item.date}}</div> -->
+                  </td>
+                  <td>
+                    <span>
+                      <label>Activity : </label> {{item.activity_name}}
+                    </span>
+                  </td>
+                  <td>
+                    <div style="text-align: end">
+                      <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#uploadVideo">Upload Video</button>&nbsp;
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

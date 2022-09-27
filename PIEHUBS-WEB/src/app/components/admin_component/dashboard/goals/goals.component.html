@@ -46,7 +46,7 @@
               <label>Week</label>
               <select placeholder="Select Week" #weekSelect (change)="weekId=weekSelect.value" class="form-select" aria-label="Default select example">
                 <option selected value="" disabled>Select Week</option>
-                <option *ngFor="let week of weeks" :value="week">{{week}}</option>
+                <option *ngFor="let week of weeks" [value]="week['id']">{{week['label1']}}</option>
               </select>
             </div>
             <div class="col-md-6 form-group ">
@@ -126,7 +126,7 @@
             <table class="table table-borderless align-middle">
               <thead class="thead-light">
                 <tr>
-                  <th scope="col">Goal Name</th>
+                  <th scope="col">Goal Name1</th>
                   <th scope="col">Week ID</th>
                   <th scope="col">From Date</th>
                   <th scope="col">To Date</th>
@@ -157,6 +157,7 @@
               </tbody>
             </table>
           </div>
+          {{weeks}}
           <div style="text-align: center" *ngIf="goalslist.length == 0">
             No data found.
           </div>

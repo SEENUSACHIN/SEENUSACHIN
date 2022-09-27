@@ -109,8 +109,8 @@
                   <td>{{item['activity_name']}}</td>
                   <td>{{item['atoms']}}</td>
                   <td>
-                    <div [ngbTooltip]="item['url']" style="width:200px; overflow:hidden; text-overflow: ellipsis;">
-                      {{item['url']}}
+                    <div style="width:200px; overflow:hidden; text-overflow: ellipsis;">
+                      <a [href]="item['url']" target="_blank">{{item['url']}}</a>
                     </div>
                   </td>
                   <td>{{item['status']}}</td>

@@ -22,6 +22,9 @@ export class SidebarComponent implements OnInit {
   gotoVdoRating () {
     this.route.navigate(['/video_rating']);
   }
+  gotoVdoUpload () {
+    this.route.navigate(['/video_upload']);
+  }
   gotoDashboard () {
     this.route.navigate(['/admin_dashboard']);
   }

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import {Router} from '@angular/router';
 import { ManageServiceService } from '../../manage-service.service';
 import { NotificationService } from '../../../../notification.service'
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-goals',
@@ -23,21 +24,22 @@ export class GoalsComponent implements OnInit {
   errorShow = ''
   weekId = ''
   selectedAct = []
+  selectedWeek = []
   createGoalform!: FormGroup
-  weeks = [
-    'week1', 'week2', 'week3', 'week4'
-  ]
+  weeks :  { id: string; label1: string }[] = []
   @ViewChild('closebutton') closebutton : any;
   constructor(private route:Router,
     private fb: FormBuilder,
     private manage: ManageServiceService,
-    private notifyService : NotificationService) { }
+    private notifyService : NotificationService,
+    public datepipe: DatePipe) { }
 
   ngOnInit(): void {
     this.createGoalform = new FormGroup({
       selectedAct: new FormControl(this.selectedAct, Validators.required),
       goalname: new FormControl("", Validators.required)
     })
+    this.getWeeks()
     this.getGoals()
     this.getClasses()
   }
@@ -65,8 +67,7 @@ export class GoalsComponent implements OnInit {
         class_id : this.classId,
         activity_id : activityIds,
         goal_name : this.createGoalform.value.goalname,
-        // week_id : this.weekId,
-        week_id : 39
+        week_id : this.weekId,
       }
       this.manage.createGoal(data).subscribe((response: any) => {
         console.log(response);
@@ -107,6 +108,17 @@ export class GoalsComponent implements OnInit {
       console.log('getClasses', response);
       if(response.success) {
         this.classes = response.class
+      }
+    });
+  }
+  getWeeks () {
+    this.manage.getWeeks().subscribe((response: any) => {
+      console.log('getWeeks', response);
+      if(response.success) {
+        response.week.forEach((element : any) => {
+          var labels = this.datepipe.transform(element['from_date'], 'dd MMM yyyy') + ' - ' + this.datepipe.transform(element['to_date'], 'dd MMM yyyy')
+          this.weeks.push({ id: element['id'], label1 : labels })
+        });
       }
     });
   }

@@ -198,4 +198,13 @@ export class ManageServiceService {
     }
     return this.httpClient.post(this.apiURL + '/api/master/topic/'+ topicId +'/subtopic', JSON.stringify(data), httpOptions).pipe(catchError(this.errorHandler))
   }
+  getWeeks () {
+    var httpOptions = {
+      headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+      })
+    }
+    return this.httpClient.get(this.apiURL + '/api/master/week', httpOptions).pipe(catchError(this.errorHandler))
+  }
 }

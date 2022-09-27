@@ -33,6 +33,12 @@
       <span class="sidebarText">Rating Videos</span>
     </a>
   </li>
+  <li class="nav-item" [ngClass]="activiTab == 'uploadVideo' ? 'active' : ''">
+    <a (click)="gotoVdoUpload()" class="nav-link pointer">
+      <i class="bi bi-upload"></i>&nbsp;
+      <span class="sidebarText">Upload Videos</span>
+    </a>
+  </li>
   <li class="nav-item">
     <a id="collapseTrigger" class="nav-link collapsed" (click)="collapseTwo = !collapseTwo" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
       <i class="bi bi-person-video"></i>&nbsp;
