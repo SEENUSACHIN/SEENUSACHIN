@@ -1,0 +1,82 @@
+<body id="page-top">
+  <div id="wrapper">
+    <app-sidebar activiTab="youtube"></app-sidebar>
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <app-header header="Videos"></app-header>
+        <div class="container-fluid">
+          <div class="d-flex flex-row">
+            <div class="col col-lg-3" *ngIf="playListDetails != null">
+              <img [src]="playListDetails['snippet']['thumbnails']['default']['url']" width="100%" height="40%"/>
+              <div class="playListTitle">{{playListDetails['snippet']['title']}}</div>
+              <div>
+                <li class="playListDetail">{{playListItems.length}} Videos </li>
+                <li class="playListDetail">Updated on {{playListDetails['snippet']['publishedAt'] | date}}</li>
+              </div>
+              <div class="d-flex flex-row">
+                <span class="playListDetail">{{playListDetails['status']['privacyStatus'] | titlecase}}</span>&nbsp;
+                <i *ngIf="playListDetails['status']['privacyStatus']=='public'" class="bi bi-eye-fill" style="color: green;"></i>
+                <i *ngIf="playListDetails['status']['privacyStatus']!='public'" class="bi bi-eye-slash-fill" style="color: grey;"></i>
+              </div>
+              <div class="playListDetailDesc">
+                {{playListDetails['snippet']['description']}}
+              </div>
+              <hr>
+              <label>Channel : </label><span class="playListDetail"> {{playListDetails['snippet']['channelTitle']}}</span>
+            </div>
+            <div *ngIf="playListItems.length > 0"  class="table_wrapper col-md-9" style="width: 100%;">
+              <table  class="table table-borderless align-middle">
+                <thead class="thead-light">
+                  <tr>
+                    <th>Video</th>
+                    <th>Visibility</th>
+                    <th>Last Updated</th>
+                    <th>Likes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let d of playListItems; let ind = index" [attr.data-index]="ind">
+                    <td>
+                      <span class="playListVideoTitle">
+                        <a target="_blank" [href]="'https://www.youtube.com/watch?v=' + d['snippet']['resourceId']['videoId']">
+                          <img [src]="d['snippet']['thumbnails']['default']['url']" width="70" height="50"/>
+                        </a>
+                        <div>
+                          <label>{{d['snippet']['title']}}</label>
+                          <div class="wrap">{{d['snippet']['description']}}</div>
+                        </div>
+                      </span>
+                    </td>
+                    <td>
+                      <i *ngIf="d['status']['privacyStatus']=='public'" class="bi bi-eye-fill" style="color: green;"></i>
+                      <i *ngIf="d['status']['privacyStatus']!='public'" class="bi bi-eye-slash-fill" style="color: grey;"></i>
+                      &nbsp;
+                      {{d['status']['privacyStatus'] | titlecase}}
+                    </td>
+                    <td>{{d['snippet']['publishedAt'] | date}}</td>
+                    <td>
+                      <i *ngIf="d['liked'] != 'like'" (click)="d['liked'] = 'like'; setRating(d['snippet']['resourceId']['videoId'], 'like', d)" class="bi bi-hand-thumbs-up"></i>
+                      <i *ngIf="d['liked'] == 'like'" (click)="d['liked'] = 'none'; setRating(d['snippet']['resourceId']['videoId'], 'none', d)" class="bi bi-hand-thumbs-up-fill" style="color: #04445D;"></i>
+                      &nbsp;{{d['like']}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="paginationClass">
+                <div class="">
+                  <label>{{paginationText}} </label>
+                  <button class="btn btn-light btn-sm" [disabled]="start == 0 || start == 1 ? true : false"  (click)="getPlaylistItem(playlistId, 'pre')"> <i class="bi bi-chevron-left"></i> </button>
+                  <button class="btn btn-light btn-sm" [disabled]="end == total ? true : false" (click)="getPlaylistItem(playlistId, 'next')"> <i class="bi bi-chevron-right"></i> </button>
+                </div>
+              </div>
+            </div>
+            <div style="text-align: center;" *ngIf="playListItems.length == 0">
+              No videos found in this playlist.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

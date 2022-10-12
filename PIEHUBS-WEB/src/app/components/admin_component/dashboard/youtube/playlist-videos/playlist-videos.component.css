@@ -1,0 +1,29 @@
+.playListTitle{
+  font-size: 2rem;
+  color: black;
+}
+.playListDetail {
+  font-size: 0.9rem;
+  color: rgb(74, 73, 73);
+}
+.playListDetailDesc {
+  font-size: 0.7rem;
+  color: rgb(137, 135, 135);
+}
+
+.playListVideoTitle {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  font-stretch: condensed;
+  flex-wrap: nowrap;
+}
+.wrap{
+  width: 10rem;
+  overflow: hidden;
+}
+.paginationClass {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}

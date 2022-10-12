@@ -26,6 +26,12 @@
       <i class="bi bi-diagram-3"></i>&nbsp;
       <span class="sidebarText">Goals</span></a>
   </li>
+  <!-- Nav Item - Events -->
+  <li class="nav-item" [ngClass]="activiTab == 'events' ? 'active' : ''">
+    <a (click)="gotoEvents()" class="nav-link">
+      <i class="bi bi-calendar2-event"></i>&nbsp;
+      <span class="sidebarText">Events</span></a>
+  </li>
   <!-- Nav Item - Videos -->
   <li class="nav-item" [ngClass]="activiTab == 'ratingVideo' ? 'active' : ''">
     <a (click)="gotoVdoRating()" class="nav-link pointer">
@@ -37,6 +43,12 @@
     <a (click)="gotoVdoUpload()" class="nav-link pointer">
       <i class="bi bi-upload"></i>&nbsp;
       <span class="sidebarText">Upload Videos</span>
+    </a>
+  </li>
+  <li class="nav-item" [ngClass]="activiTab == 'youtube' ? 'active' : ''">
+    <a (click)="gotoYoutube()" class="nav-link pointer">
+      <i class="bi bi-youtube"></i>&nbsp;
+      <span class="sidebarText">Youtube</span>
     </a>
   </li>
   <li class="nav-item">

@@ -31,7 +31,9 @@
     "ngx-toastr": "^15.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "@types/gapi": "^0.0.42",
+    "@types/gapi.auth2": "0.0.56"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.1",

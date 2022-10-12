@@ -46,6 +46,12 @@ export class SidebarComponent implements OnInit {
   gotoSubTopic () {
     this.route.navigate(['/admin_subtopics']);
   }
+  gotoYoutube () {
+    this.route.navigate(['/youtube']);
+  }
+  gotoEvents () {
+    this.route.navigate(['/admin_event']);
+  }
   logoutAdmin() {
     console.log("enter logoutAdmin")
     localStorage.clear();
