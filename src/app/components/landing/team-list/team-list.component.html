@@ -1,0 +1,278 @@
+<div class="teamList">
+  <app-navbar></app-navbar>
+  <header>
+    <div class="container d-flex">
+      <div class="p-2">
+        <h4>Team LeaderBoard</h4>
+        <!-- <p>List of team leaderboard on the platform</p> -->
+      </div>
+      <div class="ms-auto p-2">
+        <button type="button" class="btn myBtn" (click)="myTeam()">
+          My Team
+        </button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <!-- <div class="">
+      <div class="col-md-12">
+        <div class="card-body yourtask">
+          <p class="card-text"></p>
+          <div class="d-flex justify-content-end p-2">
+            <img src="../assets/test1.jpg" class="card-img-top  imgsize " alt="...">
+            <img src="../assets/profile-1.png" class="card-img-top imgsize" alt="...">
+            <img src="../assets/profile-2.png" class="card-img-top imgsize" alt="...">
+          </div>
+          <span>
+            <button class='btn btn-success'>+invite</button>
+          </span>
+        </div>
+      </div>
+    </div> -->
+    <!-- <br> -->
+    <div class="teamlistArea">
+      <div class="container text-center">
+        <div class="row">
+          <div class="col">
+            <ul class="list-group align-items-center">
+              <!-- <div class="row row-cols-1 row-cols-md-4 g-4">
+                <div class="col">
+                  <div class="card">
+                    <figure>
+                      <img src="../assets/sample.jpg" class="card-img-top" alt="...">
+                      <figcaption>
+                        <h5>Team Warriors</h5>
+                      </figcaption>
+                      <figcaption><b><i class="bi bi-people-fill"></i> (5)</b></figcaption>
+                      <figcaption><b>4500</b> <img class="atomicon" src="../assets/neutron B.png" alt=""></figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card">
+                    <figure>
+                      <img src="../assets/sample.jpg" class="card-img-top" alt="...">
+                      <figcaption>
+                        <h5>Team Warriors</h5>
+                      </figcaption>
+                      <figcaption><b><i class="bi bi-people-fill"></i> (5)</b></figcaption>
+                      <figcaption><b>4500</b> <img class="atomicon" src="../assets/neutron B.png" alt=""></figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card">
+                    <figure>
+                      <img src="../assets/sample.jpg" class="card-img-top" alt="...">
+                      <figcaption>
+                        <h5>Team Warriors</h5>
+                      </figcaption>
+                      <figcaption><b><i class="bi bi-people-fill"></i> (5)</b></figcaption>
+                      <figcaption><b>4500</b> <img class="atomicon" src="../assets/neutron B.png" alt=""></figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card">
+                    <figure>
+                      <img src="../assets/sample.jpg" class="card-img-top" alt="...">
+                      <figcaption>
+                        <h5>Team Warriors</h5>
+                      </figcaption>
+                      <figcaption><b><i class="bi bi-people-fill"></i> (5)</b></figcaption>
+                      <figcaption><b>4500</b> <img class="atomicon" src="../assets/neutron B.png" alt=""></figcaption>
+                    </figure>
+
+                  </div>
+                </div>
+              </div> -->
+              <!-- alternate design -->
+              <div class="myTopStars">
+                <ul class="list-unstyled myleadres">
+                  <li class="" *ngFor="let item of products">
+                    <div>
+                      <figure class="figure">
+                        <!-- <img src="../assets/test1.jpg" class="  imgsize1" alt="..."> -->
+                        <img
+                          [src]="item.team_pic || '../assets/images/msg.png'"
+                          class="imgsize1"
+                          alt="..."
+                        />
+                        <figcaption class="figure-caption">
+                          <b>{{ item.team_name }}</b>
+                        </figcaption>
+                        <figcaption class="figure-caption">
+                          <i class="bi bi-people-fill"></i
+                          ><b> {{ item.count }}</b>
+                        </figcaption>
+                        <figcaption class="figure-caption">
+                          <b>{{ item.team_atoms }}</b>
+                          <img
+                            class="atomicon"
+                            src="../assets/neutron B.png"
+                            alt=""
+                          />
+                        </figcaption>
+                      </figure>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </ul>
+          </div>
+        </div>
+        <div class="row m-3">
+          <div class="col-8">
+            <ul class="list-unstyled align-items-center">
+              <li>
+                <table class="table">
+                  <!-- <caption><p>List of team leaderboard on the platform</p>
+                  </caption> -->
+                  <thead>
+                    <tr>
+                      <!-- <th scope="col">Team Rank</th> -->
+                      <th scope="col">Team Name</th>
+                      <th scope="col">Members</th>
+                      <th scope="col">
+                        Atoms
+                        <img class="atomicon" src="../assets/atom.png" alt="" />
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let totalList of teamlList">
+                      <!-- <th scope="row">1</th> -->
+                      <td>
+                        <img
+                          *ngIf="totalList.team_pic == null"
+                          src="../assets/test1.jpg"
+                          class="rounded rankImg"
+                          alt="..."
+                        />
+                        <img
+                          *ngIf="totalList.team_pic != null"
+                          [src]="totalList.team_pic"
+                          class="rounded rankImg"
+                          alt="..."
+                          alt="..."
+                        />
+                        <b class="p-2 h5">{{ totalList.team_name }}</b>
+                      </td>
+                      <td>{{ totalList.count }}</td>
+                      <td>
+                        {{ totalList.team_atoms }}
+                        <img class="atomicon" src="../assets/atom.png" alt="" />
+                      </td>
+                    </tr>
+                    <!-- <tr>
+                      <th scope="row">2</th>
+                      <td><img src="../assets/test1.jpg" class="rounded rankImg" alt="..."> Jacob</td>
+                      <td>1</td>
+                      <td>11212 <img class="atomicon" src="../assets/atom.png" alt=""></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td><img src="../assets/test1.jpg" class="rounded rankImg" alt="..."> Bird</td>
+                      <td>3</td>
+                      <td>2344 <img class="atomicon" src="../assets/atom.png" alt=""></td>
+                    </tr> -->
+                  </tbody>
+                </table>
+
+                <br />
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <!-- <th>User</th>
+                      <th>Status</th>
+                      <th>Location</th>
+                      <th>Email</th>
+                      <th>Congratulate</th> -->
+                      <th scope="col">Team Name</th>
+                      <th scope="col">Members</th>
+                      <th scope="col">
+                        Atoms
+                        <img class="atomicon" src="../assets/atom.png" alt="" />
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let totalList of teamlList">
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <img
+                            *ngIf="totalList.team_pic == null"
+                            src="../assets/test1.jpg"
+                            class="circle-img circle-img--small mr-2"
+                            alt="..."
+                          />
+                          <img
+                            *ngIf="totalList.team_pic != null"
+                            [src]="totalList.team_pic"
+                            class="circle-img circle-img--small mr-2"
+                            alt="User Img"
+                          />
+                          <div class="user-info__basic">
+                            <h5 class="p-2 h5">{{ totalList.team_name }}</h5>
+                            <!-- <p class="text-muted mb-0">@sandeep</p> -->
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-baseline">
+                          <h4 class="mr-1">{{ totalList.count }}</h4>
+                          <!-- <small class="text-success"><i class="fa fa-arrow-up"></i>5%</small> -->
+                        </div>
+                      </td>
+                      <td>
+                        <div class="d-flex align-items-baseline">
+                          <!-- <td>{{totalList.count}}</td> -->
+                          <h4 class="mr-1">
+                            {{ totalList.team_atoms
+                            }}<img
+                              class="atomicon"
+                              src="../assets/atom.png"
+                              alt=""
+                            />
+                          </h4>
+                        </div>
+                      </td>
+                      <!-- <td>{{totalList.team_atoms}} </td> -->
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-4">
+            <div class="card rankcard">
+              <div class="card-header">My Report</div>
+              <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                  <div class="d-flex justify-content-around">
+                    <div>
+                      <h6>MY RANK</h6>
+                      <h4><b>4</b></h4>
+                    </div>
+                    <div>
+                      <h6>MY ATOMS</h6>
+                      <p class="designation">
+                        <b>4500</b>
+                        <img
+                          class="atomicon"
+                          src="../assets/neutron.png"
+                          alt=""
+                        />
+                      </p>
+                    </div>
+                  </div>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

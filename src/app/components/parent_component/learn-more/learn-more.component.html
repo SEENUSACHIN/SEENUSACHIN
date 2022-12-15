@@ -1,0 +1,77 @@
+<app-parent-nav></app-parent-nav>
+
+<div class='px-5'>
+
+
+<!-- <br> -->
+<div class='d-flex justify-content-between align-items-center' >
+<div id='pointer'>
+  <h4><b class='headerText'>Activity </b></h4></div>
+  <div>Kid Name: <b>{{kname}}</b></div>
+</div>
+
+<!-- <div ><h4><b>Activity</b></h4></div> -->
+<hr>
+<section class=''>
+  <div class="">
+    <div class="row">
+    <!-- <div class="col-lg-4" >
+    <div class="card box10">
+      <img src="https://images.unsplash.com/photo-1477862096227-3a1bb3b08330?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=60" alt="" class="card-img-top dummyImage">
+      <div class="card-body">
+        <h5 class="card-title">{{list.name}}</h5>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+        </div>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eum similique repellat a laborum, rerum voluptates ipsam eos quo tempore iusto dolore modi dolorum in pariatur. Incidunt repellendus praesentium quae!</p>
+        <div class='d-flex justify-content-end'>
+          <a  class="btn btn-outline-success btn-sm" (click)="viewMore()">View More</a>
+          &nbsp;
+           <a href="" class="btn btn-outline-danger btn-sm"><i class="bi bi-star"></i></a>
+         </div>
+      </div>
+     </div>
+    </div> -->
+  <!-- <div class="col-lg-4 " >
+  <div class="card box10">
+      <img src="https://images.unsplash.com/photo-1516214104703-d870798883c5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60" alt="" class="card-img-top dummyImage">
+      <div class="card-body">
+        <h5 class="card-title">{{list.name}}</h5>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+        </div>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut eum similique repellat a laborum, rerum voluptates ipsam eos quo tempore iusto dolore modi dolorum in pariatur. Incidunt repellendus praesentium quae!</p>
+        <div class='d-flex justify-content-end'>
+       <a (click)="viewMore()" class="btn btn-outline-success btn-sm">View More</a>
+       &nbsp;
+
+        <a href="" class="btn btn-outline-danger btn-sm"><i class="bi bi-star"></i></a>
+      </div>
+      </div>
+      </div>
+    </div> -->
+    <div class="col-lg-3 pb-4 " *ngFor="let list of activGroupList">
+    <div class="card box10">
+      <img  src="../assets/dummy_image.jpg" alt="" class="card-img-top dummyImage">
+      <div class="card-body p-2">
+        <div class="card-title d-flex justify-content-between"><div><h5>{{list.name}}</h5></div><div>{{list.completed}}/{{list.total}}</div></div>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-label="Example with label" [style.width]="list.percentage+'%'"  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+            <span style="font-size : 8px; color: white;">{{list.percentage.toFixed(2)}}%</span>
+          </div>
+        </div>
+        &nbsp;
+        <p class="card-text pb-1 desc">{{list.description}}</p>
+        <div class='d-flex justify-content-end'>
+          <a (click)="viewMore(list.id)" class="btn btn-outline-success btn-sm">View More</a>
+          <!-- &nbsp;
+           <a  class="btn btn-outline-danger btn-sm">{{list.rating}} <i class="bi bi-star"></i></a> -->
+         </div>
+      </div>
+     </div>
+    </div>
+  </div>
+</div>
+</section>
+
+</div>

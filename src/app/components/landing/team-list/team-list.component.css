@@ -1,0 +1,117 @@
+.teamListimage{
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+.btn-outline-primary{
+  background-color: #04445D;
+  color: #EDF3F3;
+}
+.teamImg{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  padding: 5px;
+}
+.teamMembers{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.teamListimage{
+  width: 100px;
+  height: 100px;
+  border-radius: 10%;
+}
+.atomicon{
+  width: 15px;
+  height: 15px;
+}
+figure{
+  margin-bottom: 0%;
+}
+.imgsize{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.rankImg{
+  width: 50px;
+  height: 50px;
+  border-radius: 10%;
+}
+.yourtask{
+  display: flex;
+justify-content: flex-end;
+align-items: center;
+padding-right: 10px;
+}
+.myTopStars{
+  width: 80%;
+  height: 200px;
+  border-radius: 20px;
+  background-color: #D9E4EC ;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+/* .listdirection{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+} */
+.myleadres{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  column-gap: 100px;
+}
+.imgsize1{
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+.rankcard{
+  background-color: #F6D13A;
+}
+.figure-caption{
+  color: black;
+  font-size: 14px;
+}
+img.circle-img.circle-img--small {
+  height: 55px;
+  width: 55px;
+  border-radius: 55px;
+}
+.mr-2, .mx-2 {
+  margin-right: 0.5rem!important;
+}
+.table tbody tr td,th {
+  background: #fff;
+}
+.table {
+  border-spacing: 0 15px;
+  border-collapse: separate;
+}
+.table tbody tr td {
+  vertical-align: middle;
+  border: none;
+}
+.table td, .table th {
+  padding: 0.75rem;
+  text-align: left;
+  /* vertical-align: top;
+  border-top: 1px solid #dee2e6; */
+}
+.myBtn{
+  background-color: #04445D;
+  color: whitesmoke;
+}
+

@@ -1,0 +1,124 @@
+<div class="modal fade" id="createSubTopic" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Create Topic</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" #closebutton aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="createSubTopicform">
+          <div *ngIf="errorShow!=''" class="alert alert-danger">
+            <div>
+              {{errorShow}}
+            </div>
+          </div>
+          <div class="col-md-12 row">
+            <div class="col-md-6 form-group">
+              <label>Subtopic Name</label>
+              <input class="form-control" formControlName="subtopicName" type="text" name="subtopicName" placeholder="Subtopic Name">
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Url</label>
+              <input class="form-control" formControlName="url" type="text" name="url" placeholder="Url">
+            </div>
+          </div>
+          <div class="col-md-12 row">
+            <div class="col-md-6 form-group">
+              <label>Class</label>
+              <select placeholder="Select Class" #classSelect (change)="getSubjects(classSelect.value)" formControlName="classId" class="form-select" aria-label="Default select example">
+                <option selected value="" disabled>Select Class</option>
+                <option *ngFor="let cls of classes" [value]="cls['id']">{{cls['class_name']}}</option>
+              </select>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Subject</label>
+              <select placeholder="Select Subject" #subjectSelect (change)="getChapters(subjectSelect.value)" formControlName="subjectId" class="form-select" aria-label="Default select example">
+                <option selected value="" disabled>Select Subject</option>
+                <option *ngFor="let cls of subjects" [value]="cls['id']">{{cls['subject_name']}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-12 row">
+            <div class="col-md-6 form-group">
+              <label>Chapter</label>
+              <select placeholder="Select Chapter" #chapterSelect (change)="getTopics(chapterSelect.value)"  formControlName="chapterId" class="form-select" aria-label="Default select example">
+                <option selected value="" disabled>Select Chapter</option>
+                <option *ngFor="let cls of chapters" [value]="cls['id']">{{cls['chapter_name']}}</option>
+              </select>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Topic</label>
+              <select placeholder="Select Topic" formControlName="topicId" class="form-select" aria-label="Default select example">
+                <option selected value="" disabled>Select Topic</option>
+                <option *ngFor="let cls of topics" [value]="cls['id']">{{cls['topic_name']}}</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="createSubTopic()" >Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+<body id="page-top">
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <app-sidebar activiTab="subtopic" [collapseTwo]=true></app-sidebar>
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <app-header header="Sub-Topics"></app-header>
+        <div class="container-fluid">
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <span></span>
+              <div class="d-sm-flex align-items-center justify-content-between">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" class="searchClass"
+                            placeholder="Search..." aria-label="Search"
+                            aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                        <button data-bs-toggle="modal"  type="button" data-bs-target="#createSubTopic" style="padding: 6.5px 12px" class="ml-2 d-sm-inline-block btn btn-sm btn-primary">Create</button>
+                    </div>
+                </form>
+                <!-- <button data-bs-toggle="modal" data-bs-target="#createGoal" style="padding: 6.5px 12px" class="ml-2 d-sm-inline-block btn btn-sm btn-primary">Create</button> -->
+              </div>
+          </div>
+          <div class="table_wrapper" *ngIf="subtopics.length != 0">
+            <table class="table table-borderless align-middle css-serial">
+              <thead class="thead-light">
+                <tr>
+                  <th>#</th>
+                  <th scope="col">Sub-Topic Name</th>
+                  <th scope="col">Created on</th>
+                  <th scope="col">Updated on</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of subtopics">
+                  <td></td>
+                  <td>{{item['subject_name']}}</td>
+                  <td>{{item['created_on'] | date:'medium'}}</td>
+                  <td>{{item['updated_on'] | date:'medium'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="text-align: center" *ngIf="subtopics.length == 0">
+            No data found.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>

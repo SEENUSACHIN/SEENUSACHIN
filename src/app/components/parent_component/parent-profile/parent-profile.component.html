@@ -1,0 +1,1042 @@
+<!-- <div class="registration-form">
+<form [formGroup]="registerForm">
+  <div class="form-icon">
+      <img class="myLogo" src="../assets/myLogo.png" alt="">
+  </div>
+  <div class="form-group">
+      <input type="text" formControlName='name' class="form-control item"  id="username" placeholder="Username">
+  </div>
+  <div class="form-group">
+      <input type="password" class="form-control item" id="password"  placeholder="Password">
+  </div>
+  <div class="form-group">
+      <input type="text" class="form-control item" id="email"  placeholder="Email">
+  </div>
+  <div class="form-group">
+      <input type="text" class="form-control item" id="phone-number"  placeholder="Phone Number">
+  </div>
+  <div class="form-group">
+      <input type="text" class="form-control item" id="birth-date"  placeholder="Birth Date">
+  </div>
+  <div class="form-group">
+      <button type="button" class="btn btn-block create-account ">Create Account</button>
+  </div>
+</form>
+<div class="social-media">
+  <h5>Sign up with social media</h5>
+  <div class="social-icons">
+    <a href="#"><i class="bi bi-google" title="Google"></i></a>
+      <a href="#"><i class="bi bi-facebook" title="Facebook"></i></a>
+      <a href="#"><i class="bi bi-twitter" title="Twitter"></i></a>
+  </div>
+</div>
+</div> -->
+
+<!-- parent profile page  -->
+<app-parent-nav></app-parent-nav>
+<br />
+<div class="container">
+  <div class="d-grid">
+    <!-- <div class='row'>
+      <div class="col-4">
+
+
+      </div>
+      <div class='col-8'></div>
+    </div> -->
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card card-primary card-outline">
+          <!-- parent design -->
+          <div class="card-body box-profile">
+            <div class="text-center" *ngIf="parentInfo.profile_pic != null">
+              <img
+                class="profile-user-img img-fluid img-circle"
+                [src]="ParentProfile"
+                alt=""
+              />
+            </div>
+            <div class="text-center" *ngIf="parentInfo.profile_pic == null">
+              <img
+                class="profile-user-img img-fluid img-circle"
+                src="../../../../../assets/default.png"
+                alt=""
+              />
+            </div>
+            <h3 class="profile-username text-center">{{ parentInfo.name }}</h3>
+            <p class="profile-username text-center mb-1">
+              <i class="bi bi-telephone-fill iconclr"></i>
+              {{ parentInfo.user.mobile }}
+            </p>
+            <p class="profile-username text-center">
+              <i class="bi bi-envelope-fill iconclr"></i>
+              {{ parentInfo.user.email }}
+            </p>
+            <ul class="list-group list-group-unbordered mb-3">
+              <div class="col-sm-12 text-center pb-2">
+                <button
+                  type="submit"
+                  data-bs-toggle="modal"
+                  type="button"
+                  data-bs-target="#createEvent"
+                  class="card-link mybutton"
+                  (click)="setparentData(parentInfo)"
+                >
+                  <i class="bi bi-pencil-square"></i> Edit Profile
+                </button>
+              </div>
+              <div class="col-sm-12 text-center pb-2" *ngIf="parentInfo != null">
+                <button
+                  type="submit"
+                  class="btn mybutton"
+                  (click)="addKidsInfo()"
+                >
+                  <i class="bi bi-person-plus"></i>
+                  Add Kids Info
+                </button>
+              </div>
+              <div class="col-sm-12 text-center pb-2" >
+                <button *ngIf="parentInfo != null" type="button" class="btn mybutton" (click)="viewKids()">
+                  <i class="bi bi-info-circle"></i> Kids Info
+                </button>
+                <button   type="button" class="btn mybutton" (click)="viewKids()">
+                  <i class="bi bi-info-circle"></i> Student Info
+                </button>
+              </div>
+            </ul>
+          </div>
+                    <!-- student design -->
+                    <!-- <div class="card-body box-profile">
+                      <div class="text-center" *ngIf="graduateData.profile_pic != null">
+                        <img
+                          class="profile-user-img img-fluid img-circle"
+                          [src]="ParentProfile"
+                          alt=""
+                        />
+                      </div>
+                      <div class="text-center" *ngIf="graduateData.profile_pic == null">
+                        <img
+                          class="profile-user-img img-fluid img-circle"
+                          src="../../../../../assets/default.png"
+                          alt=""
+                        />
+                      </div>
+                      <h3 class="profile-username text-center">{{ parentInfo.name }}</h3>
+                      <p class="profile-username text-center mb-1">
+                        <i class="bi bi-telephone-fill iconclr"></i>
+                        {{ graduateData.user.mobile }}
+                      </p>
+                      <p class="profile-username text-center">
+                        <i class="bi bi-envelope-fill iconclr"></i>
+                        {{ parentInfo.user.email }}
+                      </p>
+                      <ul class="list-group list-group-unbordered mb-3">
+                        <div class="col-sm-12 text-center pb-2">
+                          <button
+                            type="submit"
+                            data-bs-toggle="modal"
+                            type="button"
+                            data-bs-target="#createEvent"
+                            class="card-link mybutton"
+                            (click)="setparentData(parentInfo)"
+                          >
+                            <i class="bi bi-pencil-square"></i> Edit Profile
+                          </button>
+                        </div>
+                        <div class="col-sm-12 text-center pb-2">
+                          <button
+                            type="submit"
+                            class="btn mybutton"
+                            (click)="addKidsInfo()"
+                          >
+                            <i class="bi bi-person-plus"></i>
+                            Add Kids Info
+                          </button>
+                        </div>
+                        <div class="col-sm-12 text-center pb-2">
+                          <button type="button" class="btn mybutton" (click)="viewKids()">
+                            <i class="bi bi-info-circle"></i> Kids Info
+                          </button>
+                        </div>
+                      </ul>
+                    </div> -->
+
+
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="card">
+          <div class="card-header d-inline-flex p-2">
+            <div class="d-flex" *ngIf="addkids && !viewChild">
+              <!-- <ul class="nav nav-pills" > -->
+              <!-- <li class="nav-item"> -->
+              <!-- <h6
+                class="navbtn"
+                aria-current="page"
+                (click)="addnewKid()"
+                [ngClass]="{ active: existing }"
+              >
+                Add Kids
+              </h6> -->
+              <div id='pointer'><b class='px-1'>Add Kids</b></div>
+
+              <!-- </li> -->
+              <!-- <li class="nav-item">
+                  <a class="nav-link "
+                  [ngClass]="{ 'active': !existing }"
+                  [ngStyle]="{'background-color:blue !important': !existing }"
+                   (click)="addkid()"> Add Existing Kids</a>
+                </li> -->
+              <!-- [ngClass]="{ 'active': !existing }" -->
+              <!-- </ul> -->
+            </div>
+            &nbsp;
+                          <div id='pointer' *ngIf="viewChild"><b class='px-1'>Kids Details</b></div>
+
+            <!-- <h6 id='pointer' class="navbtn mb-0" *ngIf="viewChild">Kids Details</h6> -->
+            <!-- HTML !-->
+            <!-- <button class="button-67" role="button"*ngIf="viewChild">Kids Details</button> -->
+            <!-- Child Information -->
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <!-- <div
+                *ngIf="existing && !viewChild && !otpPage && !addkids"
+                class="basic information"
+              >
+                <h6>Enter Your child Information</h6>
+                <form
+                  class="form-horizontal"
+                  [formGroup]="basicDetailsForm"
+                  #formDir="ngForm"
+                >
+                  <div
+                    class="cross-validation"
+                    [class.cross-validation-error]="basicDetailsForm.errors?.['identityRevealed'] && (basicDetailsForm.touched || basicDetailsForm.dirty)"
+                  >
+                    <div class="form-group row">
+                      <div class="col-6 pb-2">
+                        <label for="inputEmail" class="col-sm-6 col-form-label"
+                          >Email</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            placeholder="Enter your email"
+                            name="email"
+                            formControlName="email"
+                            required
+                          />
+                          <div
+                            *ngIf="
+                              email.invalid && (email.dirty || email.touched)
+                            "
+                            class=" alert-danger p-1"
+                          >
+                            <div *ngIf="email.errors?.['required']">
+                              Email is required.
+                            </div>
+                            <div *ngIf="email.errors?.['email']">
+                              Email format is wrong.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <label for="inputEmail" class="col-sm-6 col-form-label"
+                          >Phone Number</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="tel"
+                            name="mobile"
+                            class="form-control"
+                            formControlName="mobile"
+                            id="mobile"
+                            placeholder="Phone"
+                            maxlength="10"
+                            required
+                          />
+                          <div
+                            *ngIf="
+                              mobile.invalid && (mobile.dirty || mobile.touched)
+                            "
+                            class=" alert-danger p-1"
+                          >
+                            <div *ngIf="mobile.errors?.['required']">
+                              Phone number is required.
+                            </div>
+                            <div *ngIf="mobile.errors?.['minlength']">
+                              Phone number must be at least 10 characters long..
+                            </div>
+                            <div *ngIf="mobile.errors?.['pattern']">
+                              Phone number must be a numeric..
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <br />
+                    <div class="form-group row text-center">
+                      <div class="col-sm-12">
+                        <button
+                          type="submit"
+                          class="btn btn-success"
+                          [disabled]="basicDetailsForm.invalid"
+                          (click)="addKids()"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div> -->
+              <!-- <div
+                *ngIf="!existing && basicInfo && !viewChild && !otpPage && !addkids
+                "
+                class="basic information"
+              >
+                <h6>Add Existing Child</h6>
+                <form
+                  class="form-horizontal"
+                  [formGroup]="addexistingForm"
+                  #formDir="ngForm"
+                >
+                  <div
+                    class="cross-validation"
+                    [class.cross-validation-error]="addexistingForm.errors?.['identityRevealed'] && (addexistingForm.touched || addexistingForm.dirty)"
+                  >
+                    <div class="form-group row">
+                      <div class="col-6 pb-2">
+                        <label for="inputEmail" class="col-sm-6 col-form-label"
+                          >Email</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="email"
+                            class="form-control"
+                            id="Email"
+                            placeholder="Enter your email"
+                            name="Email"
+                            formControlName="Email"
+                            required
+                          />
+                          <div
+                            *ngIf="
+                              Email.invalid && (Email.dirty || Email.touched)
+                            "
+                            class=" alert-danger p-1"
+                          >
+                            <div *ngIf="Email.errors?.['required']">
+                              Email is required.
+                            </div>
+                            <div *ngIf="Email.errors?.['Email']">
+                              Email format is wrong.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <br />
+                    <div class="form-group row text-center">
+                      <div class="col-sm-12">
+                        <button
+                          type="submit"
+                          class="btn btn-success"
+                          [disabled]="addexistingForm.invalid"
+                          (click)="mapkids()"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div> -->
+              <!-- otp page -->
+              <div
+                *ngIf="otpPage && !viewChild"
+                class="card-body d-flex flex-column align-items-center"
+              >
+                <h4 class="card-title otp">OTP Verification</h4>
+                <div class="container">
+                  <form [formGroup]="parentOtpform" #formDir="ngForm">
+                    <div class="d-flex justify-content-center">
+                      <ng-otp-input
+                        (onInputChange)="onOtpChange($event)"
+                        [config]="config"
+                      ></ng-otp-input>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                      <a type="button" class="card-link" (click)="verifyOTP()"
+                        >Resend OTP</a
+                      >
+                    </div>
+                    <br />
+                    <div class="text-center">
+                      <button
+                        type="button"
+                        class="btn btn-success"
+                        *ngIf="existing"
+                        (click)="verifyOTP()"
+                      >
+                        Verify
+                      </button>
+                    </div>
+                    <div class="text-center">
+                      <button
+                        type="button"
+                        *ngIf="!existing"
+                        class="btn btn-success"
+                        (click)="verifymapOTP()"
+                      >
+                        Verify
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <!-- Add kid info -->
+              <div *ngIf="addkids && !viewChild" class="kids details">
+                <h6>Kids Information</h6>
+
+                <form
+                  [formGroup]="registrationform"
+                  #formDir="ngForm"
+                  class="form-horizontal"
+                >
+                  <div
+                    class="cross-validation"
+                    [class.cross-validation-error]="registrationform.errors?.['identityRevealed'] && (registrationform.touched || registrationform.dirty)"
+                  >
+                    <div class="form-group row">
+                      <div class="col-4 pb-2">
+                        <label for="inputEmail" class="col-sm-6 col-form-label"
+                          >First Name</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputEmail"
+                            placeholder="Enter the first name"
+                            formControlName="first_name"
+                            required
+                            [ngClass]="{
+                              'is-invalid':
+                                registersubmitted && fd['first_name'].errors
+                            }"
+                          />
+                          <div
+                            *ngIf="registersubmitted && fd['first_name'].errors"
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="fd['first_name'].errors?.['required']">
+                              First Name is required*
+                            </div>
+                          </div>
+                          <!-- <div
+                            class=" alert-danger p-1"
+                            required
+                          >
+                            <div *ngIf="first_name.errors?.['required']">
+                              Firstname is required.
+                            </div>
+                          </div> -->
+                        </div>
+                      </div>
+                      <div class="col-4 pb-2">
+                        <label for="inputEmail" class="col-sm-6 col-form-label"
+                          >Last Name</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputEmail"
+                            placeholder="Enter the last name"
+                            formControlName="last_name"
+                            required
+                            [ngClass]="{
+                              'is-invalid':
+                                registersubmitted && fd['last_name'].errors
+                            }"
+                          />
+
+                          <div
+                            *ngIf="registersubmitted && fd['last_name'].errors"
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="fd['last_name'].errors?.['required']">
+                              Last Name is required*
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-4 pb-2">
+                        <label for="inputEmail" class="col-sm-6 col-form-label"
+                          >School Name</label
+                        >
+                        <div class="col-sm-10">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="inputEmail"
+                            placeholder="Enter the school name"
+                            formControlName="school_name"
+                            required
+                            [ngClass]="{
+                              'is-invalid':
+                                registersubmitted && fd['school_name'].errors
+                            }"
+                          />
+                          <div
+                            *ngIf="
+                              registersubmitted && fd['school_name'].errors
+                            "
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="fd['school_name'].errors?.['required']">
+                              School Name is required*
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-4 pb-2">
+                        <label for="inputEmail" class="col-sm-6 col-form-label"
+                          >Standard</label
+                        >
+                        <div class="col-sm-10">
+                          <select
+                            class="form-select selectInput"
+                            aria-label="Default select example"
+                            formControlName="standard"
+                            name="standard"
+                            id="standard"
+                            [ngClass]="{
+                              'is-invalid':
+                                registersubmitted && fd['standard'].errors
+                            }"
+                            (change)="update($event)"
+                          >
+                            <option selected value="">Select Standard*</option>
+                            <option
+                              *ngFor="let list of standards"
+                              [value]="list"
+                            >
+                              {{ list }}
+                            </option>
+                          </select>
+                          <div
+                            *ngIf="registersubmitted && fd['standard'].errors"
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="fd['standard'].errors?.['required']">
+                              Standard is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-4 pb-2">
+                        <label for="inputEmail" class="col-sm-6 col-form-label"
+                          >Date of Birth</label
+                        >
+                        <div class="col-sm-10">
+                          <div class="input-group">
+                            <!-- <ngx-datepicker [(ngModel)]="date" [options]="myDatePickerOptions"></ngx-datepicker> -->
+                            <input
+                              type="date"
+                              id="dob"
+                              name="dob"
+                              class="form-control"
+                              formControlName="dob"
+                              value="YYYY-MM-DD"
+                              [ngClass]="{
+                                'is-invalid':
+                                  registersubmitted && fd['dob'].errors
+                              }"
+                            />
+                            <div
+                              *ngIf="registersubmitted && fd['dob'].errors"
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="fd['dob'].errors?.['required']">
+                                Date of Birth is required
+                              </div>
+                              <div *ngIf="fd['dob'].errors?.['pattern']">
+                                Date of Birth must be a valid date in the format
+                                YYYY-MM-DD
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-4 pb-2">
+                        <label for="inputEmail" class="col-sm-6 col-form-label"
+                          >Gender</label
+                        >
+                        <div class="col-sm-10">
+                          <select
+                            class="form-select selectInput"
+                            aria-label="Default select example"
+                            formControlName="gender"
+                            [ngClass]="{
+                              'is-invalid':
+                                registersubmitted && fd['gender'].errors
+                            }"
+                            name="gender"
+                            id="gender"
+                            (change)="update($event)"
+                          >
+                            <option selected value="">Select Gender*</option>
+                            <option
+                              *ngFor="let item of childGender"
+                              [value]="item"
+                            >
+                              {{ item }}
+                            </option>
+                          </select>
+                          <div
+                            *ngIf="registersubmitted && fd['gender'].errors"
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="fd['gender'].errors?.['required']">
+                              Gender is required
+                            </div>
+                          </div>
+
+                          <!-- <div
+                            *ngIf="
+                            gender.invalid &&
+                              (gender.dirty || gender.touched)
+                            "
+                            class=" alert-danger p-1"
+                          >
+                            <div *ngIf="gender.errors?.['required']">
+                              gender is required.
+                            </div>
+                          </div> -->
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <div class="offset-sm-2 col-sm-10">
+                        <div class="checkbox"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <div class="form-group row">
+                    <div class="col-sm-12 text-center">
+                      <button
+                        type="submit"
+                        class="btn btn-success"
+                        (click)="submitUser()"
+                      >
+                        Save
+                      </button>
+
+                      <!-- <button type="submit" class="btn btn-warning">
+                        Reset
+                      </button> -->
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- viewChild  -->
+              <div *ngIf="viewChild" class="kidsInfo">
+                <div *ngIf="totalKids.length != ''">
+                <!-- <h6>Child Information</h6> -->
+                <div class="card col-6 mb-3 childCard" *ngFor="let kid of totalKids">
+                  <div class="row g-0">
+                    <!-- <div class="col-md-4" *ngIf="kid.profile_pic != null">
+                      <img
+                        class="profile-user-img img-fluid childImg"
+                        [src]="kid.profile_pic"
+                        alt=" "
+                      />
+                    </div>
+                    <div class="col-md-4" *ngIf="kid.profile_pic == null">
+                      <img
+                        class="profile-user-img img-fluid img-fluid childImg"
+                        src="../../../../../assets/childNull.png"
+                        alt=""
+                      />
+                    </div> -->
+                    <form  class="col-md-12 px-4">
+                      <div class="row">
+                        <label for="inputEmail3" class="col-sm-3 col-form-label"
+                          >Name:</label
+                        >
+                        <div class="col-sm-6 p-2">
+                          {{ kid.first_name }}
+                        </div>
+                        <div class="col-sm-3 p-2 d-flex justify-content-end">
+                          <button
+                            data-bs-toggle="modal"
+                            type="button"
+                            data-bs-target="#editChild"
+                            class="card-link moreBtn"
+                            (click)="setData(kid)"
+                          >
+                            <i class="bi bi-pencil"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label
+                          for="inputPassword3"
+                          class="col-sm-3 col-form-label"
+                          >Class:</label
+                        >
+                        <div class="col-sm-6 p-2">
+                          {{ kid.classes.class_name }}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label
+                          for="inputPassword3"
+                          class="col-sm-3 col-form-label"
+                          >School:</label
+                        >
+                        <div class="col-sm-6 p-2">
+                          {{ kid.school_name }}
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label
+                          for="inputPassword3"
+                          class="col-sm-3 col-form-label"
+                          >DOB:</label
+                        >
+                        <div class="col-sm-6 p-2">
+                          {{ kid.dob | date: "MMM d, y" }}
+                        </div>
+                      </div>
+                      <!-- <div class="row">
+                        <label
+                          for="inputPassword3"
+                          class="col-sm-3 col-form-label"
+                          >Phone:</label
+                        >
+                        <div class="col-sm-5 p-2">
+                          {{ kid.mobile }}
+                        </div>
+                      </div> -->
+                    </form>
+                  </div>
+                </div>
+                </div>
+                <div class='d-flex justify-content-center'  *ngIf="totalKids.length == ''">No Kids Data</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal for edit parent profile -->
+<div
+  class="modal fade"
+  id="createEvent"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Profile Details</h5>
+        <button
+          type="button"
+          class="btn-close"
+          #closebutton1
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="parentform">
+          <div class="container">
+            <div class="row align-items-start">
+              <div class="form-group col-5">
+                <label>First Name</label>
+                <input
+                  type="text"
+                  formControlName="parentname"
+                  class="form-control"
+                />
+              </div>
+              <div class="form-group col-5">
+                <label>Gallery</label>
+                <div class="input-group">
+                  <input
+                    type="file"
+                    (click)="uploadFiles1()"
+                    multiple
+                    (change)="getFileDetails1($event)"
+                    class="form-control"
+                    id="inputGroupFile04"
+                    aria-describedby="inputGroupFileAddon04"
+                    aria-label="Upload"
+                  />
+                </div>
+                <!-- formControlName="profile" -->
+                <!-- <span>{{files}}</span> -->
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          #closebutton1
+          class="btn updateBtn"
+          (click)="editParent()"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal for edit child profile -->
+<div
+  class="modal fade"
+  id="editChild"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Child Profile Details
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          #closebutton
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editform" #formDir="ngForm">
+          <div class="container">
+            <div
+              class="cross-validation"
+              [class.cross-validation-error]="editform.errors?.['identityRevealed'] && (editform.touched || editform.dirty)"
+            >
+              <div class="row align-items-start">
+                <div class="form-group col-5">
+                  <label>First Name</label>
+                  <input
+                    type="text"
+                    formControlName="first_name"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group col-5">
+                  <label>Last Name</label>
+                  <input
+                    type="text"
+                    formControlName="last_name"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="row aligni-tems-center">
+                <!-- <div class="form-group col-5">
+                  <label>Mobile Number</label>
+                  <input
+                    type="text"
+                    formControlName="mobile"
+                    class="form-control"
+                    maxlength="10"
+                  />
+                </div> -->
+                <div class="form-group col-5">
+                  <label>Class</label>
+                  <select
+                    class="form-select selectInput"
+                    aria-label="Default select example"
+                    formControlName="standard"
+                    name="standard"
+                    id="standard"
+                    (change)="update($event)"
+                  >
+                    <option selected value="">Select Standard*</option>
+                    <option *ngFor="let list of standards" [value]="list">
+                      {{ list }}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="form-group col-5">
+                  <label>School Name</label>
+                  <input
+                    type="text"
+                    formControlName="school_name"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <div class="row align-items-end">
+                <div class="form-group col-5">
+                  <label>DOB</label>
+                  <input
+                    type="date"
+                    id="dob"
+                    name="dob"
+                    class="form-control"
+                    formControlName="dob"
+                    value="YYYY-MM-DD"
+                  />
+                </div>
+                <div class="form-group col-5">
+                  <label>Gender</label>
+                  <select
+                    class="form-select selectInput"
+                    aria-label="Default select example"
+                    formControlName="gender"
+                    name="gender"
+                    id="gender"
+                    (change)="update($event)"
+                  >
+                    <option selected value="">Select Gender*</option>
+                    <option *ngFor="let item of childGender" [value]="item">
+                      {{ item }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <!-- <div class="row align-items-start">
+                <div class="form-group col-5">
+                  <label>Fathers Mobile</label>
+                  <input
+                    type="tel"
+                    id="father_mobile"
+                    name="father_mobile"
+                    formControlName="father_mobile"
+                    class="form-control"
+                    maxlength="10"
+                  />
+                  <div
+                    *ngIf="
+                      father_mobile.invalid &&
+                      (father_mobile.dirty || father_mobile.touched)
+                    "
+                    class="alert-danger p-1"
+                  >
+                    <div *ngIf="father_mobile.errors?.['minlength']">
+                      Phone number must be at least 10 characters long..
+                    </div>
+                    <div *ngIf="father_mobile.errors?.['pattern']">
+                      Phone number must be a numeric..
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-5">
+                  <label>Fathers Email</label>
+                  <input
+                    type="text"
+                    formControlName="father_email"
+                    class="form-control"
+                  />
+                </div>
+              </div> -->
+              <!-- <div class="row align-items-end">
+                <div class="form-group col-5">
+                  <label>Mothers Name</label>
+                  <input
+                    type="text"
+                    formControlName="mother_name"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group col-5">
+                  <label>Mothers Mobile</label>
+                  <input
+                    type="tel"
+                    id="mother_mobile"
+                    name="mother_mobile"
+                    formControlName="mother_mobile"
+                    class="form-control"
+                    maxlength="10"
+                    required
+                  />
+                  <div
+                    *ngIf="
+                      mother_mobile.invalid &&
+                      (mother_mobile.dirty || mother_mobile.touched)
+                    "
+                    class="alert-danger p-1"
+                  >
+                    <div *ngIf="mother_mobile.errors?.['minlength']">
+                      Phone number must be at least 10 characters long..
+                    </div>
+                    <div *ngIf="mother_mobile.errors?.['pattern']">
+                      Phone number must be a numeric..
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+              <!-- <div class="row align-items-start">
+                <div class="form-group col-5">
+                  <label>Mothers Email</label>
+                  <input
+                    type="text"
+                    formControlName="mother_email"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group col-5">
+                  <label>Gallery</label>
+                  <div class="input-group">
+                    <input
+                      type="file"
+                      (click)="uploadFiles()"
+                      multiple
+                      (change)="getFileDetails($event)"
+                      class="form-control"
+                      id="inputGroupFile04"
+                      aria-describedby="inputGroupFileAddon04"
+                      aria-label="Upload"
+                    />
+                  </div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn updateBtn"
+          #closebutton
+          (click)="editChild()"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

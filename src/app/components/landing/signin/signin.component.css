@@ -1,0 +1,277 @@
+/* body {
+  background-color: #04445D;
+} */
+.cardSize {
+  /* display: flex; */
+    width: 26rem;
+    border: none;
+}
+.signInclass {
+    display: grid;
+    /* flex-direction: column; */
+    /* justify-content: center; */
+}
+.center {
+    text-align: center;
+}
+
+.login,
+.signup,
+.otp{
+  color: #618899;
+  text-align: center;
+text-decoration: none;
+}
+.underline{
+  border-bottom: 5px solid #04445D ;
+}
+.mylogo{
+  height: 100px;
+}
+.logoArea{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: center;
+  /* padding-top: 50px; */
+}
+.logButtons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.half-circle {
+  position:absolute;
+    width: 60vh;
+    height: 100%;
+    background-color: #04445D;
+    border-bottom-left-radius: 600px;
+    border-top-left-radius: 600px;
+    /* border: 5px solid gray; */
+    border-left: 0;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index:3;
+    /* top:10px;
+    left:20px; */
+}
+.half-circle2 {
+  position:absolute;
+    width: 70vh;
+    height: 100%;
+    background-color: #618899;
+    border-bottom-left-radius: 600px;
+    border-top-left-radius: 600px;
+    /* border: 5px solid gray; */
+    border-left: 0;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /* top:10px;
+    left:20px; */
+    z-index:2;
+}
+.half-circle1 {
+    position:absolute;
+    width: 80vh;
+    height: 100%;
+    background-color: #BDCFD3;
+    border-bottom-left-radius: 600px;
+    border-top-left-radius: 600px;
+    /* border: 5px solid gray; */
+    border-left: 0;
+    /* top:10px;
+    left:20px; */
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index:1;
+}
+.leftContent{
+
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+  /* margin-top: 150px; */
+
+}
+.rightContent{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  /* align-items: center;
+  align-content: center; */
+}
+.emailInput,
+.passwordInput{
+  width: 100%;
+  /* background-color: white; */
+  outline: 0;
+  border: none;
+  border-bottom: 2px solid lightgray;
+  padding: 8px 10px;
+  border-radius: 0;
+}
+.signBtn{
+  background-color: #04445D;
+  border-radius: 20px;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+.resetPassword{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+.checkbox{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding-right: 3px;
+}
+ .socialicon{
+  width: 100%;
+  text-align: center;
+  border-bottom: 2px solid lightgray;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+  color: #04445D;
+}
+
+.socialicon span {
+   /* background:#fff; */
+   padding:0 10px;
+}
+.social-container {
+	margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+.social-container a {
+	border: 1px solid #04445D;
+	border-radius: 50%;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 5px;
+	height: 50px;
+	width: 50px;
+}
+.iconcolour{
+  color:  #04445D
+}
+.othersignin, p{
+  text-align: center;
+}
+
+.parent {
+  display: grid;
+  grid: 100vh / auto auto;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: 100vh;
+  grid-template-rows: 2fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 12px;
+  }
+
+  .div1 { grid-area: 1 / 1 / 2 / 2;
+  /* width: 50%; */
+  justify-items: end;
+}
+  .div2 {
+    grid-area: 1 / 2 / 2 / 3;
+    /* width: 50%; */
+    justify-items: end;
+   }
+
+.signInPageclass {  display: grid;
+  /* height: 100vh; */
+  grid-template-columns: 0.5fr 1.2fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "logoArea maincontent Design"
+    ". maincontent Design"
+    ". maincontent Design";
+}
+
+.logoArea { grid-area: logoArea;
+  display: flex;
+  justify-content: center;
+}
+
+.maincontent { grid-area: maincontent;
+  padding-top: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.Design { grid-area: Design;
+  width: 100%;
+}
+.active {
+  color: #04445D;
+}
+
+@media screen and (max-width: 480px) {
+  .Design{
+    display: none;
+  }
+
+}
+
+@media screen and (max-width: 1024px) {
+  .half-circle{
+    width: 50vh;
+
+  }
+  .half-circle1{
+    width: 70vh;
+
+  }
+  .half-circle2{
+    width: 60vh;
+
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1440px) {
+  .half-circle{
+    width: 50vh;
+
+  }
+  .half-circle1{
+    width: 66vh;
+
+  }
+  .half-circle2{
+    width: 58vh;
+  }
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .signInPageclass{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+

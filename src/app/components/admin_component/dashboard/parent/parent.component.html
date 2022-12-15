@@ -1,0 +1,328 @@
+<ngx-ui-loader *ngIf="loader == true"></ngx-ui-loader>
+<div
+  class="modal fade"
+  id="uploadVideo"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Upload Video</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          #closebutton
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="uploadform" #formDir="ngForm">
+          <div
+            class="cross-validation"
+            [class.cross-validation-error]="uploadform.errors?.['identityRevealed'] && (uploadform.touched || uploadform.dirty)"
+          >
+            <!-- <div class="col-md-12 form-group">
+              <label>User</label>
+              <select
+                [disabled]="users.length != 0 ? false : true"
+                placeholder="Select Class"
+                name="username"
+                id="username"
+                formControlName="username"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option selected value="" disabled>Select User</option>
+                <option *ngFor="let usr of users" [value]="usr['id']">
+                  {{ usr["username"] }}
+                </option>
+              </select>
+              <div
+                *ngIf="username.invalid && (username.dirty || username.touched)"
+                class="alert alert-danger"
+              >
+                <div *ngIf="username.errors?.['required']">
+                  Please select the User.
+                </div>
+              </div>
+            </div> -->
+            <!-- <div class="col-md-12 form-group">
+              <label>Goals</label>
+              <select placeholder="Select Goal" #goalSelect (change)="goal_Id=goalSelect.value" class="form-select" aria-label="Default select example">
+                <option selected value="" disabled>Select Goal</option>
+                <option *ngFor="let goal of goalslist" [value]="goal['id']">{{goal['goal_name']}}</option>
+              </select>
+            </div> -->
+            <div class="col-md-12 form-group">
+              <label>Video</label>
+              <div class="input-group">
+                <input
+                  type="file"
+                  (click)="uploadFiles()"
+                  (change)="getFileDetails($event)"
+                  class="form-control"
+                  id="inputGroupFile04"
+                  aria-describedby="inputGroupFileAddon04"
+                  aria-label="Upload"
+                  multiple
+                />
+              </div>
+            </div>
+            <div class="col-md-12 form-group">
+                <label>Url</label>
+                <input class="form-control" formControlName="url"  type="text" name="url" placeholder="Url">
+            </div>
+            <div class="col-md-12 form-group">
+              <label>Rate</label>
+              <input
+                class="form-control"
+                name="rating"
+                id="rating"
+                formControlName="rating"
+                placeholder="Enter Rate"
+                type="number"
+                max="100"
+                min="0"
+              />
+              <div
+                *ngIf="rating.invalid && (rating.dirty || rating.touched)"
+                class="alert alert-danger"
+              >
+                <div *ngIf="rating.errors?.['required']">
+                  Please rate this video.
+                </div>
+                <div *ngIf="rating.errors?.['min'] || rating.errors?.['max']">
+                  The value should be in 0 to 20
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 form-group">
+              <label>Comments</label>
+              <textarea
+                class="form-control"
+                aria-label="With textarea"
+                placeholder="Enter comments"
+                name="comments"
+                id="comments"
+                formControlName="comments"
+              ></textarea>
+              <div
+                *ngIf="comments.invalid && (comments.dirty || comments.touched)"
+                class="alert alert-danger"
+              >
+                <div *ngIf="comments.errors?.['required']">
+                  Please enter the comments.
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary" #closebutton  (click)="uploadVideo()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<body id="page-top">
+  <div id="wrapper">
+    <app-sidebar activiTab="parentUpload"></app-sidebar>
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <app-header header="Parent Video Upload"></app-header>
+        <div class="container-fluid">
+          <form [formGroup]="selectform" #formDir="ngForm">
+            <div class="col-md-12 row mb-1">
+              <div class="col-md-4">
+                <label>School</label>
+                <select
+                  [disabled]="selectedSchool.length != 0 ? false : true"
+                  placeholder="Select school"
+                  #schoolSelect
+                  class="form-select"
+                  (change)="selected_school = schoolSelect.value"
+                  aria-label="Default select example"
+                  formControlName="schools"
+                >
+                  <option selected value="" disabled>Select School</option>
+                  <option *ngFor="let scl of selectedSchool" [value]="scl['school_name']">
+                    {{ scl["school_name"] }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label>Class</label>
+                <select
+                  [disabled]="classes.length != 0 ? false : true"
+                  placeholder="Select Class"
+                  #classSelect
+                  class="form-select"
+                  (change)="getStudents(selected_school,classSelect.value );getSubjects(classSelect.value)"
+                  aria-label="Default select example"
+                >
+                  <option selected value="" disabled>Select Class</option>
+                  <option *ngFor="let cls of classes" [value]="cls['id']">
+                    {{ cls["class_name"] }}
+                  </option>
+                </select>
+              </div>
+              <!-- <div class="col-md-4">
+                <label>Student</label>
+                <br>
+                <input class=" form-control" id="myInput" type="text" placeholder="Select Student">
+              </div> -->
+              <div class="col-md-4">
+                <label>Student</label>
+                <select
+                  [disabled]="studentlist.length != 0 ? false : true"
+                  placeholder="Select Student"
+                  #studentSelect
+                  class="form-select"
+                  (change)="studentid = studentSelect.value; activityGroup(selectExplore,studentid);"
+                  aria-label="Default select example"
+                >
+                  <option selected value="" disabled>Select Student</option>
+                  <option *ngFor="let st of studentlist" [value]="st['id']">
+                    {{ st["first_name"] }}
+                  </option>
+                </select>
+              </div>
+
+              <!-- <div class="col-md-4">
+                <label>Kid</label>
+                <ng-select
+                  [readonly]="studentlist.length != 0 ? false : true"
+                  class="custom"
+                  [items]="studentlist"
+                  bindLabel="first_name"
+                  bindValue="kid_id"
+                  placeholder="Select Student"
+                  [multiple]="false"
+                  [closeOnSelect]="false"
+                  [(ngModel)]="selectedKid"
+                  dropdownPosition="auto"
+                  formControlName="selectedStudent"
+                >
+                </ng-select>
+              </div> -->
+            </div>
+            <div class="col-md-12 row">
+              <div class="col-md-4">
+                <label>Kids Inventor</label>
+                <select
+                  [disabled]="inventorList.length != 0 ? false : true"
+                  placeholder="Select Subject"
+                  #expSelect
+                  class="form-select"
+                  (change)="selectExplore = expSelect.value; activityGroup(selectExplore,studentid);"
+                  aria-label="Default select example"
+                >
+                  <option selected value="" disabled>Select curriculum</option>
+                  <option *ngFor="let exp of inventorList" [value]="exp['id']">
+                    {{ exp["name"] }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label>Activity group</label>
+                <select
+                  [disabled]="activitygroupList.length != 0 ? false : true"
+                  placeholder="Select Subject"
+                  #activityGrpSelect
+                  class="form-select"
+                  (change)='activity_grp = activityGrpSelect.value; getActivities(activity_grp)'
+                  aria-label="Default select example"
+                >
+                  <option selected value="" disabled>Select Activity group</option>
+                  <option *ngFor="let sub of activitygroupList" [value]="sub['id']">
+                    {{ sub["name"] }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label>Activity</label>
+                <select
+                  [disabled]="activitylist.length != 0 ? false : true"
+                  placeholder="Select Activity"
+                  #activitySelect
+                  class="form-select"
+                  (change)='activityID = activitySelect.value'
+                  aria-label="Default select example"
+                >
+                  <option selected value="" disabled>Select Activity group</option>
+                  <option *ngFor="let sub of activitylist" [value]="sub['id']">
+                    {{ sub["name"] }}
+                  </option>
+                </select>
+              </div>
+              <!-- <div class="col-md-4">
+                <label>Activity</label>
+                <ng-select
+                  [readonly]="activitylist.length != 0 ? false : true"
+                  class="custom"
+                  [items]="activitylist"
+                  bindLabel="activity_name"
+                  bindValue="id"
+                  placeholder="Select Activity"
+                  [multiple]="false"
+                  [closeOnSelect]="false"
+                  dropdownPosition="auto"
+                  formControlName="selectedAct"
+                >
+                </ng-select>
+              </div> -->
+            </div>
+            <br />
+            <div class="d-flex justify-content-center">
+              <label>&nbsp;</label><br />
+              <button
+                [disabled]="activityID == '' || activityID == null ? true: false"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#uploadVideo"
+              >
+                Upload Video</button
+              >&nbsp;
+            </div>
+          </form>
+          <div class="table_wrapper">
+            <!-- <table class="table table-borderless align-middle">
+              <tbody>
+                <tr *ngFor="let item of vdolist">
+                  <td [width]="10">
+                    <img class="round" *ngIf="item.profile =='' || item.profile ==null" src="../../../../../assets/default.png">
+                    <img class="round"*ngIf="item.profile !='' && item.profile != null" src=`${item.profile}`>
+                  </td>
+                  <td>
+                    <div><label>Name : </label> {{item.name}}</div>
+                    <div><label>Class : </label> {{item.class}}</div>
+                    <div><label>School : </label> {{item.school}}</div>
+                  </td>
+                  <td>
+                    <span>
+                      <label>Activity : </label> {{item.activity_name}}
+                    </span>
+                  </td>
+                  <td>
+                    <div style="text-align: end">
+                      <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#uploadVideo">Upload Video</button>&nbsp;
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

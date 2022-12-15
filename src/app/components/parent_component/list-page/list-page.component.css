@@ -1,0 +1,240 @@
+body {
+  background-color: #f9f9fa
+}
+
+.flex {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto
+}
+
+@media (max-width:991.98px) {
+  .padding {
+      padding: 1.5rem
+  }
+}
+
+@media (max-width:767.98px) {
+  .padding {
+      padding: 1rem
+  }
+}
+
+.padding {
+  padding: 5rem
+}
+
+.card {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -ms-box-shadow: none
+}
+
+.pl-3,
+.px-3 {
+  padding-left: 1rem !important
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid #d2d2dc;
+  border-radius: 0
+}
+
+.card .card-title {
+ color: #000000;
+ margin-bottom: 0.625rem;
+ text-transform: capitalize;
+ font-size: 0.875rem;
+ font-weight: 500;
+}
+
+.card .card-description {
+ margin-bottom: .875rem;
+ font-weight: 400;
+ color: #76838f;
+}
+
+p {
+ font-size: 0.875rem;
+ margin-bottom: .5rem;
+ line-height: 1.5rem;
+}
+
+.table-responsive {
+ display: block;
+ width: 100%;
+ overflow-x: auto;
+ -webkit-overflow-scrolling: touch;
+ -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.table, .jsgrid .jsgrid-table {
+ width: 100%;
+ max-width: 100%;
+ margin-bottom: 1rem;
+ background-color: transparent;
+}
+
+.table thead th, .jsgrid .jsgrid-table thead th {
+ border-top: 0;
+ border-bottom-width: 1px;
+ font-weight: 700;
+ font-size: .875rem;
+ text-transform: uppercase;
+}
+
+.table td, .jsgrid .jsgrid-table td {
+ font-size: 18px;
+ padding: .875rem 0.9375rem;
+}
+
+.badge {
+ border-radius: 0;
+ font-size: 12px;
+ line-height: 1;
+ padding: .375rem .5625rem;
+ font-weight: normal;
+}
+/* CSS */
+.button-75 {
+  align-items: center;
+  background-color: #05445E;
+
+  /* background-image: linear-gradient(135deg, #f34079 40%, #fc894d); */
+  border: 0;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  font-family: "Codec cold",sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  letter-spacing: .4px;
+  line-height: 1;
+  width: 150px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 3px;
+  text-decoration: none;
+  text-transform: uppercase;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-75:active {
+  outline: 0;
+}
+
+.button-75:hover {
+  outline: 0;
+}
+
+.button-75 span {
+  transition: all 200ms;
+}
+
+.button-75:hover span {
+  transform: scale(.9);
+  opacity: .75;
+}
+
+@media screen and (max-width: 991px) {
+  .button-75 {
+    font-size: 15px;
+    height: 50px;
+  }
+
+  .button-75 span {
+    line-height: 50px;
+  }
+}
+.statusComp{
+  width: 100px;
+  text-align: center;
+background-color: #198754;
+color: white;
+border-radius: 5px;
+}
+.statusPending{
+  width: 100px;
+  text-align: center;
+background-color: #ffc107;
+color: white;
+border-radius: 5px;
+}
+.subheading{
+  padding: 10px;
+  text-align: center;
+  background-color: #05445E;
+  width: 100px;
+  font-size: 18px;
+  font-weight: 700;
+color: white;
+border-radius: 5px;
+}
+.activityDetails:hover{
+color: #198754;
+cursor: pointer;
+}
+.playBtn:hover{
+color: #198754;
+}
+
+#pointer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 200px;
+  height: 40px;
+  position: relative;
+  background: #05445E;
+}
+#pointer:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid #EDF3E6;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+#pointer:before {
+  content: "";
+  position: absolute;
+  right: -20px;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid #05445E;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+.activityDetails,.statusActivity,.act{
+  font-size: 8px;
+}
+#pointer{
+  width: 150px;
+
+}
+.headerText{
+font-size: 12px!important;
+}
+}

@@ -1,0 +1,45 @@
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+  <!-- Topbar Search -->
+  <!-- <button id="check">click me </button> -->
+  <div class="sidebarButton"  id="accordionSidebarHidden">
+    <!-- Sidebar - Brand -->
+    <div class="sidebarHideIcon" id="sidebarToggle" (click)="sidebarToggle()">
+      <i class="bi bi-list"></i>
+    </div>
+  </div>
+  <h1 class="h3 mb-0 text-gray-800"><p class='dashboardHeader mb-0'>{{header}}</p></h1>
+  <ul class="navbar-nav ml-auto">
+    <!-- Nav Item - User Information -->
+    <!-- Example single danger button -->
+    <li class="nav-item dropdown no-arrow">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin Name</span>
+          <img class="img-profile rounded-circle" src="../../../../../assets/default.png">
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-right shadow animated--grow-in">
+          <li>
+            <a class="dropdown-item" href="#">
+              <i class="bi bi-person-fill"></i>
+              Profile
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">
+              <i class="bi bi-gear-fill"></i>
+              Settings
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#" (click)="logoutAdmin()">
+              <i class="bi bi-box-arrow-right"></i>
+              Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,932 @@
+<div class="dashboard">
+  <app-navbar></app-navbar>
+  <br />
+  <div class="">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="demo-content bg-alt">
+          <div>
+            <section>
+              <div class="row cardSection">
+                <div class="col-sm-11">
+                  <div class="card mycard">
+                    <div class="card-body cardBody">
+                      <!-- <div class="triangle-topleft"></div> -->
+                      <div>
+                        <h5 class="card-title">
+                          Welcome! <b>{{ firstname }}</b>
+                        </h5>
+                        <h4 class="card-text">Check out for this week Goal.</h4>
+                        <button class="btn btn-secondary">GET STARTED</button>
+                      </div>
+                      <div>
+                        <img
+                          src="../assets/welcomeImg.png"
+                          class="card-img-top welcomeimg"
+                          alt="..."
+                        />
+                      </div>
+                      <div class="design">
+                        <!-- <div class="triangle-bottomright"></div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <br />
+            <div class="teamLeaderboard">
+              <div class="container">
+                <div class="row justify-content-center">
+                  <div class="col-11">
+                    <!-- Section Heading-->
+                    <div
+                      class="section_heading text-center wow fadeInUp"
+                      data-wow-delay="0.2s"
+                      style="
+                        visibility: visible;
+                        animation-delay: 0.2s;
+                        animation-name: fadeInUp;
+                      "
+                    >
+                      <h3>Star inventors of this week</h3>
+                      <div class="piStars">
+                        <!-- <h3>Top <span>Stars</span></h3> -->
+                        <div class="row g-2">
+                          <div class="col">
+                            <div class="card pi-starCard">
+                              <!-- <h4>Individual Star</h4> -->
+                              <div class="cardImages">
+                                <img
+                                  *ngIf="starscientist.profile_pic == null"
+                                  src="../assets/test1.jpg"
+                                  class="card-img-top imgsize"
+                                  alt="..."
+                                />
+                                <img
+                                  *ngIf="starscientist.profile_pic != null"
+                                  [src]="starscientist.profile_pic"
+                                  class="card-img-top imgsize"
+                                  alt="..."
+                                />
+                                <img
+                                  src="../assets/gold-medal 1.png"
+                                  class="card-img-top imgsize1"
+                                  alt="..."
+                                />
+                              </div>
+                              <div class="card-body p-1">
+                                <h5 class="card-title">
+                                  {{ starscientist.first_name }}
+                                </h5>
+                                <h5 class="card-title">
+                                  <b>{{ starscientist.atoms }}</b>
+                                  <span>
+                                    <img
+                                      class="atomicon"
+                                      src="../assets/neutron.png"
+                                      alt=""
+                                  /></span>
+                                </h5>
+                                <p class="card-text">
+                                  <b>{{ starscientist.school_name }}</b>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="card team-starCard">
+                              <!-- <h4>Team Star</h4> -->
+                              <div class="cardImages">
+                                <img
+                                  *ngIf="starleader.team_pic == null"
+                                  src="../assets/test1.jpg"
+                                  class="card-img-top imgsize"
+                                  alt="..."
+                                />
+                                <img
+                                  *ngIf="starleader.team_pic != null"
+                                  [src]="starleader.team_pic"
+                                  class="card-img-top imgsize"
+                                  alt="..."
+                                />
+                                <img
+                                  src="../assets/gold-medal.png"
+                                  class="card-img-top imgsize1"
+                                  alt="..."
+                                />
+                              </div>
+                              <div class="card-body p-1">
+                                <h5 class="card-title">
+                                  {{ starleader.team_name }}
+                                </h5>
+                                <h5 class="card-title">
+                                  <b>{{ starleader.team_atoms }}</b>
+                                  <span>
+                                    <img
+                                      class="atomicon"
+                                      src="../assets/neutron.png"
+                                      alt=""
+                                  /></span>
+                                </h5>
+                                <p class="card-text">
+                                  <b>People({{ starleader.count }})</b>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="teamLeaderboard">
+              <div class="container">
+                <div class="row">
+                  <div class="col-12">
+                    <!-- Section Heading-->
+                    <div
+                      class="section_heading text-center wow fadeInUp"
+                      data-wow-delay="0.2s"
+                      style="
+                        visibility: visible;
+                        animation-delay: 0.2s;
+                        animation-name: fadeInUp;
+                      "
+                    >
+                      <h4>Team <span>Leaderboard</span></h4>
+                      <!-- <div id='pointer' ><h5><b class='px-2'>Team Leaderboard</b></h5></div> -->
+
+                      <div><b>Top Stars</b></div>
+                      <div class="viewAll" (click)="teamlist()">
+                        <b>View All</b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class=" ">
+                  <ul class="list-unstyled myleaderCard">
+                    <li class="" *ngFor="let list of leaders">
+                      <!-- Single Advisor-->
+                      <div class="col-12 col-sm-6 col-lg-3 myleadres">
+                        <div
+                          class="single_advisor_profile wow fadeInUp"
+                          data-wow-delay="0.2s"
+                          style="
+                            visibility: visible;
+                            animation-delay: 0.2s;
+                            animation-name: fadeInUp;
+                          "
+                        >
+                          <!-- Team Thumb-->
+                          <div class="advisor_thumb">
+                            <!-- <div class="starIconarea"> <img class="starIcon" src="../assets/star.png" alt=""></div> -->
+                            <img
+                              class="piStarimg"
+                              [src]="
+                                list.team_pic || '../assets/images/msg.png'
+                              "
+                              alt=""
+                            />
+                            <!-- Social Info-->
+                            <!-- <div class="social-info"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
+            class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-linkedin"></i></a></div> -->
+                          </div>
+                          <!-- Team Details-->
+                          <div class="single_advisor_details_info">
+                            <div>
+                              <h6>{{ list.team_name }}</h6>
+                              <p class="designation">
+                                <b>{{ list.team_atoms }}</b>
+                                <img
+                                  class="atomicon"
+                                  src="../assets/neutron B.png"
+                                  alt=""
+                                />
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <br />
+            <div>
+              <!-- events -->
+              <h3 class="heading">Scientists Leaderboard</h3>
+              <span class="">
+                <p style="text-align: right">
+                  <a (click)="scientistList()"
+                    >
+                    <b>View All</b>
+                    <!-- <i class="bi bi-arrow-right-short"></i> -->
+                </a>
+                </p>
+              </span>
+              <div
+                id="carouselExampleDark"
+                class="carousel carousel-dark slide"
+                data-bs-ride="carousel"
+              >
+                <div class="carousel-indicators">
+                  <button
+                    type="button"
+                    data-bs-target="#carouselExampleDark"
+                    data-bs-slide-to="0"
+                    class="active"
+                    aria-current="true"
+                    aria-label="Slide 1"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#carouselExampleDark"
+                    data-bs-slide-to="1"
+                    aria-label="Slide 2"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#carouselExampleDark"
+                    data-bs-slide-to="2"
+                    aria-label="Slide 3"
+                  ></button>
+                </div>
+                <div class="carousel-inner">
+                  <div
+                    class="carousel-item active carouselStyle"
+                    [ngClass]="{ active: isFirst }"
+                    *ngFor="
+                      let mydata of scientist;
+                      index as i;
+                      first as isFirst
+                    "
+                    data-bs-interval="4000"
+                  >
+                    <div class="container">
+                      <div class="row">
+                        <div class="col">
+                          <ul class="list-unstyled">
+                            <li>
+                              <section>
+                                <div class="container p-4">
+                                  <div class="card eventCards">
+                                    <div class="row">
+                                      <div class="col-md-4">
+                                        <img
+                                          *ngIf="mydata.profile_pic == null"
+                                          src="../assets/profile-3.jpg"
+                                          class="w-100 img-fluid rounded-start teamImg"
+                                        />
+                                        <img
+                                          *ngIf="mydata.profile_pic != null"
+                                          [src]="mydata.profile_pic"
+                                          class="w-100 img-fluid rounded-start teamImg"
+                                        />
+                                      </div>
+                                      <div class="col-md-8 px-1">
+                                        <div class="card-body px-3">
+                                          <div class="favourite">
+                                            <p class="card-text">
+                                              <figcaption>
+                                                <b>{{ mydata.atoms }} </b>
+                                                <img
+                                                  class="atomicon"
+                                                  src="../assets/neutron B.png"
+                                                  alt=""
+                                                />
+                                              </figcaption>
+                                            </p>
+                                          </div>
+                                          <h4 class="card-title">
+                                            {{ mydata.first_name }}
+                                          </h4>
+                                          <p class="card-text">
+                                            <b>{{ mydata.school_name }}</b>
+                                          </p>
+                                          <p class="card-text"><b>{{mydata.email}}</b></p>
+                                      <!-- <p class="card-text"><b>{{mydata.o2}}</b></p> -->
+                                      <!-- <p class="card-text"><b>{{mydata.classes.class_name}}</b></p> -->
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </section>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- <div class="carousel-item" data-bs-interval="2000">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col">
+                          <section>
+                            <div class="container p-5 ">
+                              <div class="card eventCards">
+                                <div class="row ">
+                                  <div class="col-md-4 ">
+                                    <img src="../assets/profile-4.jpg" class="w-100 img-fluid rounded-start teamImg">
+                                  </div>
+                                  <div class="col-md-8 px-3">
+                                    <div class="card-body px-3">
+                                      <div class="favourite"><i class="bi bi-heart"></i></div>
+                                      <h4 class="card-title">Science Week Festival</h4>
+                                      <p class="card-text"><b>Event Date:</b> 18-2-2022 to 20-2-2022 </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </section>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                  <!-- <div class="carousel-item">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col">
+                          <section>
+                            <div class="container p-5">
+                              <div class="card eventCards">
+                                <div class="row ">
+                                  <div class="col-md-4">
+                                    <img src="../assets/test1.jpg" class="w-100 img-fluid rounded-start teamImg">
+                                  </div>
+                                  <div class="col-md-8 px-3">
+                                    <div class="card-body px-3">
+                                      <div class="favourite"><i class="bi bi-heart"></i></div>
+
+                                      <h4 class="card-title">Science Week Festival</h4>
+                                      <p class="card-text"><b>Event Date:</b> 18-2-2022 to 20-2-2022 </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </section>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                </div>
+                <!-- <button
+                  class="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExampleDark"
+                  data-bs-slide="prev"
+                >
+                  <span
+                    class="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Previous</span>
+                </button> -->
+                <!-- <button
+                  class="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExampleDark"
+                  data-bs-slide="next"
+                >
+                  <span
+                    class="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Next</span>
+                </button> -->
+              </div>
+            </div>
+            <div>
+              <h3 class="heading">SCIENTISTS LEADERBOARD</h3>
+              <div
+                id="carouselExampleDark1"
+                class="carousel carousel-dark slide"
+                data-bs-ride="carousel"
+              >
+                <div class="carousel-indicators indicator">
+                  <button
+                    type="button"
+                    data-bs-target="#carouselExampleDark1"
+                    data-bs-slide-to="0"
+                    class="active"
+                    aria-current="true"
+                    aria-label="Slide 1"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#carouselExampleDark1"
+                    data-bs-slide-to="1"
+                    aria-label="Slide 2"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#carouselExampleDark1"
+                    data-bs-slide-to="2"
+                    aria-label="Slide 3"
+                  ></button>
+                </div>
+                <div class="carousel-inner p-5">
+                  <div
+                    class="carousel-item active carouselStyle"
+                    data-bs-interval="10000"
+                  >
+                    <div class="container">
+                      <div class="row justify-content-evenly">
+                        <!-- <div class="card mb-3 scientistCards" style="max-width: 400px;">
+                          <div class="row g-0 ">
+                            <div class="col-md-2 ">
+                              <img src="../assets/gold-medal 1.png" class="img-fluid rounded-start " alt="...">
+                            </div>
+                            <div class="col-md-4 cardImages">
+                              <img src="../assets/test1.jpg" class=" imgsize" alt="...">
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="card-body sci-cardBody">
+                                <h4 class="card-title">SEENU</h4>
+                                <p class="card-title"><b>ASHRAM SCHOOL</b></p>
+                                <p class="designation"><b>4500</b> <img class="atomicon" src="../assets/neutron.png"
+                                    alt=""></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div> -->
+                        <div
+                          class="card scientistCards"
+                          style="max-width: 700px"
+                        >
+                          <div class="row">
+                            <div class="col-md-2">
+                              <img
+                                src="../assets/gold-medal 1.png"
+                                class="img-fluid rounded-start"
+                                alt="..."
+                              />
+                            </div>
+                            <div class="col-md-4 cardImages">
+                              <img
+                                src="../assets/test1.jpg"
+                                class="imgsize"
+                                alt="..."
+                              />
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="card-body sci-cardBody">
+                                <h4 class="card-title">SEENU</h4>
+                                <p class="card-title"><b>ASHRAM SCHOOL</b></p>
+                                <p class="designation">
+                                  <b>4500</b>
+                                  <img
+                                    class="atomicon"
+                                    src="../assets/neutron.png"
+                                    alt=""
+                                  />
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container">
+                      <div class="row justify-content-evenly">
+                        <div
+                          class="card scientistCards"
+                          style="max-width: 700px"
+                        >
+                          <div class="row">
+                            <div class="col-md-2">
+                              <img
+                                src="../assets/silver-medal.png"
+                                class="img-fluid rounded-start"
+                                alt="..."
+                              />
+                            </div>
+                            <div class="col-md-4 cardImages">
+                              <img
+                                src="../assets/test1.jpg"
+                                class="imgsize"
+                                alt="..."
+                              />
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="card-body sci-cardBody">
+                                <h4 class="card-title">SEENU</h4>
+                                <p class="card-title"><b>ASHRAM SCHOOL</b></p>
+                                <p class="designation">
+                                  <b>4500</b>
+                                  <img
+                                    class="atomicon"
+                                    src="../assets/neutron.png"
+                                    alt=""
+                                  />
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="container">
+                      <div class="row justify-content-evenly">
+                        <div
+                          class="card scientistCards"
+                          style="max-width: 700px"
+                        >
+                          <div class="row g-0">
+                            <div class="col-md-2">
+                              <img
+                                src="../assets/bronze-medal.png"
+                                class="img-fluid rounded-start"
+                                alt="..."
+                              />
+                            </div>
+                            <div class="col-md-4 cardImages">
+                              <img
+                                src="../assets/test1.jpg"
+                                class="imgsize"
+                                alt="..."
+                              />
+                            </div>
+                            <div class="col-md-6">
+                              <div class="card-body sci-cardBody">
+                                <h4 class="card-title">SEENU</h4>
+                                <p class="card-title"><b>ASHRAM SCHOOL</b></p>
+                                <p class="designation">
+                                  <b>4500</b>
+                                  <img
+                                    class="atomicon"
+                                    src="../assets/neutron.png"
+                                    alt=""
+                                  />
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- <div class="card mb-3 scientistCards" style="max-width: 400px;">
+                    <div class="row g-0 ">
+                      <div class="col-md-2 ">
+                        <img src="../assets/silver-medal.png" class="img-fluid rounded-start " alt="...">
+                      </div>
+                      <div class="col-md-4 cardImages">
+                        <img src="../assets/test1.jpg" class=" imgsize" alt="...">
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="card-body sci-cardBody">
+                          <h4 class="card-title">SEENU</h4>
+                          <p class="card-title"><b>ASHRAM SCHOOL</b></p>
+                          <p class="designation"><b>4500</b> <img class="atomicon" src="../assets/neutron.png" alt=""></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  class="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExampleDark1"
+                  data-bs-slide="prev"
+                >
+                  <span
+                    class="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                  class="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExampleDark1"
+                  data-bs-slide="next"
+                >
+                  <span
+                    class="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+            <br />
+            <div>
+              <h3 class="heading">GOAL</h3>
+              <div
+                id="carouselExampleDark2"
+                class="carousel carousel-dark slide"
+                data-bs-ride="carousel"
+              >
+                <div class="carousel-indicators indicator">
+                  <button
+                    type="button"
+                    data-bs-target="#carouselExampleDark2"
+                    data-bs-slide-to="0"
+                    class="active"
+                    aria-current="true"
+                    aria-label="Slide 1"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#carouselExampleDark2"
+                    data-bs-slide-to="1"
+                    aria-label="Slide 2"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#carouselExampleDark2"
+                    data-bs-slide-to="2"
+                    aria-label="Slide 3"
+                  ></button>
+                </div>
+                <div class="goalSection">
+                  <h5 class="heading">
+                    The Big Bang Fair
+                    <div class="carousel-inner p-5">
+                      <div
+                        class="carousel-item active"
+                        data-bs-interval="10000"
+                      >
+                        <div class="container">
+                          <div class="row justify-content-evenly">
+                            <div
+                              class="card mb-3 star-goalCard"
+                              style="max-width: 400px"
+                            >
+                              <div class="row g-0">
+                                <div class="col-md-2">
+                                  <img
+                                    src="../assets/gold-medal 1.png"
+                                    class="img-fluid rounded-start"
+                                    alt="..."
+                                  />
+                                </div>
+                                <div class="col-md-4 cardImages">
+                                  <img
+                                    src="../assets/test1.jpg"
+                                    class="imgsize"
+                                    alt="..."
+                                  />
+                                </div>
+
+                                <div class="col-md-6">
+                                  <div class="card-body sci-cardBody">
+                                    <h5 class="card-title">ASHRAM SCHOOL</h5>
+                                    <p class="designation">
+                                      <b>4500</b>
+                                      <img
+                                        class="atomicon"
+                                        src="../assets/neutron.png"
+                                        alt=""
+                                      />
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              class="card mb-3 team-goalCard"
+                              style="max-width: 400px"
+                            >
+                              <div class="row g-0">
+                                <div class="col-md-2">
+                                  <img
+                                    src="../assets/gold-medal 1.png"
+                                    class="img-fluid rounded-start"
+                                    alt="..."
+                                  />
+                                </div>
+                                <div class="col-md-4 cardImages">
+                                  <img
+                                    src="../assets/test1.jpg"
+                                    class="imgsize"
+                                    alt="..."
+                                  />
+                                </div>
+
+                                <div class="col-md-6">
+                                  <div class="card-body sci-cardBody">
+                                    <h5 class="card-title">ASHRAM SCHOOL</h5>
+                                    <p class="designation">
+                                      <b>4500</b>
+                                      <img
+                                        class="atomicon"
+                                        src="../assets/neutron.png"
+                                        alt=""
+                                      />
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                        <div class="container">
+                          <div class="row justify-content-evenly">
+                            <div
+                              class="card mb-3 star-goalCard"
+                              style="max-width: 400px"
+                            >
+                              <div class="row g-0">
+                                <div class="col-md-2">
+                                  <img
+                                    src="../assets/silver-medal.png"
+                                    class="img-fluid rounded-start"
+                                    alt="..."
+                                  />
+                                </div>
+                                <div class="col-md-4 cardImages">
+                                  <img
+                                    src="../assets/test1.jpg"
+                                    class="imgsize"
+                                    alt="..."
+                                  />
+                                </div>
+
+                                <div class="col-md-6">
+                                  <div class="card-body sci-cardBody">
+                                    <h5 class="card-title">ASHRAM SCHOOL</h5>
+                                    <p class="designation">
+                                      <b>4500</b>
+                                      <img
+                                        class="atomicon"
+                                        src="../assets/neutron.png"
+                                        alt=""
+                                      />
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              class="card mb-3 team-goalCard"
+                              style="max-width: 400px"
+                            >
+                              <div class="row g-0">
+                                <div class="col-md-2">
+                                  <img
+                                    src="../assets/silver-medal.png"
+                                    class="img-fluid rounded-start"
+                                    alt="..."
+                                  />
+                                </div>
+                                <div class="col-md-4 cardImages">
+                                  <img
+                                    src="../assets/test1.jpg"
+                                    class="imgsize"
+                                    alt="..."
+                                  />
+                                </div>
+
+                                <div class="col-md-6">
+                                  <div class="card-body sci-cardBody">
+                                    <h5 class="card-title">ASHRAM SCHOOL</h5>
+                                    <p class="designation">
+                                      <b>4500</b>
+                                      <img
+                                        class="atomicon"
+                                        src="../assets/neutron.png"
+                                        alt=""
+                                      />
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                        <div class="container">
+                          <div class="row justify-content-evenly">
+                            <div
+                              class="card mb-3 star-goalCard"
+                              style="max-width: 400px"
+                            >
+                              <div class="row g-0">
+                                <div class="col-md-2">
+                                  <img
+                                    src="../assets/bronze-medal.png"
+                                    class="img-fluid rounded-start"
+                                    alt="..."
+                                  />
+                                </div>
+                                <div class="col-md-4 cardImages">
+                                  <img
+                                    src="../assets/test1.jpg"
+                                    class="imgsize"
+                                    alt="..."
+                                  />
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="card-body sci-cardBody">
+                                    <h5 class="card-title">ASHRAM SCHOOL</h5>
+                                    <p class="designation">
+                                      <b>4500</b>
+                                      <img
+                                        class="atomicon"
+                                        src="../assets/neutron.png"
+                                        alt=""
+                                      />
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div
+                              class="card mb-3 team-goalCard"
+                              style="max-width: 400px"
+                            >
+                              <div class="row g-0">
+                                <div class="col-md-2">
+                                  <img
+                                    src="../assets/bronze-medal.png"
+                                    class="img-fluid rounded-start"
+                                    alt="..."
+                                  />
+                                </div>
+                                <div class="col-md-4 cardImages">
+                                  <img
+                                    src="../assets/test1.jpg"
+                                    class="imgsize"
+                                    alt="..."
+                                  />
+                                </div>
+
+                                <div class="col-md-6">
+                                  <div class="card-body sci-cardBody">
+                                    <h5 class="card-title">ASHRAM SCHOOL</h5>
+                                    <p class="designation">
+                                      <b>4500</b>
+                                      <img
+                                        class="atomicon"
+                                        src="../assets/neutron.png"
+                                        alt=""
+                                      />
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </h5>
+                </div>
+                <button
+                  class="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExampleDark2"
+                  data-bs-slide="prev"
+                >
+                  <span
+                    class="carousel-control-prev-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                  class="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExampleDark2"
+                  data-bs-slide="next"
+                >
+                  <span
+                    class="carousel-control-next-icon"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="demo-content">
+          <app-recent-activity></app-recent-activity>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,394 @@
+<div
+  class="modal fade"
+  id="createGoal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Create Activity</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          #closebutton
+
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="createActivityform">
+          <div *ngIf="errorShow != ''" class="alert alert-danger">
+            <div>
+              {{ errorShow }}
+            </div>
+          </div>
+          <div class="col-md-12 row">
+            <div class="col-md-6 form-group">
+              <label>Activity Name</label>
+              <input
+                class="form-control"
+                formControlName="activity_name"
+                type="text"
+                name="activity_name"
+                placeholder="Activity Name"
+              />
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Atoms</label>
+              <input
+                class="form-control"
+                formControlName="atoms"
+                type="number"
+                name="atoms"
+                placeholder="Atoms"
+              />
+            </div>
+          </div>
+          <div class="col-md-12 row">
+            <div class="col-md-6 form-group">
+              <label>Url</label>
+              <input
+                class="form-control"
+                formControlName="url"
+                type="text"
+                name="url"
+                placeholder="Url"
+              />
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Class</label>
+              <select
+                placeholder="Select Class"
+                #classSelect
+                class="form-select"
+                (change)="getSubjects(classSelect.value)"
+                aria-label="Default select example"
+              >
+                <option selected value="" disabled>Select Class</option>
+                <option *ngFor="let cls of classes" [value]="cls['id']">
+                  {{ cls["class_name"] }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-12 row">
+            <div class="col-md-6 form-group">
+              <label>Subject</label>
+              <select
+                placeholder="Select Subject"
+                #subSelect
+                class="form-select"
+                (change)="getChapter(subSelect.value)"
+                aria-label="Default select example"
+              >
+                <option selected value="" disabled>Select Subject</option>
+                <option *ngFor="let sub of subjects" [value]="sub['id']">
+                  {{ sub["subject_name"] }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Chapter</label>
+              <select
+                placeholder="Select Chapter"
+                #chapSelect
+                (change)="chapterId = chapSelect.value"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option selected value="" disabled>Select Chapter</option>
+                <option
+                  *ngFor="let chapter of chapters"
+                  [value]="chapter['id']"
+                >
+                  {{ chapter["chapter_name"] }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-12 row">
+            <div class="col-md-6 form-group">
+              <label>O2</label>
+              <input
+                class="form-control"
+                formControlName="o2"
+                type="number"
+                name="o2"
+                placeholder="Enter 0 - 10"
+                pattern="/^-?\d+\.?\d*$/"
+                min="0"
+                max="10"
+                onKeyPress="if(this.value.length==2) return false;"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="createActivity()"
+        >
+          Create
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<body id="page-top">
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <app-sidebar activiTab="activities"></app-sidebar>
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <app-header header="Activities"></app-header>
+        <div class="container-fluid" >
+        <!-- <div class="container-fluid" *ngIf='totalPages > 9'> -->
+          <!-- Page Heading -->
+          <div
+            class="d-sm-flex align-items-center justify-content-between mb-4"
+          >
+            <span></span>
+            <div class="d-sm-flex align-items-center justify-content-between">
+              <form
+                [formGroup]="searchform"
+                #formDir="ngForm"
+                class="form-inline mr-auto w-100 navbar-search"
+              >
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="searchClass"
+                    placeholder="Search..."
+                    aria-label="Search"
+                    aria-describedby="basic-addon2"
+                    formControlName="search"
+                    name="search"
+                    id="search"
+                    (keydown)="onKey($event)"
+                  />
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" (click)="searchGoal(1)">
+                      <i class="bi bi-search"></i>
+                    </button>
+                  </div>
+                  <button
+                    data-bs-toggle="modal"
+                    type="button"
+                    data-bs-target="#filter"
+                    style="padding: 6.5px 12px"
+                    class="ml-2 d-sm-inline-block btn btn-sm btn-primary"
+                  >
+                    <i class="bi bi-funnel"></i>
+                  </button>
+                  <button
+                    data-bs-toggle="modal"
+                    type="button"
+                    data-bs-target="#createGoal"
+                    style="padding: 6.5px 12px"
+                    class="ml-2 d-sm-inline-block btn btn-sm btn-primary"
+                  >
+                    Create
+                  </button>
+                </div>
+              </form>
+              <!-- <button data-bs-toggle="modal" data-bs-target="#createGoal" style="padding: 6.5px 12px" class="ml-2 d-sm-inline-block btn btn-sm btn-primary">Create</button> -->
+            </div>
+          </div>
+          <div class="table_wrapper" *ngIf="activitylist.length != 0">
+            <table class="table table-borderless align-middle css-serial">
+              <thead class="thead-light">
+                <tr>
+                  <th>#</th>
+                  <th scope="col">Activity Name</th>
+                  <th scope="col">Url</th>
+                  <th scope="col">Atoms</th>
+                  <th scope="col">O2</th>
+                  <th scope="col">Created On</th>
+                  <!-- <th scope="col">Updated On</th> -->
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of activitylist | paginate: { id: 'server', itemsPerPage: 20, currentPage: currentPage, totalItems: recordcount }">
+                  <td></td>
+                  <td>{{ item["activity_name"] }}</td>
+                  <td>
+                    <div
+                      style="
+                        width: 200px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                      "
+                    >
+                      <a [href]="item['url']" target="_blank">{{
+                        item["url"]
+                      }}</a>
+                    </div>
+                  </td>
+                  <td>{{ item["atoms"] }}</td>
+                  <td>{{ item["o2"] }}</td>
+                  <td>{{ item["created_on"] | date: "MMM d, y, h:mm a" }}</td>
+                  <!-- <td>{{ item["updated_on"] | date: "MMM d, y, h:mm a" }}</td> -->
+                  <td class="text-center">
+                    <i style="color: red" class="bi bi-trash3"></i> &nbsp;
+                    <!-- <i style="color:#04445D" class="bi bi-pencil"></i> -->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="text-align: center" *ngIf="activitylist.length == 0">
+            No data found.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="list" >
+    <pagination-controls
+    (pageChange)="searchGoal($event)"
+    id="server"
+
+     ></pagination-controls>
+    <!-- <pagination-controls
+    id="basicPaginate"
+    [maxSize]="maxSize"
+    [directionLinks]="directionLinks"
+    [autoHide]="autoHide"
+    [responsive]="responsive"
+    [previousLabel]="labels.previousLabel"
+    [nextLabel]="labels.nextLabel"
+    [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+    [screenReaderPageLabel]="labels.screenReaderPageLabel"
+    [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+    (pageChange)="onPageChange($event, pageOfItems)"
+    (pageBoundsCorrection)="onPageBoundsCorrection($event)"></pagination-controls> -->
+  </div>
+  <!-- @changePage="onChangePage" -->
+</body>
+<!-- Modal for filter-->
+<div
+  class="modal fade"
+  id="filter"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Filter Activity</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          #close
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-check">
+          <!-- <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"> -->
+          <!-- <label class="form-check-label" for="inlineCheckbox1">Standard</label> -->
+          <div class="col-md-12 row showtheaddedform">
+            <div class="col-md-6 form-group">
+              <label>Class</label>
+              <select
+                placeholder="Select Class"
+                #classSelect1
+                class="form-select"
+                (change)="getSubjects(classSelect1.value)"
+                aria-label="Default select example"
+              >
+                <option selected value="" disabled>Select Class</option>
+                <option *ngFor="let cls of classes" [value]="cls['id']">
+                  {{ cls["class_name"] }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Subject</label>
+              <select
+                placeholder="Select Subject"
+                class="form-select"
+                #subSelect1
+                (change)="getChapter(subSelect1.value)"
+                aria-label="Default select example"
+              >
+                <option selected value="" disabled>Select Subject</option>
+                <option *ngFor="let sub of subjects" [value]="sub['id']">
+                  {{ sub["subject_name"] }}
+                </option>
+              </select>
+              <!-- {{subSelect1.value}} -->
+
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Chapter</label>
+              <select
+                placeholder="Select Chapter"
+                #chapSelect1
+                class="form-select"
+                aria-label="Default select example"
+                (change)='filter = chapSelect1.value'
+              >
+                <option selected value="" disabled>Select Chapter</option>
+                <option
+                  *ngFor="let chapter of chapters"
+                  [value]="chapter['id']"
+                >
+                  {{ chapter["chapter_name"] }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-check form-check-inline">
+          <!-- <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+          <label class="form-check-label" for="inlineCheckbox2">Atoms</label> -->
+        </div>
+        <div class="form-check form-check-inline">
+          <!-- <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" >
+          <label class="form-check-label" for="inlineCheckbox3">O2</label> -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="formempty()" >
+          Clear
+        </button>
+        <button
+          type='button'
+          #close
+          class="btn btn-primary" *ngIf="chapSelect1.value == ''"
+          (click)="filterbyStandard(classSelect1.value)"
+        >
+          Save
+        </button>
+        <button
+        *ngIf="chapSelect1.value != ''"
+          type='button'
+          #close
+          class="btn btn-primary"
+          (click)="filterbyChapter(chapSelect1.value)"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

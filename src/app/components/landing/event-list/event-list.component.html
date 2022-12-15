@@ -1,0 +1,119 @@
+<div class="myTeamlist">
+  <nav>
+    <app-navbar></app-navbar>
+  </nav>
+  <header>
+    <div class="container d-flex">
+      <div class="p-2">
+        <h3>Events </h3>
+        <h5>Popular Events</h5>
+      </div>
+      <div class="ms-auto p-2">
+        <!-- <button type="button" class="btn myBtn" (click)="myTeamDetails()">Subject</button> -->
+        <!-- Example single danger button -->
+        <div class="btn-group">
+          <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Subject
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Physics</a></li>
+            <li><a class="dropdown-item" href="#">Chemistry</a></li>
+            <li><a class="dropdown-item" href="#">Botony</a></li>
+            <li><a class="dropdown-item" href="#">Zoology</a></li>
+            <li><a class="dropdown-item" href="#">Biology</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="container px-4 ">
+      <div class="p-2 ">
+
+      <div class="row gx-5">
+        <div class="col">
+          <!-- <div class="p-2 border bg-light"> -->
+            <div class="card  myEventcard">
+              <div class="row g-0 " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div class="col-md-4 teamImg ">
+                  <img src="../assets/sample.jpg" class="teamListimage" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body p-1">
+                      <div class="d-flex flex-row-reverse">
+                        <div class="p-2 favourite"><i class="bi bi-heart"></i></div>
+                      </div>
+                      <h5 class="card-title">Science Week Festival</h5>
+                      <p class="card-text">23-9-2022 - 25-9-2022</p>
+                    </div>
+                </div>
+              </div>
+            <!-- </div> -->
+          </div>
+        </div>
+        <div class="col">
+          <!-- <div class="p-2 border bg-light "> -->
+            <div class="card myEventcard" >
+              <div class="row g-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div class="col-md-4 teamImg ">
+                  <img src="../assets/sample.jpg" class="teamListimage" alt="...">
+                </div>
+
+                <div class="col-md-8">
+                                    <div class="card-body p-1">
+                        <div class="d-flex flex-row-reverse">
+                          <div class="p-2 favourite"><i class="bi bi-heart"></i></div>
+                        </div>
+                      <h5 class="card-title">Science Fair</h5>
+                      <p class="card-text">23-9-2022 - 25-9-2022</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- </div> -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Event Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12 teamImg ">
+            <figure>
+              <img src="../assets/sample.jpg" class="teamListimagepopup" alt="...">
+              <figcaption><b><h4>Science Events From New Scientist</h4></b></figcaption>
+              <div class="row justify-content-between">
+                <div class="col-4">
+                  Sat. Aug 31.2022
+                                </div>
+                <div class="col-4">
+                  <i class="bi bi-star"></i> 4.0
+                </div>
+              </div>
+            </figure>
+          </div>
+<h5>About</h5>
+<div class="description">
+  <p><b>Description:</b></p>
+  <p class="lh-1">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
+  <p class="lh-sm">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
+  <p class="lh-base">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
+  <p class="lh-lg">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
+</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary"><i class="bi bi-plus"></i> Join</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

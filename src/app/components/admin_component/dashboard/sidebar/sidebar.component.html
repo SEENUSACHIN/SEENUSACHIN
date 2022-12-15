@@ -1,0 +1,78 @@
+
+<ul class="navbar-nav bg-primary sidebar sidebar-dark " id="accordionSidebar">
+  <!-- Sidebar - Brand -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center">
+    <div class="">
+      <img style="width: 100px;height: 70px;" src="../../../../../assets/pi_white_bg.png">
+    </div>
+  </a>
+  <!-- Divider -->
+  <hr class="sidebar-divider my-0">
+  <!-- Nav Item - Dashboard -->
+  <li class="nav-item" [ngClass]="activiTab == 'dashboard' ? 'active' : ''">
+    <a (click)="gotoDashboard()" class="nav-link">
+      <i class="bi bi-speedometer2"></i>&nbsp;
+      <span class="sidebarText">Dashboard</span></a>
+  </li>
+  <!-- Nav Item - Activity -->
+  <li class="nav-item" [ngClass]="activiTab == 'activities' ? 'active' : ''">
+    <a (click)="gotoActivity()" class="nav-link">
+      <i class="bi bi-radioactive"></i>&nbsp;
+      <span class="sidebarText">Activities</span></a>
+  </li>
+  <!-- Nav Item - Goals -->
+  <li class="nav-item" [ngClass]="activiTab == 'goals' ? 'active' : ''">
+    <a (click)="gotoGoals()" class="nav-link">
+      <i class="bi bi-diagram-3"></i>&nbsp;
+      <span class="sidebarText">Goals</span></a>
+  </li>
+  <!-- Nav Item - Events -->
+  <li class="nav-item" [ngClass]="activiTab == 'events' ? 'active' : ''">
+    <a (click)="gotoEvents()" class="nav-link">
+      <i class="bi bi-calendar2-event"></i>&nbsp;
+      <span class="sidebarText">Events</span></a>
+  </li>
+  <!-- Nav Item - Videos -->
+  <li class="nav-item" [ngClass]="activiTab == 'ratingVideo' ? 'active' : ''">
+    <a (click)="gotoVdoRating()" class="nav-link pointer">
+      <i class="bi bi-fast-forward-circle"></i>&nbsp;
+      <span class="sidebarText">Rating Videos</span>
+    </a>
+  </li>
+  <li class="nav-item" [ngClass]="activiTab == 'uploadVideo' ? 'active' : ''">
+    <a (click)="gotoVdoUpload()" class="nav-link pointer">
+      <i class="bi bi-upload"></i>&nbsp;
+      <span class="sidebarText">Upload Videos</span>
+    </a>
+  </li>
+  <li class="nav-item" [ngClass]="activiTab == 'parentUpload' ? 'active' : ''">
+    <a (click)="gotoparentVdoUpload()" class="nav-link pointer">
+      <i class="bi bi-upload"></i>&nbsp;
+      <span class="sidebarText">Parent Upload Videos</span>
+    </a>
+  </li>
+  <li class="nav-item" [ngClass]="activiTab == 'youtube' ? 'active' : ''">
+    <a (click)="gotoYoutube()" class="nav-link pointer">
+      <i class="bi bi-youtube"></i>&nbsp;
+      <span class="sidebarText">Youtube</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a id="collapseTrigger" class="nav-link collapsed" (click)="collapseTwo = !collapseTwo" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      <i class="bi bi-person-video"></i>&nbsp;
+      <span class="sidebarText">Master
+        <i style="text-align: end;" [class]="!collapseTwo ? 'bi bi-chevron-right' : 'bi bi-chevron-down'"></i>
+      </span>
+      <!-- <i [class]="!collapseTwo ? 'bi bi-chevron-right' : 'bi bi-chevron-down'"></i> -->
+    </a>
+    <div class="collapse" id="collapseExample" >
+      <div class="bg-theme py-2 collapse-inner rounded">
+        <div><a class="nav-link-child" [ngClass]="activiTab == 'class' ? 'active' : ''" (click)=" gotoClass()"><i class="bi bi-back"></i>&nbsp; Classes</a></div>
+        <div><a class="nav-link-child" [ngClass]="activiTab == 'subject' ? 'active' : ''" (click)=" gotoSubject()"><i class="bi bi-journals"></i>&nbsp; Subjects</a></div>
+        <div><a class="nav-link-child" [ngClass]="activiTab == 'chapter' ? 'active' : ''" (click)=" gotoChapter()"><i class="bi bi-book-half"></i>&nbsp; Chapters</a></div>
+        <div><a class="nav-link-child" [ngClass]="activiTab == 'topic' ? 'active' : ''" (click)=" gotoTopic()"><i class="bi bi-card-heading"></i>&nbsp; Topics</a></div>
+        <div><a class="nav-link-child" [ngClass]="activiTab == 'subtopic' ? 'active' : ''" (click)=" gotoSubTopic()"><i class="bi bi-card-text"></i>&nbsp; Sub-Topics</a></div>
+      </div>
+    </div>
+  </li>
+</ul>

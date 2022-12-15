@@ -1,0 +1,43 @@
+<header>
+  <nav class="navbar navbar-expand-lg" style="background-color: #05445E;">
+    <div class="container-fluid">
+      <a class="navbar-brand"><img class="myLogo" src="../assets/pi_white_bg.png" alt=""></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="d-flex flex-row-reverse collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="d-flex">
+          <ul class="nav">
+              <li class="nav-item">
+                <a class="nav-link active navbarTabs" [routerLinkActive]="['active']" aria-current="page"(click)="home()"><i class="bi bi-house-door navbarTabs"></i> Home</a>
+              </li>
+              <li class="nav-item">
+                <a class=" nav-link navbarTabs" (click)="learningActivity()"><i class="bi bi-book navbarTabs"></i> Explore</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link navbarTabs" (click)="team()"><i class="bi bi-people-fill navbarTabs"></i> Team</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link navbarTabs" (click)="project()"><i class="bi bi-file-earmark-zip navbarTabs"></i> Activities</a>
+              </li>
+              <li class="nav-item">
+                <!-- <div class="profile">
+                  <button class="btn profileIcon" (click)="profile()" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill bi--lg"></i></button>
+                </div> -->
+                  <div class="dropdown profileIcon">
+                    <button class="btn myprofilebtn " type="button" data-bs-toggle="dropdown" aria-expanded="false" >
+                      <i class="bi bi-person-fill bi--lg"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                      <li><a class="dropdown-item" (click)="profile()">  Profile</a></li>
+                      <li><a class="dropdown-item" href="#">Log Out</a></li>
+                      <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                    </ul>
+                  </div>
+              </li>
+            </ul>
+      </div>
+      </div>
+    </div>
+  </nav>
+</header>

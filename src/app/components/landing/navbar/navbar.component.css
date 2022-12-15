@@ -1,0 +1,32 @@
+.myLogo{
+  width: 90px;
+  height: 45px;
+}
+.profile{
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.navbarTabs {
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  }
+.nav,.nav-item>:hover{
+  color: #D9E4EC;
+}
+.myprofilebtn{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  color: #05445E;
+
+}

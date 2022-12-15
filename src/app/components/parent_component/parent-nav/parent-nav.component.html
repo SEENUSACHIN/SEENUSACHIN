@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg ">
+  <div class="container-fluid">
+    <a class="navbar-brand"
+      ><img class="myLogo" src="../assets/myLogo.png" alt=""
+    /></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent1"
+      aria-controls="navbarSupportedContent1"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- <li class="nav-item">
+          <a class="nav-link navbarTabs" (click)="learningActivity()"
+            ><i class="bi bi-house-fill"></i> Home</a
+          >
+        </li> -->
+        <li class="nav-item">
+          <!-- <a class="nav-link active" aria-current="page" href="#">Kids Inventor</a> -->
+          <a class="nav-link navbarTabs" (click)="learningActivity()"
+            ><i class="bi bi-book-fill navbarTabs"></i> Kids Inventor</a
+          >
+        </li>
+        <!-- <li class="nav-item ">
+          <a class="nav-link navbarTabs"
+            ><i class="bi bi-person-workspace"></i> My Activity</a
+          >
+        </li> -->
+      </ul>
+      <!-- <form class="d-flex" role="search">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      &nbsp; -->
+      <li class="list-unstyled">
+        <div class="dropdown profileIcon">
+          <button
+            class="btn myprofilebtn"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i *ngIf="parentPic == null" class="bi bi-person-fill bi--lg"></i>
+            <img *ngIf="parentPic != null" [src]="parentPic" alt="" class=' img-circle'>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" (click)="profile()"> Profile</a></li>
+            <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
+          </ul>
+        </div>
+      </li>
+    </div>
+  </div>
+</nav>
+<br>
+<div class='px-5'><nav aria-label="breadcrumb">
+  <ol class="breadcrumb pb-0">
+    <!-- <li class="breadcrumb-item" [ngClass]="{'active':currentpage == '/learn_more/:id'}"><a  (click)="navigation('learn_more/:id')">Play</a></li> -->
+    <li class="breadcrumb-item" [ngClass]="{'active':currentpage == 'learn_more/:id'}"><a (click)="navigation('learn_more/:id')" >Foundation</a></li>
+    <li class="breadcrumb-item active" [ngClass]="{'active': currentpage == 'Steam' || currentpage == 'activity_list/:id'}" > <a (click)="navigation('activity_list/:id')">Steam</a> </li>
+  </ol>
+</nav></div>

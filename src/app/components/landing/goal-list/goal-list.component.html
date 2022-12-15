@@ -1,0 +1,141 @@
+<div class="myTeamlist">
+  <nav>
+    <app-navbar></app-navbar>
+  </nav>
+  <header>
+    <div class="container d-flex ">
+      <div class="p-2">
+        <h4>Goals</h4>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="container px-1 ">
+      <!-- <div class="leading"> -->
+        <div class="row gx-5">
+          <div class="col">
+            <div class="p-1 ">
+              <div class="card ">
+                <div class="row g-0">
+                  <!-- <h5>Leading</h5> -->
+                  <div class="col-md-4 teamImg ">
+                    <figure>
+                      <img src="../assets/sample.jpg" class="teamListimage" alt="...">
+                      <figcaption><b><h4>Rahul</h4></b></figcaption>
+                    </figure>
+                  </div>
+                  <div class="col-md-4 d-flex align-items-center">
+                    <div class="card-body text-center p-0">
+                      <!-- <div class="card-body"> -->
+                        <h5 class="card-title">Earth Science Week</h5>
+                        <h1 class="card-text">VS</h1>
+                      <!-- </div> -->
+                    </div>
+                  </div>
+                  <div class="col-md-4 teamImg ">
+                    <figure>
+                      <img src="../assets/sample.jpg" class="teamListimage" alt="...">
+                      <figcaption><b><h4>Samuel</h4></b></figcaption>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- </div> -->
+      <div class="row gx-5">
+        <div class="col">
+          <div class="p-1">
+            <div class="card " style="max-width: 540px;">
+              <div class="row g-0 " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div class="col-md-4 teamImg ">
+                  <figure >
+                    <img src="../assets/sample.jpg" class="teamListimage" alt="...">
+                    <figcaption><b><h5>+40  <img class="atomicon" src="../assets/neutron B.png" alt=""></h5></b></figcaption>
+                  </figure>
+                </div>
+
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <!-- <div class="card-body"> -->
+                                      <div class="d-flex flex-row-reverse">
+                  <div class="p-2"><b>10 o2</b></div>
+                </div>
+                      <h5 class="card-title">CHEMISTRY</h5>
+                      <p class="card-text">What are the properties of
+                        transition metals?</p>
+                      <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 25%;"
+                          aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                      </div>
+                    </div>
+                  <!-- </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="p-1 ">
+            <div class="card " style="max-width: 540px;">
+              <div class="row g-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div class="col-sm-4 teamImg ">
+                  <figure>
+                    <img src="../assets/sample.jpg" class="teamListimage" alt="...">
+                    <figcaption><b><h5>+40  <img class="atomicon" src="../assets/neutron B.png" alt=""></h5></b></figcaption>
+                  </figure>
+                </div>
+                <div class="col-sm-8">
+                  <div class="card-body">
+                    <!-- <div class="card-body"> -->
+                      <div class="d-flex flex-row-reverse">
+                        <div class="p-2"><b>10 o2</b></div>
+                      </div>
+                      <h5 class="card-title">PHYSICS</h5>
+                      <p class="card-text">Do atoms ever actually touch each other??</p>
+                      <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 25%;"
+                          aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                      </div>
+                    <!-- </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">CHEMISTRY ACTIVITY</h5>
+          <button type="button" class="btn-close" #closepopup data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex flex-row-reverse">
+            <div class="p-2"><a id="exampleModal" class="myUploadIcon" (click)="uploadActivity()"><i class="bi bi-cloud-arrow-up"></i></a></div>
+            <div class="p-2"><a class="myUploadIcon"><i class="bi bi-calendar-event"></i></a></div>
+          </div>
+<h5>What are the properties of transition metals?</h5>
+<div class="description">
+  <p><b>Description:</b></p>
+  <p class="lh-1">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
+  <p class="lh-sm">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
+  <p class="lh-base">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
+  <p class="lh-lg">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
+</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary"  (click)="selectActivity()">select</button>
+          <button type="button" class="btn btn-primary"  (click)="selectActivity()">Go</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

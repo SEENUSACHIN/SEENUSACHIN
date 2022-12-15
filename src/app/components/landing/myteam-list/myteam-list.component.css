@@ -1,0 +1,84 @@
+.teamListimage{
+  width: 150px;
+  height: 150px;
+  border-radius: 10%;
+}
+.teamMembers{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.teamImg{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  align-items: stretch;
+  align-content: center;
+  padding: 0%;
+}
+.teamMembersImg{
+  width: 100px;
+  height: 100px;
+}
+.atomicon{
+  width: 15px;
+  height: 15px;
+}
+figure{
+  margin-bottom: 0%;
+}
+/* .myteamMembercard{
+  background-color: #F4ECFB;
+} */
+.member{
+  background-color: #E8B753;
+}
+/* image upload  */
+.uploadTeamImg{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+/* .hoverable{
+  position: relative;
+  display: block;
+  cursor: pointer;
+  height: 200px;
+  width: 200px;
+  border: 5px solid #000;
+  border-radius: 50%;
+} */
+.hoverable .hover-text{
+  position: absolute;
+  display: none;
+  top: 50%;
+  left:  50%;
+  transform: translate(-50%,-50%);
+  z-index: 2;
+}
+.hoverable .background{
+  position: absolute;
+  display: none;
+  top: 0;
+  left:  0;
+  bottom: 0;
+  right: 0;
+  background-color:rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 1;
+}
+.hoverable:hover .hover-text{
+  display: block;
+}
+.hoverable:hover .background{
+  display: block;
+}
+#fileInput{
+  display: none;
+}
+.errormsg{
+  color: red;
+}

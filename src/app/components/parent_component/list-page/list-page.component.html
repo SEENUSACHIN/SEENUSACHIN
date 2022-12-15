@@ -1,0 +1,98 @@
+<app-parent-nav></app-parent-nav>
+<div class="page-content page-container" id="page-content">
+  <div class="">
+    <div class="px-5">
+      <!-- <div id='pointer'><h4><b class='headerText'>Activity List</b></h4></div> -->
+      <div class='d-flex justify-content-between align-items-center' >
+        <div id='pointer'>
+          <h4><b class='headerText'>Activity List </b></h4></div>
+          <div>Kid Name:<b>{{kname}}</b></div>
+        </div>
+         <hr />
+      <p *ngIf="level == 2 || level == 4  " >*please select  20 activities minimum from the below list to procced</p>
+      <br>
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-10 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table ">
+                  <thead>
+                    <tr class='act'>
+                      <th>No</th>
+                      <th *ngIf="level == 2 || level == 4  ">#</th>
+                      <th>Activity</th>
+                      <th>Status</th>
+                      <th>Video</th>
+                    </tr>
+                  </thead>
+                  <tbody >
+                    <tr *ngFor="let data of lists; index as i " >
+                      <td class='col '><div class='activityDetails' >{{i}}</div></td>
+                      <td  *ngIf="level == 2 || level == 4  " class='col'><div class="form-check">
+                        <input class="form-check-input" type="checkbox" [value]="data"
+                        id="flexCheckDefault" (change)="updateCheckedOptions(data, $event)">
+                        <label class="form-check-label" for="flexCheckDefault">
+                        </label>
+                      </div>
+                      </td>
+                      <td class='col'  ><div class='activityDetails' (click)="viewActivity(data.id)">{{data.name}}</div></td>
+                      <td class='col '>
+                        <div class="statusActivity" role="button">
+                          <div *ngIf="data.completed == true" class="text"> Completed</div>
+                          <div *ngIf="data.completed != true" class="text"> Not Yet Started</div>
+                        </div>
+                      </td>
+                      <!-- Button trigger modal -->
+                      <td class='col playBtn'>
+                        <i  (click)="playVideo(data)"
+                          class="bi bi-play-fill"
+                        >
+                      </i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div *ngIf="level == 2 || level == 4  "  class='d-flex justify-content-end'>
+                  <button type="button" (click)="selectActivity()" class="btn btn-primary">Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Activity</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div *ngFor="let item of lists" class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

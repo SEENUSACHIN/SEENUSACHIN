@@ -1,0 +1,21 @@
+.carouselStyle {
+    align-items: center;
+    height: 60vh;
+}
+.btn-success {
+  background-color: #16213E;
+}
+.myLogo{
+  width: 140px;
+  height: 45px;
+}
+*{
+  background-color: #EDF3F3;
+}
+/* body
+{
+padding:0px;
+margin:0px;
+width:100%;
+height:100%;
+} */

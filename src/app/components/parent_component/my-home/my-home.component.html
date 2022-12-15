@@ -1,0 +1,361 @@
+<div class="contentArea py-5">
+  <div class="container pb-4">
+    <div *ngIf="!initialPage && !otpPage && !graduate" class="form form--signup">
+      <div>
+        <div class="logoArea">
+          <img class="mylogo" src="../assets/myLogo.png" alt="" />
+        </div>
+      </div>
+
+      <div class="form--heading">Welcome to Pi-Hubs!</div>
+      <form [formGroup]="registrationform" #formDir="ngForm" autocomplete="off">
+        <div class="col-12 form-group">
+          <select
+            class="form-select selectInput"
+            placeholder="Select User"
+            formControlName="role"
+            name="role"
+            id="role"
+            (change)="update($event)"
+            [ngClass]="{ 'is-invalid': submitted && rf['role'].errors }"
+          >
+            <option selected value="">Select Role
+            </option>
+            <option *ngFor="let list of role" [value]="list">{{ list }}</option>
+          </select>
+          <div *ngIf="submitted && rf['role'].errors" class="invalid-feedback">
+            <div *ngIf="rf['role'].errors?.['required']">
+              User type is required*
+            </div>
+          </div>
+        </div>
+        <div class="col-12 form-group">
+          <input
+            type="text"
+            placeholder="Name"
+            formControlName="parentname"
+            [ngClass]="{ 'is-invalid': submitted && rf['parentname'].errors }"
+          />
+          <div
+            *ngIf="submitted && rf['parentname'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="rf['parentname'].errors?.['required']">
+              Name is required*
+            </div>
+            <!-- <div *ngIf="fd['parentname'].errors?.['email']">Email must be a valid email address</div> -->
+          </div>
+        </div>
+        <div class="col-12 form-group">
+          <input
+            type="email"
+            placeholder="Email"
+            formControlName="email"
+            [ngClass]="{ 'is-invalid': submitted && rf['email'].errors }"
+          />
+          <div *ngIf="submitted && rf['email'].errors" class="invalid-feedback">
+            <div *ngIf="rf['email'].errors?.['required']">
+              Email is required*
+            </div>
+            <div *ngIf="rf['email'].errors?.['email']">
+              Email must be a valid email address
+            </div>
+          </div>
+        </div>
+        <div class="col-12 form-group">
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            formControlName="mobile"
+            maxlength="10"
+            [ngClass]="{ 'is-invalid': submitted && rf['mobile'].errors }"
+          />
+          <div
+            *ngIf="submitted && rf['mobile'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="rf['mobile'].errors?.['required']">
+              Phone number is required*
+            </div>
+            <div *ngIf="rf['mobile'].errors?.['minlength']">
+              Phone number must be at 10 characters
+            </div>
+            <div *ngIf="rf['mobile'].errors?.['pattern']">
+              Phone number must be a numeric..
+            </div>
+          </div>
+          <!-- <div
+            *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)"
+            class="alert-danger p-1"
+          >
+            <div *ngIf="mobile.errors?.['required']">
+              Phone number is required.
+            </div>
+            <div *ngIf="mobile.errors?.['minlength']">
+              Phone number must be at least 8 characters long..
+            </div>
+            <div *ngIf="mobile.errors?.['pattern']">
+              Phone number must be a numeric..
+            </div>
+          </div> -->
+        </div>
+        <div class="col-12 form-group">
+          <input
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+            [ngClass]="{ 'is-invalid': submitted && rf['password'].errors }"
+          />
+          <div
+            *ngIf="submitted && rf['password'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="rf['password'].errors?.['required']">
+              Password is required*
+            </div>
+            <div *ngIf="rf['password'].errors?.['minlength']">
+              Password must be at least 8 characters
+            </div>
+            <div *ngIf="rf['password'].errors?.['pattern']">
+              Password must contain at least one symbol one numeric and one
+              capital letter..
+            </div>
+          </div>
+
+          <!-- <div
+            *ngIf="password.invalid && (password.dirty || password.touched)"
+            class="alert-danger p-1"
+          >
+            <div *ngIf="password.errors?.['required']">
+              Password is required.
+            </div>
+            <div *ngIf="password.errors?.['minlength']">
+              Password must be at least 10 characters long..
+            </div>
+            <div *ngIf="password.errors?.['pattern']">
+              Password must contain at least one symbol one numeric and one
+              capital letter..
+            </div>
+          </div> -->
+        </div>
+        <button type="submit" class="button" (click)="parentsignUp()">
+          Sign Up
+        </button>
+        <div class="center">
+          <span>Already have an account? </span>
+          <a type="button" class="card-link" (click)="signinBtn()">Sign In</a>
+        </div>
+      </form>
+      <br />
+      <div class="othersignin">
+        <h5 class="socialicon"><span>SOCIAL LOGIN</span></h5>
+        <p>Connect With Social Media</p>
+        <div class="social-container">
+          <a class="social">
+            <i class="bi bi-google iconcolour btn" style="font-size: 25px"></i>
+          </a>
+          <a class="social">
+            <i class="bi bi-facebook iconcolour" style="font-size: 25px"></i>
+          </a>
+          <a class="social">
+            <i class="bi bi-linkedin iconcolour" style="font-size: 25px"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="initialPage && !otpPage" class="form form--login">
+      <div>
+        <div class="logoArea">
+          <img class="mylogo" src="../assets/myLogo.png" alt="" />
+        </div>
+      </div>
+      <div class="form--heading">Welcome back!</div>
+      <form [formGroup]="signinform" #formDir="ngForm" autocomplete="off">
+        <div class="col-12 form-group">
+          <input
+            type="email"
+            placeholder="Email"
+            name="loginemail"
+            id="loginemail"
+            formControlName="loginemail"
+            [ngClass]="{
+              'is-invalid': loginsubmitted && fd['loginemail'].errors
+            }"
+          />
+
+          <div
+            *ngIf="loginsubmitted && fd['loginemail'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="fd['loginemail'].errors?.['required']">
+              Email is required*
+            </div>
+            <div *ngIf="fd['loginemail'].errors?.['email']">
+              Email must be a valid email address
+            </div>
+          </div>
+
+          <!-- <div
+          [ngClass]="{ 'is-invalid': loginsubmitted && f['loginemail'].errors }"
+            class="alert-danger p-1"
+          >
+            <div *ngIf="loginemail.errors?.['required']">
+              Email is required.
+            </div>
+            <div *ngIf="loginemail.errors?.['email']">
+              Email format is wrong.
+            </div>
+          </div> -->
+        </div>
+        <div class="col-12 form-group">
+          <input
+            type="password"
+            placeholder="Password"
+            formControlName="loginpassword"
+            [ngClass]="{
+              'is-invalid': loginsubmitted && fd['loginpassword'].errors
+            }"
+          />
+          <div
+            *ngIf="loginsubmitted && fd['loginpassword'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="fd['loginpassword'].errors?.['required']">
+              Password is required*
+            </div>
+            <div *ngIf="fd['loginpassword'].errors?.['minlength']">
+              Password must be at least 8 characters
+            </div>
+            <div *ngIf="fd['loginpassword'].errors?.['pattern']">
+              Password must contain at least one symbol one numeric and one
+              capital letter..
+            </div>
+          </div>
+        </div>
+
+        <button class="button" (click)="signin()">Login</button>
+        <div class="center">
+          <span>New to Pi-Hubs? </span>
+          <a type="button" class="card-link" (click)="signupBtn()">Sign Up</a>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="otpPage" class="card-body py-2">
+      <h4 class="card-title otp">OTP Verification</h4>
+      <br />
+      <div class="otparea">
+        <form [formGroup]="otpform" #formDir="ngForm">
+          <div class="otparea">
+            <ng-otp-input
+              (onInputChange)="onOtpChange($event)"
+              [config]="config"
+            ></ng-otp-input>
+          </div>
+          <div class="d-flex justify-content-center">
+            <a type="button" class="card-link" (click)="resendOtp()"
+              >Resend OTP</a
+            >
+          </div>
+          <br />
+          <div class="center">
+            <button type="button" class="btn btn-success" (click)="verifyOTP()">
+              Verify
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="graduate" >
+      <h3 class='text-center'>Student Details</h3>
+      <form [formGroup]="graduateform" #formDir="ngForm" class='graduateForm w-75' >
+        <div class="row ">
+          <div class="col-12 form-group pb-3">
+            <input
+            type="text"
+            placeholder="College Name"
+            formControlName="college_name"
+            [ngClass]="{ 'is-invalid': graduateSubmitted && gR['college_name'].errors }"
+          />
+          <div
+            *ngIf="graduateSubmitted && gR['college_name'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="gR['college_name'].errors?.['required']">
+              College is required*
+            </div>
+          </div>
+          </div>
+          <div class="col-12 form-group pb-3">
+            <input
+            type="text"
+            placeholder="Degree Name"
+            formControlName="program"
+            [ngClass]="{ 'is-invalid': graduateSubmitted && gR['program'].errors }"
+          />
+          <div
+            *ngIf="graduateSubmitted && gR['program'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="gR['program'].errors?.['required']">
+              Degree is required*
+            </div>
+          </div>
+          </div>
+          <div class="col-12 form-group pb-3">
+            <input
+            type="text"
+            placeholder="Department Name"
+            formControlName="department"
+            [ngClass]="{ 'is-invalid': graduateSubmitted && gR['department'].errors }"
+          />
+          <div
+            *ngIf="graduateSubmitted && gR['department'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="gR['department'].errors?.['required']">
+              Department is required*
+            </div>
+          </div>
+          </div>
+          <br>
+          <div class="text-center">
+            <button type="button" class="btn btn-success" (click)="graduateReg( )">
+              Submit
+            </button>
+          </div>
+
+        </div>
+  </form>
+    </div>
+  </div>
+
+
+  <!-- alternate validation  -->
+  <!-- <div>
+    <div class="card-body">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col mb-3">
+              <label class="form-label">Email</label>
+              <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': loginsubmitted && f['email'].errors }" />
+              <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                  <div *ngIf="f['email'].errors?.['required']">Email is required</div>
+                  <div *ngIf="f['email'].errors?.['email']">Email must be a valid email address</div>
+              </div>
+          </div>
+      </div>
+        <div class="col mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" formControlName="password" class="" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
+            <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                <div *ngIf="f['password'].errors?.['required']">Password is required</div>
+                <div *ngIf="f['password'].errors?.['minlength']">Password must be at least 6 characters</div>
+            </div>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-primary me-2">Register</button>
+        </div>
+          </form>
+    </div>
+  </div> -->
+</div>

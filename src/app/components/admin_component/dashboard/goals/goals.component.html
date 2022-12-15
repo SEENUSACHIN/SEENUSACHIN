@@ -1,0 +1,356 @@
+<div
+  class="modal fade"
+  id="createGoal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          {{ createOrEdit == "create" ? "Create Goal" : "Update Goal" }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          #closebutton
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="createGoalform">
+          <div *ngIf="errorShow != ''" class="alert alert-danger">
+            <div>
+              {{ errorShow }}
+            </div>
+          </div>
+          <div class="col-md-12 row">
+            <div class="col-md-6 form-group">
+              <label>Goal Name</label>
+              <input
+                [readonly]="createOrEdit == 'edit' ? true : false"
+                class="form-control"
+                formControlName="goalname"
+                type="text"
+                name="goalname"
+                placeholder="Goal Name"
+              />
+            </div>
+            <div *ngIf="createOrEdit != 'edit'" class="col-md-6 form-group">
+              <label>Week</label>
+              <select
+                [disabled]="createOrEdit == 'edit' ? true : false"
+                placeholder="Select Week"
+                #weekSelect
+                (change)="weekId = weekSelect.value"
+                class="form-select"
+                aria-label="Default select example"
+              >
+                <option selected value="" disabled>Select Week</option>
+                <option *ngFor="let week of weeks" [value]="week['id']">
+                  {{ week["label1"] }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <!-- <div class='d-flex justify-content-end'>
+              <div class='btn' id="btn1">
+              <i class="bi bi-plus" ></i> Add More</div>
+            </div> -->
+            <div id="div1">
+              <div class="col-md-12 row showtheaddedform">
+                <div class="col-md-6 form-group">
+                  <label>Class</label>
+                  <select
+                    placeholder="Select Class"
+                    #classSelect
+                    class="form-select"
+                    (change)="getSubjects(classSelect.value)"
+                    aria-label="Default select example"
+                  >
+                    <option selected value="" disabled>Select Class</option>
+                    <option *ngFor="let cls of classes" [value]="cls['id']">
+                      {{ cls["class_name"] }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label>Subject</label>
+                  <select
+                    placeholder="Select Subject"
+                    #subSelect
+                    class="form-select"
+                    (change)="getChapter(subSelect.value)"
+                    aria-label="Default select example"
+                  >
+                    <option selected value="" disabled>Select Subject</option>
+                    <option *ngFor="let sub of subjects" [value]="sub['id']">
+                      {{ sub["subject_name"] }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-12 row showtheaddedform">
+                <div class="col-md-6 form-group">
+                  <label>Chapter</label>
+                  <select
+                    placeholder="Select Chapter"
+                    #chapSelect
+                    (change)="getActivities(chapSelect.value)"
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option selected value="" disabled>Select Chapter</option>
+                    <option
+                      *ngFor="let chapter of chapters"
+                      [value]="chapter['id']"
+                    >
+                      {{ chapter["chapter_name"] }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-6 form-group">
+                  <label>Activity</label>
+                  <ng-select
+                    class="custom"
+                    [items]="activitylist"
+                    bindLabel="activity_name"
+                    bindValue="id"
+                    placeholder="Select Activity"
+                    [multiple]="true"
+                    [closeOnSelect]="false"
+                    (change)="onSelect($event)"
+                    dropdownPosition="auto"
+                    formControlName="selectedAct"
+                  >
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="col-md-8" *ngIf="selectedCar.length != 0">
+                <label>Selected Activities</label>
+                <div *ngFor="let item of selectedCar">
+                  <div class="d-flex">
+                    <span class="doc-name col-md-8 p-1">{{
+                      item["activity_name"]
+                    }}</span>
+                    <i
+                      (click)="removeUploading(item['id'])"
+                      class="bi bi-x-circle-fill"
+                      style="color: red"
+                      aria-hidden="true"
+                    ></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div id="showtheaddedform"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          #closebutton
+          *ngIf="createOrEdit == 'create'"
+          (click)="createGoal()"
+        >
+          Create
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          #closebutton
+          *ngIf="createOrEdit == 'edit'"
+          (click)="updateGoal()"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<body id="page-top">
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <app-sidebar activiTab="goals"></app-sidebar>
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <app-header header="Weekly Goals"></app-header>
+        <div class="container-fluid">
+          <!-- Page Heading -->
+          <div
+            class="d-sm-flex align-items-center justify-content-between mb-4"
+          >
+            <span></span>
+            <div class="d-sm-flex align-items-center justify-content-between">
+              <form [formGroup]="searchform" class="form-inline mr-auto w-100 navbar-search">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="searchClass"
+                    placeholder="Search..."
+                    aria-label="Search"
+                    aria-describedby="basic-addon2"
+                    formControlName='search'
+                  />
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" (click)="searchGoal()">
+                      <i class="bi bi-search"></i>
+                    </button>
+                  </div>
+                  <button
+                    data-bs-toggle="modal"
+                    type="button"
+                    data-bs-target="#createGoal"
+                    style="padding: 6.5px 12px"
+                    class="ml-2 d-sm-inline-block btn btn-sm btn-primary"
+                    (click)="createOrEdit = 'create'; formempty()"
+                  >
+                    Create
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="table_wrapper" *ngIf="goalslist.length != 0">
+            <table class="table table-borderless align-middle table-hover css-serial">
+              <thead class="thead-light">
+                <tr>
+                  <th>#</th>
+                  <th scope="col">Project Name</th>
+                  <th scope="col">Event Date</th>
+
+                  <th scope="col">Edit</th>
+                  <th scope="col">View</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of goalslist | filter: filterTerm">
+                  <td></td>
+                  <td>{{ item["goal_name"] }}</td>
+                  <td>
+                    {{ item["from_date"] | date: "dd/M/yy" }} -
+                    {{ item["to_date"] | date: "dd/M/yy" }}
+                  </td>
+                  <td
+                  (click)="setData(item)" data-bs-toggle="modal"
+                  data-bs-target="#createGoal"
+                  >
+                    <a class='btn myeditBtn'>
+                    <i
+                      style="color: #04445d"
+                      class="bi bi-pencil"
+
+                    ></i>
+                  </a>
+                  </td>
+                  <td (click)="getGoal(item['id'])"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <a class="btn myview">
+                      View Details <i class="bi bi-eye-fill"></i>
+                      </a>
+                      <!-- {{ item["view"] }} -->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="text-align: center" *ngIf="goalslist.length == 0">
+            No data found.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          {{ singleGoal.goal_name }} Project Details
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+          <div class="goal col-6">
+            <!-- Class: Standard 11 -->
+            <!-- <div>Class Name: {{ singleGoal.goal_name }}</div> -->
+          </div>
+          <div>
+            <table class="table table-hover css-serial">
+              <thead >
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Standard</th>
+                  <th scope="col">Activity Name</th>
+                  <th scope="col">URL</th>
+                  <th scope="col">Atom</th>
+                  <th scope="col">O2</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let act of singleGoal.standard">
+                <tr *ngFor="let i of act.activity">
+                  <!-- <th scope="row"></th> -->
+                  <td></td>
+                  <td>{{ act.standard }}</td>
+                  <td >
+                    {{ i.activity_name }}</td>
+                  <td>
+                    <a class="mylink" [href]="i.url" target="_blank">{{
+                      i.url
+                    }}</a>
+                  </td>
+                  <td>{{ i.atoms }}</td>
+                  <td>{{ i.o2 }}</td>
+                  <td>
+                    <i
+                      style="color: red"
+                      class="bi bi-trash3"
+                      (click)="deleteGoal(i.id, singleGoal.goal.id)"
+                    ></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- {{singleGoal.}} -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <!-- <button type="button" class="btn btn-primary"> </button> -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+  .recentCArd{
+    padding-right: 5px;
+  }
+  .cardBody{
+    background-color: #D9E4EC;
+    border-radius: 10px;
+    padding: 4px;
+  }
+  .teamImg{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+    align-items: stretch;
+    align-content: center;
+    padding-right: 3px;
+  }
+  .teamListimage{
+    width: 100px;
+    height: 110px;
+    border-radius: 10%;
+  }
+.imgsize{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.yourtask{
+  align-items: flex-start;
+  padding: 10px;
+}
+.cardImages{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  column-gap: 15px;
+  }
+  .favourite{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 5px 0px 0px;
+  }
+.eventCards{
+  background-color: #F6D13A;
+}

@@ -1,0 +1,30 @@
+.teamListimage{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.teamMembers{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.teamImg{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  padding-top: 10px;
+}
+.myUploadIcon{
+  font-size: 25px;
+  color: #05445E;
+}
+.atomicon{
+  width: 20px;
+  height: 20px;
+}
+figure{
+  margin: 0%;
+}

@@ -1,0 +1,77 @@
+<div class="adminsignIntopclass">
+  <div class="adminsignInclass">
+    <div class="card cardSize">
+      <div class="row logButtons">
+        <div class="col-auto">
+          <h3 class="signup"> <a type="button">Login</a> </h3>
+          <div class="underline"></div>
+        </div>
+      </div>
+      <form>
+        <div class="card-body">
+          <br>
+          <div class="container centerContainer">
+            <form [formGroup]="adminsigninform" #formDir="ngForm">
+              <div *ngIf="errorShow" class="alert alert-danger">
+                <div>
+                  Please enter the valid credentials.
+                </div>
+              </div>
+              <div class="cross-validation"
+                [class.cross-validation-error]="adminsigninform.errors?.['identityRevealed'] && (adminsigninform.touched || adminsigninform.dirty)">
+                <div class="mb-3 form-group">
+                  <input type="email" name="email" class=" emailInput" formControlName="email" id="email"
+                    placeholder="Email" required>
+                  <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+                    <div *ngIf="email.errors?.['required']">
+                      Email is required.
+                    </div>
+                    <div *ngIf="email.errors?.['email']">
+                      Email format is wrong.
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3 form-group">
+                  <input type="password" name="password" class=" passwordInput" formControlName="password"
+                    id="password" placeholder="Password" required>
+                  <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+                    <div *ngIf="password.errors?.['required']">
+                      Password is required.
+                    </div>
+                  </div>
+                </div>
+                <br>
+              </div>
+              <div class="center">
+                <button type="submit" (click)="adminSignIn()" [disabled]="adminsigninform.invalid" class="btn btn-primary center signBtn">Login</button>
+              </div>
+              <br>
+            </form>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+  <!-- <div class="login-form">
+    <form  method="post">
+        <h2 class="text-center">Log in</h2>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Username" required="required">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" placeholder="Password" required="required">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+        </div>
+        <div class="clearfix">
+            <label class="float-left form-check-label"><input type="checkbox"> Remember me</label>
+            <a href="#" class="float-right">Forgot Password?</a>
+        </div>
+    </form>
+    <p class="text-center"><a href="#">Create an Account</a></p>
+</div> -->
+</div>

@@ -1,0 +1,396 @@
+.myLogo{
+  width: 140px;
+  height: 45px;
+}
+.mycard{
+  border: none;
+  background-color: #EDF3F3;
+}
+.cardSection{
+  /* width: 80%; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px 0px 10px 0px;
+}
+.cardBody{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  /* padding-left: 10px; */
+  /* color: whitesmoke; */
+  background-color: #D9E4EC;
+  /* border-radius: 0px 100px; */
+  border-radius: 0px 50px;
+}
+
+
+.triangle-topleft {
+  width: 0;
+  height: 0;
+  border-top: 60px solid white;
+  border-right: 60px solid transparent;
+}
+.triangle-bottomright {
+
+  width: 0;
+  height: 0;
+  border-bottom: 60px solid white;
+  border-left: 60px solid transparent;
+}
+.design{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.piStars{
+  width: 100%;
+  /* background-color: white;
+  border: 2px solid #ddd; */
+  padding: 10px  ;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 10px;
+}
+.imgsize{
+  padding: 10px;
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+}
+.imgsize1{
+  width: 80px;
+  height: 80px;
+}
+.welcomeimg{
+  width: 150px;
+  height: 150px;
+  padding: 5px 0px 5px 0px;;
+
+}
+.scientistMedal{
+  padding: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+
+}
+.teamImg{
+height: 150px;
+  align-items: stretch;
+  align-content: center;
+  padding: 0%;
+}
+.cardImages{
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+align-items: center;
+}
+.atomicon{
+  width: 20px;
+  height: 20px;
+}
+/* .atomicon:hover{
+  background-color: whitesmoke;
+} */
+ fieldset.scheduler-border {
+  border: 1px groove #ddd !important;
+  padding: 0 1.4em 1.4em 1.4em !important;
+  margin: 0 0 1.5em 0 !important;
+}
+  legend.scheduler-border {
+      font-size: 1.2em !important;
+      font-weight: bold !important;
+      text-align: center !important;
+      width:auto;
+      padding:0 10px;
+      border-bottom:none;
+  }
+
+
+   /* pie Star design */
+
+    .single_advisor_profile {
+        position: relative;
+        margin-bottom: 10px;
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+        z-index: 1;
+        border-radius: 15px;
+        -webkit-box-shadow: 0 0.25rem 1rem 0 rgba(47, 91, 234, 0.125);
+        box-shadow: 0 0.25rem 1rem 0 rgba(47, 91, 234, 0.125);
+    }
+    .single_advisor_profile .advisor_thumb {
+        position: relative;
+        z-index: 1;
+        border-radius: 5px 5px 0 0;
+        margin: 0 auto;
+        padding: 5px 5px 1px 5px;
+        background-color: #ffffff;
+        overflow: hidden;
+    }
+    .single_advisor_profile .advisor_thumb::after {
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+        position: absolute;
+        width: 135%;
+        height: 65px;
+        bottom: -45px;
+        left: -25%;
+        content: "";
+        background-color: #ffffff;
+        -webkit-transform: rotate(-15deg);
+        transform: rotate(-13deg);
+    }
+    @media only screen and (max-width: 575px) {
+        .single_advisor_profile .advisor_thumb::after {
+            height: 160px;
+            bottom: -90px;
+        }
+    }
+    .single_advisor_profile .advisor_thumb .social-info {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        bottom: 0;
+        right: 30px;
+        text-align: right;
+    }
+    .single_advisor_profile .advisor_thumb .social-info a {
+        font-size: 14px;
+        color: #020710;
+        padding: 0 5px;
+    }
+    .single_advisor_profile .advisor_thumb .social-info a:hover,
+    .single_advisor_profile .advisor_thumb .social-info a:focus {
+        color: #3f43fd;
+    }
+    .single_advisor_profile .advisor_thumb .social-info a:last-child {
+        padding-right: 0;
+    }
+
+    .single_advisor_profile .single_advisor_details_info {
+        position: relative;
+        z-index: 1;
+        padding: 10px;
+        text-align: right;
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+        border-radius: 0 0 15px 15px;
+        background-color: #ffffff;
+    }
+    .single_advisor_profile .single_advisor_details_info::after {
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+        position: absolute;
+        z-index: 1;
+        width: 70px;
+        height: 3px;
+        background-color: #05445E;
+        content: "";
+        top: 0;
+        right: 10px;
+    }
+    .single_advisor_profile .single_advisor_details_info h6 {
+        margin-bottom: 0.25rem;
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+    }
+    .view-details{
+      padding-right: 10px;
+    }
+    .piStarimg{
+      width: 180px;
+      height: 180px;
+    }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .single_advisor_profile .single_advisor_details_info h6 {
+            font-size: 14px;
+        }
+    }
+    .single_advisor_profile .single_advisor_details_info p {
+        -webkit-transition-duration: 500ms;
+        transition-duration: 500ms;
+        margin-bottom: 0;
+        font-size: 14px;
+    }
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
+        .single_advisor_profile .single_advisor_details_info p {
+            font-size: 12px;
+        }
+    }
+    .single_advisor_profile:hover .advisor_thumb::after,
+    .single_advisor_profile:focus .advisor_thumb::after {
+        background-color: #FF7F50;
+    }
+    .single_advisor_profile:hover .advisor_thumb .social-info a,
+    .single_advisor_profile:focus .advisor_thumb .social-info a {
+        color: #ffffff;
+    }
+    .single_advisor_profile:hover .advisor_thumb .social-info a:hover,
+    .single_advisor_profile:hover .advisor_thumb .social-info a:focus,
+    .single_advisor_profile:focus .advisor_thumb .social-info a:hover,
+    .single_advisor_profile:focus .advisor_thumb .social-info a:focus {
+        color: #ffffff;
+    }
+    .single_advisor_profile:hover .single_advisor_details_info,
+    .single_advisor_profile:focus .single_advisor_details_info {
+        background-color: #FF7F50;
+    }
+    .single_advisor_profile:hover .single_advisor_details_info::after,
+    .single_advisor_profile:focus .single_advisor_details_info::after {
+        background-color: #ffffff;
+    }
+    .single_advisor_profile:hover .single_advisor_details_info h6,
+    .single_advisor_profile:focus .single_advisor_details_info h6 {
+        color: #ffffff;
+    }
+    .single_advisor_profile:hover .single_advisor_details_info p,
+    .single_advisor_profile:focus .single_advisor_details_info p {
+        color: #ffffff;
+    }
+    .element-3 {
+      background: linear-gradient(135deg, rgba(0,0,0,0.22), rgba(255,255,255,0.25));
+    }
+    .element {
+      align-items: center;
+      background: linear-gradient(-45deg, rgba(0,0,0,0.22), rgba(255,255,255,0.25));
+      box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.25),
+       -8px -8px 12px 0 rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      display: flex;
+      height: 200px;
+      justify-content: center;
+      width: 40%;
+    }
+.myleaderCard{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  /* align-items: center; */
+  /* align-content: center; */
+}
+.myleadres{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 200px;
+}
+.starIcon{
+  width: 30px;
+  height: 3 0px;
+}
+.starIconarea{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* position: relative; */
+  /* top: 20px; */
+}
+.team-starCard, .team-goalCard, .pi-starCard{
+  background-color: #F6D13A;
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-items: center;
+}
+.eventCards{
+  background-color: #F6D13A;
+  color: #ffffff;
+  display: flex;
+}
+.uploadTeamImg{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.scientistCards, .pi-starCard, .star-goalCard{
+  background-color: #C84A39 ;
+  color: #ffffff;
+}
+.heading{
+  text-align: center;
+}
+.favourite{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.sci-cardBody{
+  color:#ffffff;
+}
+.viewAll{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.pageArea{
+  width: 100%;
+  padding: 4px;
+}
+.leader{
+  text-align: center;
+}
+.piImg{
+  background-color: #D4D8EA;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.carousel-control-prev{
+  left: -15px;
+}
+.carousel-control-next{
+  right: -15px;
+}
+#pointer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 300px;
+  height: 40px;
+  position: relative;
+  background: #05445E;
+}
+#pointer:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid #EDF3F3;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+#pointer:before {
+  content: "";
+  position: absolute;
+  right: 0px;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-right: 20px solid #EDF3F3;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+
+
+
+
+
+

@@ -1,0 +1,453 @@
+<div
+  class="modal fade"
+  id="rateVideo"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Rate this video</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          #closebutton
+        ></button>
+      </div>
+      <form [formGroup]="ratingform" name="frm" #formDir="ngForm">
+        <div class="modal-body">
+          <div
+            class="cross-validation"
+            [class.cross-validation-error]="ratingform.errors?.['identityRevealed'] && (ratingform.touched || ratingform.dirty)"
+          >
+            <div class="col-md-12 mt-4 form-group">
+              <label>Rate</label>
+              <input
+                class="form-control"
+                name="atoms_scored"
+                id="atoms_scored"
+                formControlName="atoms_scored"
+                placeholder="Enter Rate"
+                type="number"
+                max="20"
+                min="0"
+              />
+              <div
+                *ngIf="
+                  atoms_scored.invalid &&
+                  (atoms_scored.dirty || atoms_scored.touched)
+                "
+                class="alert alert-danger"
+              >
+                <div *ngIf="atoms_scored.errors?.['required']">
+                  Please rate this video.
+                </div>
+                <div
+                  *ngIf="atoms_scored.errors?.['min'] || atoms_scored.errors?.['max']"
+                >
+                  The value should be in 0 to 100..
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 mt-4 form-group">
+              <label>Comments</label>
+              <textarea
+                class="form-control"
+                aria-label="With textarea"
+                placeholder="Enter comments"
+                name="comments"
+                id="comments"
+                formControlName="comments"
+              ></textarea>
+              <div
+                *ngIf="comments.invalid && (comments.dirty || comments.touched)"
+                class="alert alert-danger"
+              >
+                <div *ngIf="comments.errors?.['required']">
+                  Please enter the comments.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            #closebutton
+            class="btn btn-primary"
+            (click)="rateActivity()"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="viewRating"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">View Rating</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form
+        [formGroup]="ratingform"
+        #formDir="ngForm"
+           >
+        <div class="modal-body"
+        >
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-3">
+                <label>Rating : </label>
+              </div>
+              <div class="col-md-8">
+                <label>{{ atoms_scored}}</label>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-md-3">
+                <label>Comments : </label>
+              </div>
+              <div class="col-md-8">
+                <label>{{comments}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            *ngIf="!editRating"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+          >
+            Ok
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- modal for approved video -->
+
+<div
+  class="modal fade"
+  id="viewVideo1"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Project Video</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="playvdo(false)"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div style="text-align: center">
+          <video
+            width="400px"
+            height="200px"
+            (playing)="(vdoPlay)"
+            controls
+            [src]="video_url"
+          ></video>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal for unapproved video -->
+<div
+  class="modal fade"
+  id="viewVideo2"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Project Video</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="playvdo(false)"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div style="text-align: center">
+          <video
+            width="400px"
+            height="200px"
+            (playing)="(vdoPlay)"
+            controls
+            [src]="video_url"
+          ></video>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<body id="page-top">
+  <div id="wrapper">
+    <!-- Sidebar -->
+    <app-sidebar activiTab="ratingVideo"></app-sidebar>
+    <!-- End of Sidebar -->
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <app-header header="Video Rating"></app-header>
+        <div class="container-fluid">
+          <div
+            class="d-sm-flex align-items-center justify-content-between mb-4"
+          >
+            <!-- <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <a class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" (click)="unApprovedList()">UnApproved</a>
+              <a class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false" (click)="approvedList()">Approved</a>
+            </div>
+        </nav> -->
+            <nav>
+              <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                <a
+                  class="nav-item nav-link"
+                  id="nav-home-tab"
+                  data-toggle="tab"
+                  role="tab"
+                  aria-controls="nav-home"
+                  aria-selected="true"
+                  [ngClass]="{ active: approveBtn }"
+                  (click)="getActivityList()"
+                  >UnApproved</a
+                >
+                <a
+                  class="nav-item nav-link"
+                  id="nav-profile-tab"
+                  data-toggle="tab"
+                  role="tab"
+                  aria-controls="nav-profile"
+                  aria-selected="true"
+                  [ngClass]="{ active: approvedBtn }"
+                  (click)="getapprovedActivityList()"
+                  >Approved</a
+                >
+              </div>
+            </nav>
+            <div class="d-sm-flex align-items-center justify-content-between">
+              <form  [formGroup]="searchform"
+              #formDir="ngForm" class="form-inline mr-auto w-100 navbar-search">
+              <div class="input-group" *ngIf="approveBtn">
+                <input
+                  type="text"
+                  class="searchClass"
+                  placeholder="Search..."
+                  aria-label="Search"
+                  aria-describedby="basic-addon2"
+                   formControlName= 'search'
+                   name="search"
+              id="search"
+                       />
+                <div class="input-group-append">
+                  <button class="btn btn-primary"  (click)="getActivityList()">
+                    <i class="bi bi-search"></i>
+                  </button>
+                  <!-- <button class="btn btn-primary" *ngIf="approvedBtn" (click)="getapprovedActivityList()">
+                    <i class="bi bi-search"></i>
+                  </button> -->
+
+                </div>
+              </div>
+
+                <div class="input-group" *ngIf="approvedBtn"  >
+                  <input
+                    type="text"
+                    class="searchClass"
+                    placeholder="Search..."
+                    aria-label="Search"
+                    aria-describedby="basic-addon2"
+                     formControlName= 'search'
+                     name="search"
+                id="search"
+                         />
+                  <div class="input-group-append">
+                    <!-- <button class="btn btn-primary" *ngIf="approveBtn" (click)="getActivityList()">
+                      <i class="bi bi-search"></i>
+                    </button> -->
+                    <button class="btn btn-primary" (click)="getapprovedActivityList()">
+                      <i class="bi bi-search"></i>
+                    </button>
+
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="tab-content" id="nav-tabContent">
+            <div
+              class="tab-pane fade"
+              [ngClass]="{ 'show active': approveBtn }"
+              id="nav-home"
+              role="tabpanel"
+              aria-labelledby="nav-home-tab"
+            >
+              <div class=" " *ngFor="let list of myapprovalList">
+                <div class="row approvedlist">
+                  <div class="col"><div>
+                    <label>Name :</label> {{ list.user.student.first_name }}
+                  </div>
+                  <div>
+                    <label>Class :</label> {{ list.user.student.classes.class_name }}
+                  </div>
+                  <div>
+                    <label>School :</label>
+                    {{ list.user.student.school_name }}
+                  </div></div>
+                  <div class="col"><span>
+                    <label>Activity :</label>
+                    {{ list.activity.activity_name }}
+                  </span>
+                  <div style="text-align: start">
+                    <a
+                      data-bs-toggle="modal"
+                      data-bs-target="#viewVideo2"
+                      (click)="setvideoUrl(list.video_url)"
+                      ><i
+                        class="bi bi-play-circle-fill"
+                        style="color: #04445d"
+                      ></i
+                    ></a>
+                  </div></div>
+                  <div class="col"><div class="topDateClass">
+                    Uploaded On:
+                    {{ list.updated_on | date: "MMM d, y, h:mm a" }}
+                  </div>
+                  <br />
+                  <div style="text-align: end">
+                    <button
+                      class="btn btn-sm btn-primary"
+                      data-bs-toggle="modal"
+                      data-bs-target="#rateVideo"
+                      (click)="setId(list)"
+                    >
+                      Rate</button
+                    >&nbsp;
+                  </div>
+                </div>
+                  <!-- <div class="col">col</div> -->
+                </div>
+
+                </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              [ngClass]="{ 'show active': approvedBtn }"
+              id="nav-profile"
+              role="tabpanel"
+              aria-labelledby="nav-profile-tab"
+              *ngFor="let item of myapprovedList"
+            >
+              <div class=" ">
+                <div class="row approvedlist">
+                  <div class="col-3"><div>
+                    <label>Name :</label> {{ item.user.student.first_name }}
+
+                  </div>
+                  <div>
+                    <label>Class :</label> {{ item.user.student.classes.class_name }}
+                  </div>
+                  <div>
+                    <label>School :</label> {{ item.user.student.school_name }}
+                  </div></div>
+                  <div class="col-4"><span>
+                    <label>Activity :</label>
+                    {{ item.activity.activity_name }}
+                  </span>
+                  <div style="text-align: start">
+                    <a
+                      data-bs-toggle="modal"
+                      data-bs-target="#viewVideo1"
+                      (click)="setvideoUrl(item.video_url)"
+                      >
+                      <i
+                        class="bi bi-play-circle-fill"
+                        style="color: #04445d"
+                      >
+                      </i
+>
+                  </a>
+                  </div></div>
+                  <div class="col-2">                    <span>
+                    <label>Atoms :</label> {{ item.atoms_scored }}</span
+                  >
+</div>
+                  <div class="col-3"><div class="topDateClass">
+                    Uploaded On:
+                    {{ item.updated_on | date: "MMM d, y, h:mm a" }}
+                  </div>
+                  <br />
+                  <div style="text-align: end">
+                    <button
+                    type="button"
+                      class="btn btn-sm btn-primary"
+                      data-bs-toggle="modal"
+                      data-bs-target="#viewRating"
+                      (click)="setviewId(item.atoms_scored, item.comments)"
+                    >
+                      View</button
+                    >&nbsp;
+                  </div></div>
+                </div>
+                </div>
+
+            </div>
+          </div>
+          <!-- <div class="table_wrapper"></div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
