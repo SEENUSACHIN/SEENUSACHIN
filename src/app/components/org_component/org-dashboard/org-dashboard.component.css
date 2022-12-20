@@ -1,0 +1,92 @@
+.dashboardCard {
+  column-gap: 1px;
+}
+.myEventcard {
+  /* min-width: 200px; */
+  /* border: none; */
+  /* margin: 10px; */
+  border-style: solid;
+  border: 10px solid  #EDF3F3;
+  border-radius: 15px;
+  padding: 15px;
+  background-color: rgb(255, 255, 255);
+}
+#pointer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 280px;
+  height: 40px;
+  position: relative;
+  background: #05445E;
+}
+#pointer:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid #EDF3F6;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+#pointer:before {
+  content: "";
+  position: absolute;
+  right: -20px;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid #05445E;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+.btn-success {
+  background-color: #16213E;
+}.btn-success:hover {
+  background-color: #16213E;
+}
+.sessionList {
+  width: 100%;
+  /* background-color: whitesmoke; */
+  min-height: 22rem;
+}
+.mySessioncard {
+  padding: 15px;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  border: white;
+  border-radius: 0px;
+  /* border-left: #05445E; */
+}
+.mySessioncard:hover{
+  border-left: #05445E;
+  /* border-left-width: 2px; */
+  border-style: solid;
+  border-radius: 0px;
+}
+.mySessioncards {
+  row-gap: 10px;
+  padding: 20px;
+}
+.area1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.area {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  align-items:flex-start;
+  width: 350px;
+}
+.mySessionHeader {
+  padding: 18px 18px 0px 18px;
+}
+.canName {
+  margin: 5px;
+}

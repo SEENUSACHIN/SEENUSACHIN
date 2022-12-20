@@ -1,0 +1,74 @@
+#pointer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 280px;
+  height: 40px;
+  position: relative;
+  background: #05445E;
+}
+#pointer:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid #EDF3F6;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+#pointer:before {
+  content: "";
+  position: absolute;
+  right: -20px;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid #05445E;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+.btn-success {
+  background-color: #16213E;
+}
+.btn-success:hover {
+  background-color: #16213E;
+}
+.quizCard {
+  min-height: 250px;
+  width: 100%;
+  border: none;
+  padding: 15px;
+  box-shadow: 1px 1px 1px 1px white;
+  background-color: rgb(255, 255, 255);
+}
+.quesClass {
+  font-size: 16px;
+  font-weight: bold;
+}
+.ansClass {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  column-gap: 10px;
+}
+.quesBtn {
+  width: 150px;
+}
+.btnGrpClass {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  column-gap: 20px;
+}
+.btnTopGrpClass {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+  column-gap: 10px;
+}

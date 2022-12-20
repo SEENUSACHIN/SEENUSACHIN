@@ -1,0 +1,345 @@
+<app-org-nav></app-org-nav>
+<div
+  class="modal fade"
+  id="createSession"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+  >
+    <div class="modal-content">
+      <div class="modal-header py-1 align-items-center">
+        <h5 class="modal-title" id="staticBackdropLabel">
+          {{ "Create Game" }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          #closebutton
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="sessionform" #formDir="ngForm">
+          <div
+            class="cross-validation"
+            [class.cross-validation-error]="sessionform.errors?.['identityRevealed'] && (sessionform.touched || sessionform.dirty)"
+          >
+            <div class="col-md-12 row">
+              <div class="col-md-12 mt-3 form-group">
+                <label>Name</label>
+                <input
+                  class="form-control"
+                  name="name"
+                  id="name"
+                  formControlName="name"
+                  placeholder="Enter Session name"
+                  type="text"
+                  [ngClass]="{ 'is-invalid': sessionSubmitted && sf['name'].errors }"
+                />
+                <div
+                  *ngIf="sessionSubmitted && sf['name'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="sf['name'].errors?.['required']">
+                    Name is required*
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 mt-3 form-group">
+                <label>Description</label>
+                <textarea
+                  class="form-control"
+                  name="description"
+                  id="description"
+                  formControlName="description"
+                  placeholder="Enter Description"
+                  type="text"
+                  [ngClass]="{ 'is-invalid': sessionSubmitted && sf['description'].errors }"
+                ></textarea>
+                <div
+                  *ngIf="sessionSubmitted && sf['description'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="sf['description'].errors?.['required']">
+                    Description is required*
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 row">
+              <div class="col-md-6 mt-3 form-group">
+                <label>Registration Fees</label>
+                <input
+                  class="form-control"
+                  name="registration_fees"
+                  id="registration_fees"
+                  formControlName="registration_fees"
+                  placeholder="Enter Registration fees"
+                  type="text"
+                  [ngClass]="{ 'is-invalid': sessionSubmitted && sf['registration_fees'].errors }"
+                />
+                <div
+                  *ngIf="sessionSubmitted && sf['registration_fees'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="sf['registration_fees'].errors?.['required']">
+                    Registration fees is required*
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mt-3 form-group">
+                <label>Competition Type</label>
+                <select
+                  formControlName="competition_type"
+                  placeholder="Enter Competition type"
+                  class="form-select"
+                  name="competition_type"
+                  id="competition_type"
+                  aria-label="Default select example"
+                  [ngClass]="{ 'is-invalid': sessionSubmitted && sf['competition_type'].errors }"
+                >
+                  <option value="Quiz">Quiz</option>
+                  <option value="Tambola">Tambola</option>
+                </select>
+                <div
+                  *ngIf="sessionSubmitted && sf['competition_type'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="sf['competition_type'].errors?.['required']">
+                    Competition type is required*
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 row">
+              <div class="col-md-6 mt-3 form-group">
+                <label>Start Datetime</label>
+                <input
+                  type="datetime-local"
+                  id="start_datetime"
+                  [min]='minTime'
+                  name="start_datetime"
+                  class="form-control"
+                  [formControlName]="'start_datetime'"
+                  [ngClass]="{ 'is-invalid': sessionSubmitted && sf['start_datetime'].errors }"
+                />
+                <div
+                  *ngIf="sessionSubmitted && sf['start_datetime'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="sf['start_datetime'].errors?.['required']">
+                    Start datetime is required*
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mt-3 form-group">
+                <label>End Datetime</label>
+                <input
+                  type="datetime-local"
+                  [min]='minTime'
+                  id="end_datetime"
+                  name="end_datetime"
+                  class="form-control"
+                  [formControlName]="'end_datetime'"
+                  [ngClass]="{ 'is-invalid': sessionSubmitted && sf['end_datetime'].errors }"
+                />
+                <div
+                  *ngIf="sessionSubmitted && sf['end_datetime'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="sf['end_datetime'].errors?.['required']">
+                    End datetime is required*
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 row">
+              <div class="col-md-6 mt-3 form-group">
+                <label>Meeting Link</label>
+                <input
+                  class="form-control"
+                  name="meeting_link"
+                  id="meeting_link"
+                  formControlName="meeting_link"
+                  placeholder="Enter Meeting Link"
+                  type="text"
+                  [ngClass]="{ 'is-invalid': sessionSubmitted && sf['meeting_link'].errors }"
+                />
+                <div
+                  *ngIf="sessionSubmitted && sf['meeting_link'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="sf['meeting_link'].errors?.['required']">
+                    Meeting link is required*
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mt-3 form-group">
+                <label>Total questions</label>
+                <input
+                  class="form-control"
+                  name="total_questions"
+                  id="total_questions"
+                  formControlName="total_questions"
+                  placeholder="Enter Total questions"
+                  type="number"
+                  [ngClass]="{ 'is-invalid': sessionSubmitted && sf['total_questions'].errors }"
+                />
+                <div
+                  *ngIf="sessionSubmitted && sf['total_questions'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="sf['total_questions'].errors?.['required']">
+                    Total questions is required*
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 form-group"></div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button
+          type="submit"
+          (click)="addSession()"
+          #closebutton
+          class="btn btn-success"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="p-2 min-vh-100 orgDasboard">
+  <div class="container">
+    <div class="mt-1" id="pointer">
+      <h5><b class="headerText">Dashboard</b></h5>
+    </div>
+    <div
+      class="col-md-12 row d-flex justify-content-between"
+      style="text-align: center; float: right"
+    >
+      <!-- class="d-flex justify-content-between align-items-center dashboardCard mt-4" -->
+      <!-- <div class=""> -->
+      <div class="card col-md-3 myEventcard">
+        <div class="col-md-12">
+          <div class="card-body p-1">
+            <!-- <div class="d-flex flex-row-reverse">
+              <div class="p-2 favourite"><i class="bi bi-heart"></i></div>
+            </div> -->
+            <h5 class="card-title">Science Fair</h5>
+            <p class="card-text">23-9-2022 - 25-9-2022</p>
+          </div>
+        </div>
+      </div>
+      <div class="card col-md-3 myEventcard">
+        <div class="col-md-12">
+          <div class="card-body p-1">
+            <!-- <div class="d-flex flex-row-reverse">
+              <div class="p-2 favourite"><i class="bi bi-heart"></i></div>
+            </div> -->
+            <h5 class="card-title">Science Fair</h5>
+            <p class="card-text">23-9-2022 - 25-9-2022</p>
+          </div>
+        </div>
+      </div>
+      <div class="card col-md-3 myEventcard">
+        <div class="col-md-12">
+          <div class="card-body p-1">
+            <!-- <div class="d-flex flex-row-reverse">
+              <div class="p-2 favourite"><i class="bi bi-heart"></i></div>
+            </div> -->
+            <h5 class="card-title">Science Fair</h5>
+            <p class="card-text">23-9-2022 - 25-9-2022</p>
+          </div>
+        </div>
+      </div>
+      <div class="card col-md-3 myEventcard">
+        <div class="col-md-12">
+          <div class="card-body p-1">
+            <!-- <div class="d-flex flex-row-reverse">
+              <div class="p-2 favourite"><i class="bi bi-heart"></i></div>
+            </div> -->
+            <h5 class="card-title">Science Fair</h5>
+            <p class="card-text">23-9-2022 - 25-9-2022</p>
+          </div>
+        </div>
+      </div>
+      <!-- </div> -->
+    </div>
+
+    <div class="sessionList">
+      <div class="mt-2 d-flex flex-row justify-content-between mySessionHeader">
+        <h6><b class="headerText">Sessions</b></h6>
+        <button
+          class="btn btn-success btn-sm"
+          data-bs-toggle="modal"
+          id="crBtn"
+          type="button"
+          data-bs-target="#createSession"
+          style="padding: 6.5px 12px"
+        >
+          Create Game
+        </button>
+      </div>
+      <div style="text-align: center;" *ngIf="sessionList.length == 0">
+        No datas found.
+      </div>
+      <div *ngIf="sessionList.length != 0" class="d-flex flex-column align-items-center mySessioncards">
+        <div class="card mySessioncard" *ngFor="let item of sessionList">
+          <div class="area1">
+            <div
+              class="area col-mod-6"
+              style="text-align: start"
+            >
+              <span :title="item.name" class="canName">
+                <b>Name :</b> {{ item.name }}
+              </span>
+              <span :title="item.description" class="canName"
+                ><b>Description :</b> {{ item.description }}</span
+              >
+              <span :title="item.meeting_link" class="canName"
+                ><b>Meeting Link : </b> <a [href]="item.meeting_link">{{ item.meeting_link }}</a></span
+              >
+            </div>
+            <div class="area2 col-mod-3">
+              <span class="canName"><b>status : </b>{{ item.status == false ? 'New' : '' }}</span>
+            </div>
+            <div class="area3 col-mod-3">
+              <div :title="item.date" class="canName">
+                <b>Date: </b> {{ item.start_datetime | date:'short'}} - {{ item.end_datetime | date:'shortTime'}}
+              </div>
+              <div class="d-flex justify-content-between" style="float: right">
+                <a
+                  class="nav-link canName"
+                  style="text-decoration: underline; font-weight: bold"
+                  (click)="viewSession(item.id)"
+                >
+                  View
+                </a>
+                <button
+                  class="btn btn-success btn-sm"
+                  (click)="startSession(item.id)"
+                >
+                  Start Game
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
