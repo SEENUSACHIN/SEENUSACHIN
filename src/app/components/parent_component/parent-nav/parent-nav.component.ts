@@ -12,13 +12,19 @@ import * as $ from 'jquery';
 export class ParentNavComponent implements OnInit {
   currentpage: string = '';
   parentPic = localStorage.getItem('parentPic');
+  studentPic = localStorage.getItem('studentPic');
+  userRole:any = localStorage.getItem('userRole');
+
 
 
 
   constructor(private route:Router) { }
 
   ngOnInit(): void {
-    this.parentPic
+    this.userRole;
+    this.parentPic;
+    this.studentPic;
+    console.log(this.studentPic);
     // this.currentpage = this.router.history.current.path
   }
   navigation(tabs:any) {
@@ -27,10 +33,18 @@ export class ParentNavComponent implements OnInit {
     console.log(this.currentpage);
   }
   profile() {
-    this.route.navigate(['/parent_profile'])
+    // this.route.navigate(['/parent_profile'])
+    if (this.userRole == 'parent') {
+      this.route.navigate(['/parent_profile'])
+    }else {
+      this.route.navigate(['/student_profile'])
+    }
    }
    learningActivity() {
     this.route.navigate(['/inventory']);
+  }
+  studentActivity() {
+    this.route.navigate(['/student_inventor']);
   }
   logout() {
     this.route.navigate(['/parent']);

@@ -40,6 +40,8 @@ export class MyHomeComponent implements OnInit {
   groupId: any = '';
   parentId: any = '';
   parentPic: any = '';
+  studentPic: any = '';
+  studentProfile: any = '';
   graduateId: any = '';
   pid: any = '';
   childrens: any = [];
@@ -56,9 +58,15 @@ export class MyHomeComponent implements OnInit {
   role: any = ['parent', 'graduate'];
   selected = '';
   graduateDetail: any = [];
+  graduateLogin: any = [];
   graduateToken: any = '';
   regToken: any = '';
   regId: any = '';
+  userRole: any = '';
+  graduateUserId: any = '';
+  stuPic: any = '';
+  studentInfo: any = [];
+  myFiles1: string[] = [];
 
   constructor(
     private route: Router,
@@ -212,27 +220,43 @@ export class MyHomeComponent implements OnInit {
         if (response.success === true) {
           this.parentToken = response.token;
           console.log(response);
-          if(response.parent != null){
-            console.log("if", response.parent);
+          if (response.parent != null) {
+            this.userRole = 'parent';
+            console.log('if', response.parent);
             this.groupId = response.childrens;
-          this.parentId = response.parent.id;
-          this.parentPic = response.parent.profile_pic;
-          this.childrens = response.childrens;
-          console.log('parentToken', this.parentToken);
-          console.log('groupId', this.groupId);
-          // localStorage.setItem('email', this.signinform.value.email)
-          localStorage.setItem('parentPic', this.parentPic);
-          localStorage.setItem('parentToken', this.parentToken);
-          localStorage.setItem('group_id', this.groupId);
-          localStorage.setItem('registerParentId', this.parentId);
-          localStorage.setItem('childrens', JSON.stringify(this.childrens));
-          this.route.navigate(['/inventory']);
-          this.notifyService.showSuccess(response.msg, '');
-          }else{
-            this.regToken = response.token
-            this.regId = response.user_id
-            console.log("else", response);
+            this.parentId = response.parent.id;
+            this.parentPic = response.parent.profile_pic;
+            this.childrens = response.childrens;
+            console.log('parentToken', this.parentToken);
+            console.log('groupId', this.groupId);
+            // localStorage.setItem('email', this.signinform.value.email)
+            localStorage.setItem('userRole', this.userRole);
+            localStorage.setItem('parentPic', this.parentPic);
+            localStorage.setItem('parentToken', this.parentToken);
+            localStorage.setItem('group_id', this.groupId);
+            localStorage.setItem('registerParentId', this.parentId);
+            localStorage.setItem('childrens', JSON.stringify(this.childrens));
             this.route.navigate(['/inventory']);
+            this.notifyService.showSuccess(response.msg, '');
+          } else {
+            this.userRole = 'student';
+            this.regToken = response.token;
+            this.graduateUserId = response.graduate[0].user_id;
+            this.stuPic = response.graduate[0].profile_pic;
+            this.graduateLogin = response.graduate[0];
+            // this.graduateDetail
+            localStorage.setItem('studentPic', this.stuPic);
+            localStorage.setItem('regToken', this.regToken);
+            localStorage.setItem('graduateUserId', this.graduateUserId);
+            localStorage.setItem(
+              'graduateLogin',
+              JSON.stringify(this.graduateLogin)
+            );
+
+            console.log('graduateLogin', this.graduateLogin);
+            console.log('else', response);
+            this.route.navigate(['/student_inventor']);
+            this.notifyService.showSuccess(response.msg, '');
           }
         } else {
           this.otpPage = false;
@@ -318,8 +342,8 @@ export class MyHomeComponent implements OnInit {
           this.otpPage = false;
         } else {
           this.graduateId = response.user_id;
-          console.log("tgid",this.graduateId);
-          localStorage.setItem('graduateId', this.graduateId);
+          console.log('tgid', this.graduateId);
+          localStorage.setItem('graduateUserId', this.graduateId);
         }
         console.log('otp', this.otpPage);
         if (response.parent != null) {
@@ -345,32 +369,61 @@ export class MyHomeComponent implements OnInit {
     this.graduateSubmitted = true;
     // localStorage.clear();
     if (!this.graduateform.invalid) {
-    var data = {
-      college_name: this.graduateform.value.college_name,
-      program: this.graduateform.value.program,
-      department: this.graduateform.value.department,
-    };
-    const formdata = new FormData();
-    formdata.append('college_name', this.graduateform.value.college_name);
-    formdata.append('program', this.graduateform.value.program);
-    formdata.append('department', this.graduateform.value.department);
-    this.parent.graduateReg(formdata).subscribe((response: any) => {
-      console.log(response);
-      if (response.success === true) {
-        this.graduateDetail = response.graduate,
-        this.graduateToken = response.token,
-        localStorage.setItem('details', this.graduateDetail);
-        localStorage.setItem('graduateToken', this.graduateToken);
-        console.log("details",this.graduateDetail);
-        console.log("Graduatetoken",this.graduateToken);
-        this.route.navigate(['/inventory/']);
-        this.notifyService.showSuccess(response.msg, '');
-      }else {
-        this.notifyService.showError(response.msg, '');
-      }
+      var data = {
+        college_name: this.graduateform.value.college_name,
+        program: this.graduateform.value.program,
+        department: this.graduateform.value.department,
+      };
+      const formdata = new FormData();
+      formdata.append('college_name', this.graduateform.value.college_name);
+      formdata.append('program', this.graduateform.value.program);
+      formdata.append('department', this.graduateform.value.department);
+      formdata.append('profile', this.myFiles1[0]);
 
-    });
+      this.parent.graduateReg(formdata).subscribe((response: any) => {
+        console.log(response);
+        if (response.success === true) {
+          this.graduateDetail = response.graduate;
+          this.graduateToken = response.token;
+          this.studentPic = response.graduate.profile_pic;
+          localStorage.setItem('studentPic', this.studentPic);
+          localStorage.setItem('details', this.graduateDetail);
+          localStorage.setItem('regToken', this.graduateToken);
+          console.log('details', this.graduateDetail);
+          console.log('regToken', this.graduateToken);
+          console.log('studentPic', this.studentPic);
+          this.route.navigate(['/student_inventor']);
+          this.getStudentInfo();
+          this.notifyService.showSuccess(response.msg, '');
+        } else {
+          this.notifyService.showError(response.msg, '');
+        }
+      });
+    }
+    return;
   }
-  return;
+  uploadFiles1() {
+    const frmData = new FormData();
+    for (var j = 0; j < this.myFiles1.length; j++) {
+      frmData.append('profile', this.myFiles1[j]);
+    }
+  }
+  getFileDetails1(e: any) {
+    //console.log (e.target.files);
+    for (var j = 0; j < e.target.files.length; j++) {
+      this.myFiles1.push(e.target.files[j]);
+    }
+  }
+  getStudentInfo() {
+    this.parent.studentProfileDetails().subscribe((response: any) => {
+      console.log('getStudent', response);
+      if (response.success == true) {
+        this.studentInfo = response.graduate;
+        this.studentProfile = this.studentInfo.profile_pic;
+        console.log('student', this.studentInfo);
+        localStorage.setItem('studentPic', this.studentProfile);
+        console.log('pic', this.studentProfile);
+      }
+    });
   }
 }

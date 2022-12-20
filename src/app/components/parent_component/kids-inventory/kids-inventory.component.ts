@@ -20,6 +20,7 @@ export class KidsInventoryComponent implements OnInit {
   gId:any = [];
   @ViewChild('child') child : any;
   graduateData: any = localStorage.getItem('details')
+  userRole:any = localStorage.getItem('userRole')
 
 
   eventlist = [
@@ -52,7 +53,10 @@ export class KidsInventoryComponent implements OnInit {
     //     status: "Time4",
     //   },
     // ];
-    this.getKids()
+    if(this.userRole == "parent") {
+
+      this.getKids()
+    }
     // this.kyidetails()
   }
 setData(data:any) {

@@ -34,6 +34,10 @@ import { ListPageComponent } from './components/parent_component/list-page/list-
 import { DetailsPageComponent } from './components/parent_component/details-page/details-page.component';
 import { ViewActivityComponent } from './components/parent_component/view-activity/view-activity.component';
 import { ParentProfileComponent } from './components/parent_component/parent-profile/parent-profile.component';
+import { StudentProfileComponent } from './components/parent_component/student-profile/student-profile.component';
+import { StudentInventorComponent } from './components/parent_component/student-inventor/student-inventor.component';
+
+
 
 
 
