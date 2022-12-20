@@ -34,6 +34,7 @@ export class ParentProfileComponent implements OnInit {
   parentOtpform!: FormGroup;
   addexistingForm!: FormGroup;
   editform!: FormGroup;
+  graduateform!: FormGroup;
   parentform!: FormGroup;
   submitted = false;
   parentdata: any = { parentname: '', profile: '' };
@@ -52,7 +53,9 @@ export class ParentProfileComponent implements OnInit {
   childID: string = '';
   parentId: any = '';
   RegparentId: any = '';
+  // graduateLogin: any = '';
   kids: any = [];
+  graduateLogin: any = [];
   totalKids: any = [];
   parentInfo: any = '';
   childDatas: any = '';
@@ -61,6 +64,8 @@ export class ParentProfileComponent implements OnInit {
   editId: any = '';
   birthDate: any = '';
   parentprofileId: string = '';
+  studentprofileId: string = '';
+
   basicInfo: boolean = true;
   addkids: boolean = true;
   viewChild: boolean = false;
@@ -108,7 +113,18 @@ export class ParentProfileComponent implements OnInit {
     // mother_mobile: '',
     // mother_email: '',
   };
+  graduatedata = {
+    name: '',
+    college_name: '',
+    department: '',
+    program: '',
+    email: '',
+    mobile: '',
+  };
+  userRole:any = localStorage.getItem('userRole');
+  studentInfo:any = [];
   ParentProfile: any = '';
+  studentProfile: any = '';
   date: any = '';
   selectedDate: any;
   myDatePickerOptions: any;
@@ -180,7 +196,9 @@ export class ParentProfileComponent implements OnInit {
     return this.registrationform.get('gender')!;
   }
   ngOnInit(): void {
+
     // this.graduateData
+    // this.getStudentInfo()
     (this.registrationform = this.formBuilder.group({
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
@@ -205,6 +223,7 @@ export class ParentProfileComponent implements OnInit {
     this.childDatas = localStorage.getItem('childrens');
     this.parentId = localStorage.getItem('parent_id');
     this.RegparentId = localStorage.getItem('RegparentId');
+    this.graduateLogin = localStorage.getItem('graduateLogin');
 
     this.kids = JSON.parse(this.childDatas);
 
@@ -274,22 +293,14 @@ export class ParentProfileComponent implements OnInit {
       standard: new FormControl(this.editdata.standard, []),
       dob: new FormControl(this.editdata.dob, []),
       gender: new FormControl(this.editdata.gender, []),
-      // mobile: new FormControl(this.editdata.mobile, [
-      //     Validators.minLength(10),
-      //     Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')
-      // ]),
-      // father_name: new FormControl(this.editdata.father_name, []),
-      // father_mobile: new FormControl(this.editdata.father_mobile, [
-      //     Validators.minLength(10),
-      //     Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')
-      // ]),
-      // father_email: new FormControl(this.editdata.father_email, []),
-      // mother_name: new FormControl(this.editdata.mother_name, []),
-      // mother_mobile: new FormControl(this.editdata.mother_mobile, [
-      //     Validators.minLength(10),
-      //     Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$')
-      // ]),
-      // mother_email: new FormControl(this.editdata.mother_email, []),
+    });
+    this.graduateform = new FormGroup({
+      name: new FormControl(this.graduatedata.name, []),
+      college_name: new FormControl(this.graduatedata.college_name, []),
+      department: new FormControl(this.graduatedata.department, []),
+      program: new FormControl(this.graduatedata.program, []),
+      email: new FormControl(this.graduatedata.email, []),
+      mobile: new FormControl(this.graduatedata.mobile, []),
     });
   }
   get fd() {
@@ -320,6 +331,13 @@ export class ParentProfileComponent implements OnInit {
   }
   setparentData(data: any) {
     this.parentprofileId = data.id;
+    console.log('parentvalue', data);
+    this.parentform.setValue({
+      parentname: data.name,
+    });
+  }
+  setstudentData(data: any) {
+    this.studentprofileId = data.id;
     console.log('parentvalue', data);
     this.parentform.setValue({
       parentname: data.name,
@@ -594,6 +612,9 @@ export class ParentProfileComponent implements OnInit {
       }
     });
   }
+  editGraduate() {
+
+  }
   uploadFiles() {
     const frmData = new FormData();
     for (var i = 0; i < this.myFiles.length; i++) {
@@ -618,4 +639,15 @@ export class ParentProfileComponent implements OnInit {
       this.myFiles1.push(e.target.files[j]);
     }
   }
+  getStudentInfo() {
+    this.parent.studentProfileDetails().subscribe((response: any) => {
+      console.log('getStudent',response);
+      if (response.success == true) {
+        this.studentInfo = response.graduate;
+        console.log('student', this.studentInfo);
+        this.studentProfile = this.studentInfo.profile_pic;
+      }
+    });
+  }
+
 }

@@ -21,17 +21,16 @@
             ><i class="bi bi-house-fill"></i> Home</a
           >
         </li> -->
-        <li class="nav-item">
-          <!-- <a class="nav-link active" aria-current="page" href="#">Kids Inventor</a> -->
+        <li class="nav-item" *ngIf="userRole == 'parent'">
           <a class="nav-link navbarTabs" (click)="learningActivity()"
             ><i class="bi bi-book-fill navbarTabs"></i> Kids Inventor</a
           >
         </li>
-        <!-- <li class="nav-item ">
-          <a class="nav-link navbarTabs"
-            ><i class="bi bi-person-workspace"></i> My Activity</a
+        <li class="nav-item " *ngIf="userRole != 'parent'">
+          <a class="nav-link navbarTabs" (click)="studentActivity()"
+            ><i class="bi bi-person-workspace"></i> Student</a
           >
-        </li> -->
+        </li>
       </ul>
       <!-- <form class="d-flex" role="search">
         <input
@@ -44,7 +43,7 @@
       </form>
       &nbsp; -->
       <li class="list-unstyled">
-        <div class="dropdown profileIcon">
+        <div class="dropdown profileIcon" *ngIf="userRole == 'parent'">
           <button
             class="btn myprofilebtn"
             type="button"
@@ -59,12 +58,27 @@
             <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
           </ul>
         </div>
+        <div class="dropdown profileIcon" *ngIf="userRole != 'parent'">
+          <button
+            class="btn myprofilebtn"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i *ngIf="studentPic == null" class="bi bi-person-fill bi--lg"></i>
+            <img *ngIf="studentPic != null" [src]="studentPic" alt="" class=' img-circle'>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" (click)="profile()"> Profile</a></li>
+            <li><a class="dropdown-item" (click)="logout()">Log Out</a></li>
+          </ul>
+        </div>
       </li>
     </div>
   </div>
 </nav>
 <br>
-<div class='px-5'><nav aria-label="breadcrumb">
+<div *ngIf="userRole == 'parent'" class='px-5'><nav aria-label="breadcrumb">
   <ol class="breadcrumb pb-0">
     <!-- <li class="breadcrumb-item" [ngClass]="{'active':currentpage == '/learn_more/:id'}"><a  (click)="navigation('learn_more/:id')">Play</a></li> -->
     <li class="breadcrumb-item" [ngClass]="{'active':currentpage == 'learn_more/:id'}"><a (click)="navigation('learn_more/:id')" >Foundation</a></li>

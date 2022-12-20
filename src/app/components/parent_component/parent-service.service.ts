@@ -230,6 +230,18 @@ export class ParentServiceService {
       .get(this.apiURL + '/api/parent/' + pId + '/info', httpOptions)
       .pipe(catchError(this.errorHandler));
   }
+  studentProfileDetails() {
+    var gId = localStorage.getItem('graduateUserId');
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('regToken'),
+      }),
+    };
+    return this.http
+      .get(this.apiURL + '/api/graduate/' + gId , httpOptions)
+      .pipe(catchError(this.errorHandler));
+  }
   editChild(data: any, editId: any) {
     //  var childId = localStorage.getItem('childId')
     const config = {
@@ -252,6 +264,19 @@ export class ParentServiceService {
     };
     return this.http
       .put(this.apiURL + '/api/parent/' + pId + '/info', data, config)
+      .pipe(catchError(this.errorHandler));
+  }
+  editStudent(data: any) {
+    var gId = localStorage.getItem('graduateUserId');
+    console.log("id",gId);
+    const config = {
+      headers: {
+        enctype: 'multipart/form-data',
+        Authorization: 'Bearer ' + localStorage.getItem('regToken'),
+      },
+    };
+    return this.http
+      .put(this.apiURL + '/api/graduate/' + gId , data, config)
       .pipe(catchError(this.errorHandler));
   }
   // editParent(data :any,editId:any) {
@@ -284,11 +309,11 @@ export class ParentServiceService {
       .pipe(catchError(this.errorHandler));
   }
   graduateReg(data: any) {
-    var gId = localStorage.getItem('graduateId');
+    var gId = localStorage.getItem('graduateUserId');
     const config = {
       headers: {
         enctype: 'multipart/form-data',
-        // Authorization: 'Bearer ' + localStorage.getItem('parentToken')
+        Authorization: 'Bearer ' + localStorage.getItem('regToken')
       },
     };
     return this.http

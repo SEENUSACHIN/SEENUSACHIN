@@ -208,6 +208,9 @@ text-decoration: none;
   flex-direction: column !important;
   justify-content: center !important; */
 }
+#fileInput{
+  display: none;
+}
 
 
 
