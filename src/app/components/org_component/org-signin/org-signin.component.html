@@ -1,0 +1,209 @@
+<div class="contentArea py-5">
+  <div class="container pb-4">
+    <!-- signin -->
+    <div *ngIf="signinPage" class="form form--login">
+      <div>
+        <div class="logoArea">
+          <img class="mylogo" src="../assets/myLogo.png" alt="" />
+        </div>
+      </div>
+      <div class="form--heading">Welcome back!</div>
+      <form [formGroup]="signinform" #formDir="ngForm" autocomplete="off">
+        <div class="col-12 form-group">
+          <input
+            type="email"
+            placeholder="Email"
+            name="loginEmail"
+            id="loginEmail"
+            formControlName="loginEmail"
+            [ngClass]="{
+              'is-invalid': loginsubmitted && fd['loginEmail'].errors
+            }"
+          />
+
+          <div
+            *ngIf="loginsubmitted && fd['loginEmail'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="fd['loginEmail'].errors?.['required']">
+              Email is required*
+            </div>
+            <div *ngIf="fd['loginEmail'].errors?.['email']">
+              Email must be a valid email address
+            </div>
+          </div>
+        </div>
+        <div class="col-12 form-group">
+          <input
+            type="password"
+            placeholder="Password"
+            formControlName="loginPassword"
+            [ngClass]="{
+              'is-invalid': loginsubmitted && fd['loginPassword'].errors
+            }"
+          />
+          <div
+            *ngIf="loginsubmitted && fd['loginPassword'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="fd['loginPassword'].errors?.['required']">
+              Password is required*
+            </div>
+            <div *ngIf="fd['loginPassword'].errors?.['minlength']">
+              Password must be at least 8 characters
+            </div>
+            <div *ngIf="fd['loginPassword'].errors?.['pattern']">
+              Password must contain at least one symbol one numeric and one
+              capital letter..
+            </div>
+          </div>
+        </div>
+
+        <button class="button" (click)="signin()">Login</button>
+        <div class="center">
+          <span>New to Pi-Hubs? </span>
+          <a type="button" class="card-link" (click)="showSignup()">Sign Up</a>
+        </div>
+      </form>
+    </div>
+    <!-- otp signup -->
+    <div *ngIf="otpsignupPage" class="form form--signup">
+      <div>
+        <div class="logoArea">
+          <img class="mylogo" src="../assets/myLogo.png" alt="" />
+        </div>
+      </div>
+
+      <div class="form--heading">Welcome to Pi-Hubs!</div>
+      <form [formGroup]="registerForm" #formDir="ngForm" autocomplete="off">
+        <div class="col-12 form-group">
+          <input
+            type="text"
+            placeholder="Name"
+            formControlName="regName"
+            [ngClass]="{ 'is-invalid': regSubmitted && rf['regName'].errors }"
+          />
+          <div
+            *ngIf="regSubmitted && rf['regName'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="rf['regName'].errors?.['required']">
+              Name is required*
+            </div>
+          </div>
+        </div>
+        <div class="col-12 form-group">
+          <input
+            type="text"
+            placeholder="OTP"
+            formControlName="regOtp"
+            [ngClass]="{ 'is-invalid': regSubmitted && rf['regOtp'].errors }"
+          />
+          <div
+            *ngIf="regSubmitted && rf['regOtp'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="rf['regOtp'].errors?.['required']">
+              OTP is required*
+            </div>
+          </div>
+        </div>
+        <div class="col-12 form-group">
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            formControlName="regMobile"
+            maxlength="10"
+            [ngClass]="{ 'is-invalid': regSubmitted && rf['regMobile'].errors }"
+          />
+          <div
+            *ngIf="regSubmitted && rf['regMobile'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="rf['regMobile'].errors?.['required']">
+              Phone number is required*
+            </div>
+            <div *ngIf="rf['regMobile'].errors?.['minlength']">
+              Phone number must be at 10 characters
+            </div>
+            <div *ngIf="rf['regMobile'].errors?.['pattern']">
+              Phone number must be a numeric..
+            </div>
+          </div>
+        </div>
+        <div class="col-12 form-group">
+          <input
+            type="password"
+            placeholder="Password"
+            formControlName="regPassword"
+            [ngClass]="{
+              'is-invalid': regSubmitted && rf['regPassword'].errors
+            }"
+          />
+          <div
+            *ngIf="regSubmitted && rf['regPassword'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="rf['regPassword'].errors?.['required']">
+              Password is required*
+            </div>
+            <div *ngIf="rf['regPassword'].errors?.['minlength']">
+              Password must be at least 8 characters
+            </div>
+            <div *ngIf="rf['regPassword'].errors?.['pattern']">
+              Password must contain at least one symbol one numeric and one
+              capital letter..
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="button" (click)="signUp()">Sign Up</button>
+        <div class="center">
+          <span>Already have an account? </span>
+          <a type="button" class="card-link" (click)="showSignin()">Sign In</a>
+        </div>
+      </form>
+      <br />
+    </div>
+    <!-- signup -->
+    <div *ngIf="signupPage" class="form form--signup">
+      <div>
+        <div class="logoArea">
+          <img class="mylogo" src="../assets/myLogo.png" alt="" />
+        </div>
+      </div>
+
+      <div class="form--heading">Welcome to Pi-Hubs!</div>
+      <form [formGroup]="registerOtpForm" #formDir="ngForm" autocomplete="off">
+        <div class="col-12 form-group">
+          <input
+            type="email"
+            placeholder="Email"
+            formControlName="otpEmail"
+            [ngClass]="{
+              'is-invalid': regOtpSubmitted && rof['otpEmail'].errors
+            }"
+          />
+          <div
+            *ngIf="regOtpSubmitted && rof['otpEmail'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="rof['otpEmail'].errors?.['required']">
+              Email is required*
+            </div>
+            <div *ngIf="rof['otpEmail'].errors?.['email']">
+              Email must be a valid email address
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="button" (click)="sendOTP()">
+          Send OTP
+        </button>
+        <div class="center">
+          <span>Already have an account? </span>
+          <a type="button" class="card-link" (click)="showSignin()">Sign In</a>
+        </div>
+      </form>
+      <br />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,141 @@
+<app-org-nav></app-org-nav>
+<div class="p-2 min-vh-100 orgDasboard">
+  <div class="container">
+    <div class="mt-1" id="pointer">
+      <h5><b class="headerText">{{sessionName}}</b></h5>
+    </div>
+    <div class="mt-2">
+      <div *ngIf="questionObj.length != 0" class="card quizCard">
+        <div class="btnTopGrpClass">
+          <!-- <button class="btn btn-success btn-sm">Show Result</button>
+          <button class="btn btn-success btn-sm">Show Overall Result</button> -->
+          <button class="btn btn-danger btn-sm" (click)="goToHome()">End Session</button>
+        </div>
+        <div class="card-body" *ngIf="quesShow != null">
+          <div *ngIf="quesShow.question.type == 'image/png'">
+            <a target="_blank" [href]="quesShow.question.url"><img [src]="quesShow.question.url" width="300" height="150"/></a>
+          </div>
+          <p class="quesClass">{{ quesShow.question.name}}</p>
+          <div class="ansClass" *ngFor="let item of quesShow.question.option">
+            <input type="radio" [checked]="item.answer == true" id="{{ item.id }}" name="age" value="{{ item.id }}" />
+            <label for="{{ item.id }}">
+              {{ item.name }}
+              <div *ngIf="item.type == 'image/png'">
+                <a target="_blank" [href]="item.url"><img [src]="item.url" width="300" height="150"/></a>
+              </div>
+            </label
+            ><br />
+          </div>
+        </div>
+        <div class="">
+          <div class="btnGrpClass">
+            <button
+              [disabled]="disableShow[quesInd]"
+              class="btn btn-success btn-sm quesBtn"
+              (click)="showQues(quesInd)"
+            >
+              Show
+            </button>
+            <button
+              [disabled]="quesInd == questionObj.length - 1"
+              class="btn btn-success btn-sm quesBtn"
+              (click)="goToNextQues()"
+            >
+              Next
+            </button>
+          </div>
+          <div class="btnGrpClass mt-1">
+            <button
+              class="btn btn-success btn-sm quesBtn"
+              (click)="showResult(quesInd)"
+            >
+              Result
+            </button>
+            <button
+              class="btn btn-success btn-sm quesBtn"
+              (click)="showOverallResult()"
+            >
+              Overall Result
+            </button>
+          </div>
+        </div>
+        <!-- result -->
+        <div class="mt-1 container" *ngIf="resultShow[quesInd]">
+          <div class="d-flex justify-content-between">
+            <div class="quesClass">{{ "Result" }}</div>
+            <button
+              type="button"
+              class="btn-close"
+              aria-label="Close"
+              (click)="closeResult(quesInd)"
+            ></button>
+          </div>
+          <div class="container">
+            <table class="table table-hover table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Participant Name</th>
+                  <th scope="col">Score</th>
+                  <th scope="col">Answered Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">{{ 1 }}</th>
+                  <td>{{ "Abc" }}</td>
+                  <td>{{ "20" }}</td>
+                  <td>{{ "2 sec ago " }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">{{ 2 }}</th>
+                  <td>{{ "HJK" }}</td>
+                  <td>{{ "10" }}</td>
+                  <td>{{ "1 sec ago " }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- overall result -->
+        <div class="mt-1 container" *ngIf="overallResultShow">
+          <div class="d-flex justify-content-between">
+            <div class="quesClass">{{ "Overall Result" }}</div>
+            <button
+              type="button"
+              class="btn-close"
+              aria-label="Close"
+              (click)="closeOverallResult()"
+            ></button>
+          </div>
+          <div class="container">
+            <table class="table table-hover table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Participant Name</th>
+                  <th scope="col">Total Score</th>
+                  <th scope="col">Overall Rank</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">{{ 1 }}</th>
+                  <td>{{ "Abc" }}</td>
+                  <td>{{ "200" }}</td>
+                  <td>{{ "1" }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">{{ 2 }}</th>
+                  <td>{{ "HJK" }}</td>
+                  <td>{{ "100" }}</td>
+                  <td>{{ "2" }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

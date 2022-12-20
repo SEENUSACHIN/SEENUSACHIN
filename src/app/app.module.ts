@@ -65,11 +65,15 @@ import { CardModule } from "primeng/card";
 import { ParentProfileComponent } from './components/parent_component/parent-profile/parent-profile.component';
 import { ParentComponent } from './components/admin_component/dashboard/parent/parent.component';
 import Zoom from "smooth-zoom";
+import { StudentProfileComponent } from './components/parent_component/student-profile/student-profile.component';
+import { StudentInventorComponent } from './components/parent_component/student-inventor/student-inventor.component';
 
-
-
-
-
+// org-component
+import { OrgSigninComponent } from './components/org_component/org-signin/org-signin.component';
+import { OrgDashboardComponent } from './components/org_component/org-dashboard/org-dashboard.component';
+import { OrgNavComponent } from './components/org_component/org-nav/org-nav.component';
+import { ViewSessionComponent } from './components/org_component/view-session/view-session.component';
+import { ViewQuestionComponent } from './components/org_component/view-question/view-question.component';
 
 const routes: Routes = [
   // {path:'', redirectTo: localStorage.getItem('token') != null && localStorage.getItem('token') != '' ? 'admin_dashboard' : 'admin_signin', pathMatch: 'full'},
@@ -113,6 +117,13 @@ const routes: Routes = [
   {path:'detailsPage/:id' , component: DetailsPageComponent},
   {path:'view_activity' , component: ViewActivityComponent},
   {path:'parent_profile' , component: ParentProfileComponent},
+  {path:'student_profile' , component: StudentProfileComponent},
+  {path:'student_inventor' , component: StudentInventorComponent},
+  {path:'org_signin' , component: OrgSigninComponent},
+  {path:'org_dashboard' , component: OrgDashboardComponent},
+  {path:'view_session/:session_id' , component: ViewSessionComponent},
+  {path:'view_question/:session_id' , component: ViewQuestionComponent}
+
 ];
 declare global {
   interface Window {
@@ -163,6 +174,13 @@ DetailsPageComponent,
 ViewActivityComponent,
 ParentProfileComponent,
 ParentComponent,
+StudentProfileComponent,
+StudentInventorComponent,
+OrgSigninComponent,
+OrgDashboardComponent,
+OrgNavComponent,
+ViewSessionComponent,
+ViewQuestionComponent
 
   ],
   imports: [
@@ -186,7 +204,6 @@ ParentComponent,
     NgxPaginationModule,
     TimelineModule,
     CardModule
-
 
   ],
   providers: [
