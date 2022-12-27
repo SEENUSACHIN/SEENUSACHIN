@@ -1,33 +1,56 @@
 <app-parent-nav></app-parent-nav>
 <div class="px-5">
   <!-- <div id='pointer' ><h4><b class='px-2 headerText'>Activity Video</b></h4></div> -->
-  <div class='d-flex justify-content-between align-items-center' >
-    <div id='pointer'>
-      <h4><b class='px-2 headerText'>Activity List </b></h4></div>
-      <div>Kid Name: <b>{{kname}}</b> </div>
+  <div class="d-flex justify-content-between align-items-center">
+    <div id="pointer">
+      <h4><b class="px-2 headerText">Activity List </b></h4>
     </div>
-<hr>
-<div  class='' *ngIf="mydata.video_url != ''">
-  <h4>{{mydata.name}}</h4>
-
-<div class="container text-center" >
-  <div class="row">
-    <div class="col pb-1" *ngFor="let item of mydata.video_url.kid_activity_asset">
-      <div *ngIf="item.type == 'video/mp4'">
-      <video  class='videoPlayer' controls>
-        <source [src]="item.url" type="video/mp4">
-      </video>
-    </div>
-    <div *ngIf="item.type != 'video/mp4'">
-      <!-- <img id='actImg' [src]="item.url" alt="" (click)="viewImg()"> -->
-      <img id='actImg' [src]="item.url" alt="" (click)="viewImg()" class="zoomable" alt="Image Alt" />
-    </div>
+    <div>
+      Kid Name: <b>{{ kname }}</b>
     </div>
   </div>
-</div>
-<div class='' *ngIf="mydata.video_url != ''">Activity Url: <a [href]="mydata.video_url.external_url"  target="_blank"> {{mydata.video_url.external_url}}</a></div>
-</div>
-<!-- <div class="container d-flex justify-content-start" >
+  <hr />
+  <div class="" *ngIf="mydata.video_url != ''">
+    <h4>{{ mydata.name }}</h4>
+
+    <div class="container text-center">
+      <div class="row">
+        <div
+          class="col pb-1"
+          *ngFor="let item of mydata.video_url.kid_activity_asset"
+        >
+          <div *ngIf="item.type == 'video/mp4'">
+            <video class="videoPlayer" controls>
+              <source [src]="item.url" type="video/mp4" />
+            </video>
+          </div>
+          <div class="myProducts">
+            <div class="myProducts-gallery">
+              <div *ngIf="item.type != 'video/mp4'">
+                <!-- <img id='actImg' [src]="item.url" alt="" (click)="viewImg()"> -->
+                <img
+                  id="actImg"
+                  [src]="item.url"
+                  alt=""
+                  (click)="myImageFunction(item.url)"
+                  class="zoomable"
+                  alt="Image Alt"
+                  data-bs-toggle="modal" data-bs-target="#showImage"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="" *ngIf="mydata.video_url != ''">
+      Activity Url:
+      <a [href]="mydata.video_url.external_url" target="_blank">
+        {{ mydata.video_url.external_url }}</a
+      >
+    </div>
+  </div>
+  <!-- <div class="container d-flex justify-content-start" >
   <div class="row"  >
     <div class="col  pb-2" *ngFor="let item of mydata.video_url.kid_activity_asset">
       <div *ngIf="item.type == 'image/png'">
@@ -36,15 +59,33 @@
     </div>
   </div>
 </div> -->
-<div>
-  <hr>
-<!-- <h6>Slime Art Experiment – How to Turn Slime Into Artwork</h6> -->
-<h6>Description:</h6>
-<p>{{mydata.description}}
-</p>
+  <div>
+    <hr />
+    <!-- <h6>Slime Art Experiment – How to Turn Slime Into Artwork</h6> -->
+    <h6>Description:</h6>
+    <p>{{ mydata.description }}</p>
+  </div>
+  <div class="">
+    <h6>comments:</h6>
+    <p>{{ mydata.video_url.comments }}</p>
+  </div>
 </div>
-<div class=''>
-  <h6>comments:</h6>
-  <p>{{mydata.video_url.comments}}</p>
+<!-- Modal -->
+<div class="modal fade" id="showImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Activity Image</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="image-container d-flex justify-content-center h-50">
+          <img id="img-Box" src="" />
+        </div>
 </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -11,6 +11,8 @@ export class ViewActivityComponent implements OnInit {
   mydata = JSON.parse(this.video)
   videolist:any = []
   kname:any = localStorage.getItem('kidname');
+  showImg:any = ''
+
 
   // videolist = this.mydata.video_url.kid_activity_asset
 
@@ -31,13 +33,19 @@ export class ViewActivityComponent implements OnInit {
     // zoom.attach(".another-elements");
 
     Zoom(".zoomable",{
-      onClick: (img) => {
-        console.log('img ', img);
-        img.src = img.src.replace(/-[0-9]+\.jpg/, ".jpg");
-      },
-      // onTransitionEnd: (img) => {
-      //   img.src = img.src.replace(/-[0-9]+\.jpg/, ".jpg");
-      // },
+      onClick: (actImg) => {
+        console.log('actImg ', actImg);
+        actImg.src = actImg.src.replace(/-[0-9]+\.jpg/, ".jpg");
+      }
     });
+  }
+  // imageShow() {
+    // this.showImg = document.getElementById('actImg') as HTMLElement;
+    // this.showImg.click();
+    myImageFunction(productSmallImg: any) {
+      // console.log('productSmallImg ', productSmallImg.mydata.video_url.kid_activity_asset[2].url);
+      var productFullImg:any = document.getElementById("img-Box");
+      console.log('productFullImg ', productFullImg.src);
+      productFullImg.src = productSmallImg;
   }
 }

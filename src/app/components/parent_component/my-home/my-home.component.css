@@ -85,7 +85,7 @@ body {
 } */
 
 form {
-  width:70%;
+  width:73%;
 }
 form > * {
   margin: 10px;
@@ -212,5 +212,35 @@ text-decoration: none;
   display: none;
 }
 
+.forgotpage{
+  width: 100%;
+display: flex;
+justify-content: center;
+padding-left: 0%;
+padding-right: 0%;
+}
+.myotp{
+  width: 35px !important;
+  height: 35px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.ng-otp-input-wrapper{
+  margin-right: 4px!important;
+}
 
+.image-upload>input{
+  display: none;
+}
+.image-upload>input:hover{
+  box-shadow: 3px;
+  border: 3px solid lightgrey;
 
+}
+.img-circle{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 1px solid lightgrey;
+}
