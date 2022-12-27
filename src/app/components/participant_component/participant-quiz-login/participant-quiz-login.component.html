@@ -1,0 +1,33 @@
+<div class="contentArea py-5">
+  <div class="container pb-4">
+    <div class="form form--signup">
+      <div>
+        <div class="logoArea">
+          <img class="mylogo" src="../assets/myLogo.png" alt="" />
+        </div>
+      </div>
+
+      <div class="form--heading">Start Game!</div>
+      <form [formGroup]="registerForm" #formDir="ngForm" autocomplete="off">
+        <div class="col-12 form-group">
+          <input
+            type="text"
+            placeholder="Meeting Id"
+            formControlName="meeting_id"
+            [ngClass]="{ 'is-invalid': regSubmitted && rf['meeting_id'].errors }"
+          />
+          <div
+            *ngIf="regSubmitted && rf['meeting_id'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="rf['meeting_id'].errors?.['required']">
+              Meeting ID is required*
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="button" (click)="login()">Start</button>
+      </form>
+      <br />
+    </div>
+  </div>
+</div>

@@ -24,6 +24,7 @@ export class ViewQuestionComponent implements OnInit {
   questionList : any = []
   session_id: any
   selectedQues: any
+  searchString:any = null
   constructor(
     private routeP: ActivatedRoute,
     private route:Router,
@@ -37,7 +38,7 @@ export class ViewQuestionComponent implements OnInit {
     this.session_id =this.routeP.snapshot.paramMap.get('session_id')
     console.log('this.session_id ', this.session_id);
     this.getSessionById(this.session_id)
-    this.getAllQuestion()
+    // this.getAllQuestion()
   }
   getSessionById(session_id: any) {
     this.org.getSingleSession(session_id).subscribe((response: any) => {
@@ -52,7 +53,10 @@ export class ViewQuestionComponent implements OnInit {
     })
   }
   getAllQuestion() {
-    this.org.getAllQuestion().subscribe((response: any) => {
+    console.log("this.searchString ", this.searchString);
+    this.questionList = []
+    this.selectedQues = null
+    this.org.getAllQuestion(this.searchString).subscribe((response: any) => {
       if (response.success === true) {
         this.questionList = response.question
         console.log('this.questionList ', this.questionList);
@@ -62,6 +66,10 @@ export class ViewQuestionComponent implements OnInit {
   onSelect(e: any) {
     console.log('e ', e);
     this.selectedQues = e
+  }
+  loadQues(e : any) {
+    this.getSessionById(this.session_id)
+    // this.getAllQuestion()
   }
   addQuestion () {
     var sessionData = {

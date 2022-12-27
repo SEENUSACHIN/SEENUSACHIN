@@ -15,6 +15,11 @@
           <div *ngIf="quesShow.question.type == 'image/png'">
             <a target="_blank" [href]="quesShow.question.url"><img [src]="quesShow.question.url" width="300" height="150"/></a>
           </div>
+          <div *ngIf="quesShow.question.type == 'video/mp4'">
+            <video width="300" height="150" controls>
+              <source [src]="quesShow.question.url" type="video/mp4">
+            </video>
+          </div>
           <p class="quesClass">{{ quesShow.question.name}}</p>
           <div class="ansClass" *ngFor="let item of quesShow.question.option">
             <input type="radio" [checked]="item.answer == true" id="{{ item.id }}" name="age" value="{{ item.id }}" />
@@ -22,6 +27,11 @@
               {{ item.name }}
               <div *ngIf="item.type == 'image/png'">
                 <a target="_blank" [href]="item.url"><img [src]="item.url" width="300" height="150"/></a>
+              </div>
+              <div *ngIf="item.type == 'video/mp4'">
+                <video width="300" height="150" controls>
+                  <source [src]="item.url" type="video/mp4">
+                </video>
               </div>
             </label
             ><br />
@@ -31,14 +41,16 @@
           <div class="btnGrpClass">
             <button
               [disabled]="disableShow[quesInd]"
-              class="btn btn-success btn-sm quesBtn"
+              class="btn btn-sm quesBtn"
+              [ngClass]="disableShow[quesInd] ? 'btn-default' : 'btn-success'"
               (click)="showQues(quesInd)"
             >
               Show
             </button>
             <button
               [disabled]="quesInd == questionObj.length - 1"
-              class="btn btn-success btn-sm quesBtn"
+              class="btn btn-sm quesBtn"
+              [ngClass]="quesInd == questionObj.length - 1 ? 'btn-default' : 'btn-success'"
               (click)="goToNextQues()"
             >
               Next

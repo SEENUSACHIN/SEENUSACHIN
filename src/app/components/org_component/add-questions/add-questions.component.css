@@ -1,0 +1,27 @@
+.removeBadge {
+  position: absolute;
+  right: -12px;
+  top: 10px;
+  background: red;
+  text-align: center;
+  border-radius: 50px 50px;
+  color: white;
+  padding: 0px 3px;
+  font-size: 12px;
+}
+.preview {
+  position:relative;
+  padding-top:20px;
+  display:inline-block;
+}
+.quesClass1 {
+  font-size: 13px;
+  font-weight: bold;
+}
+.ansClass {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  column-gap: 10px;
+}

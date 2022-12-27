@@ -224,8 +224,18 @@
 </div>
 <div class="p-2 min-vh-100 orgDasboard">
   <div class="container">
-    <div class="mt-1" id="pointer">
-      <h5><b class="headerText">Dashboard</b></h5>
+    <div class="d-flex justify-content-between">
+      <div class="mt-1" id="pointer">
+        <h5><b class="headerText">Dashboard</b></h5>
+      </div>
+        <a
+          class="nav-link"
+          style="font-weight: bold; text-decoration: underline;"
+          type="button"
+          (click)="goToCentralRep()"
+        >
+          Add questions to central Repository
+        </a>
     </div>
     <div
       class="col-md-12 row d-flex justify-content-between"
@@ -239,8 +249,8 @@
             <!-- <div class="d-flex flex-row-reverse">
               <div class="p-2 favourite"><i class="bi bi-heart"></i></div>
             </div> -->
-            <h5 class="card-title">Science Fair</h5>
-            <p class="card-text">23-9-2022 - 25-9-2022</p>
+            <h5 class="card-title">20</h5>
+            <p class="card-text">Total Session</p>
           </div>
         </div>
       </div>
@@ -250,8 +260,8 @@
             <!-- <div class="d-flex flex-row-reverse">
               <div class="p-2 favourite"><i class="bi bi-heart"></i></div>
             </div> -->
-            <h5 class="card-title">Science Fair</h5>
-            <p class="card-text">23-9-2022 - 25-9-2022</p>
+            <h5 class="card-title">10</h5>
+            <p class="card-text">Completed Session</p>
           </div>
         </div>
       </div>
@@ -261,8 +271,8 @@
             <!-- <div class="d-flex flex-row-reverse">
               <div class="p-2 favourite"><i class="bi bi-heart"></i></div>
             </div> -->
-            <h5 class="card-title">Science Fair</h5>
-            <p class="card-text">23-9-2022 - 25-9-2022</p>
+            <h5 class="card-title">3</h5>
+            <p class="card-text">In progress</p>
           </div>
         </div>
       </div>
@@ -272,8 +282,8 @@
             <!-- <div class="d-flex flex-row-reverse">
               <div class="p-2 favourite"><i class="bi bi-heart"></i></div>
             </div> -->
-            <h5 class="card-title">Science Fair</h5>
-            <p class="card-text">23-9-2022 - 25-9-2022</p>
+            <h5 class="card-title">23-9-2022 - 25-9-2022</h5>
+            <p class="card-text">Upcoming Session</p>
           </div>
         </div>
       </div>
@@ -299,42 +309,44 @@
       </div>
       <div *ngIf="sessionList.length != 0" class="d-flex flex-column align-items-center mySessioncards">
         <div class="card mySessioncard" *ngFor="let item of sessionList">
-          <div class="area1">
+          <div class="area1 col-mod-12">
             <div
               class="area col-mod-6"
               style="text-align: start"
             >
-              <span :title="item.name" class="canName">
+              <span [title]="item.name" class="canName">
                 <b>Name :</b> {{ item.name }}
               </span>
-              <span :title="item.description" class="canName"
-                ><b>Description :</b> {{ item.description }}</span
+              <span [title]="item.description" class="canName" style="max-width: 300px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">
+                <b>Description :</b>{{ item.description }}</span
               >
-              <span :title="item.meeting_link" class="canName"
-                ><b>Meeting Link : </b> <a [href]="item.meeting_link">{{ item.meeting_link }}</a></span
+              <span [title]="item.meeting_link" class="canName"
+                ><b>Meeting Link : </b> <a target="_blank" [href]="item.meeting_link">{{ item.meeting_link }}</a></span
               >
             </div>
             <div class="area2 col-mod-3">
-              <span class="canName"><b>status : </b>{{ item.status == false ? 'New' : '' }}</span>
+              <span class="canName"><b>status : </b>{{ item.status == false ? 'New' : 'Completed' }}</span>
+              <div class="canName" style="color: red; font-weight: bold;" *ngIf="item.expired == true">Date Expired</div>
             </div>
             <div class="area3 col-mod-3">
-              <div :title="item.date" class="canName">
-                <b>Date: </b> {{ item.start_datetime | date:'short'}} - {{ item.end_datetime | date:'shortTime'}}
+              <div [title]="item.date" class="canName">
+                <b>Date: </b> {{ item.start_datetime | date : "mediumDate" }} {{ item.start_datetime | date : "shortTime" }} - {{ item.end_datetime | date:'shortTime'}}
               </div>
               <div class="d-flex justify-content-between" style="float: right">
-                <a
+                <!-- <a
                   class="nav-link canName"
                   style="text-decoration: underline; font-weight: bold"
                   (click)="viewSession(item.id)"
                 >
                   View
-                </a>
+                </a> -->
                 <button
                   class="btn btn-success btn-sm"
-                  (click)="startSession(item.id)"
+                  (click)="viewSession(item.id)"
                 >
-                  Start Game
-                </button>
+                  View Qs
+                </button>&nbsp;
+                <button *ngIf="item.expired != true" class="btn btn-default btn-sm" (click)="copyText('http://localhost:4200/#/view_session/' + item.id)" value="click to copy" ><i class="bi bi-back"></i></button>
               </div>
             </div>
           </div>

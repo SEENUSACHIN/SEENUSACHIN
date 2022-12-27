@@ -1,0 +1,97 @@
+<div class="contentArea py-5">
+  <div class="container pb-4">
+    <div *ngIf="showSuccess" class="form form--signup">
+      <div>
+        <div class="logoArea">
+          <i style="color: #04445D; font-size: 64px;" class="bi bi-check-circle-fill"></i>
+        </div>
+      </div>
+      <div class="form--heading">{{successMessage}}</div>
+      <div style="text-align: center;">
+        <button type="button" class="btn btn-success btn-sm" (click)="makePayment()">Make Payment</button>
+      </div>
+    </div>
+    <div *ngIf="showPaymentSuccess" class="form form--signup">
+      <div>
+        <div class="logoArea">
+          <i style="color: #04445D; font-size: 64px;" class="bi bi-check-circle-fill"></i>
+        </div>
+      </div>
+      <div class="form--heading">{{successMessage}}</div>
+      <div style="text-align: center;">
+        <button type="button" class="btn btn-success btn-sm" (click)="gotoMainPage()">Back</button>
+      </div>
+    </div>
+    <div *ngIf="!showSuccess && !showPaymentSuccess" class="form form--signup">
+      <div>
+        <div class="logoArea">
+          <img class="mylogo" src="../assets/myLogo.png" alt="" />
+        </div>
+      </div>
+
+      <div class="form--heading">Register the game {{session_name}}!</div>
+      <form [formGroup]="registerForm" #formDir="ngForm" autocomplete="off">
+        <div class="col-12 form-group">
+          <input
+            type="text"
+            placeholder="Name"
+            formControlName="regName"
+            [ngClass]="{ 'is-invalid': regSubmitted && rf['regName'].errors }"
+          />
+          <div
+            *ngIf="regSubmitted && rf['regName'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="rf['regName'].errors?.['required']">
+              Name is required*
+            </div>
+          </div>
+        </div>
+        <div class="col-12 form-group">
+          <input
+            type="text"
+            placeholder="Email"
+            formControlName="regEmail"
+            [ngClass]="{ 'is-invalid': regSubmitted && rf['regEmail'].errors }"
+          />
+          <div
+            *ngIf="regSubmitted && rf['regEmail'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="rf['regEmail'].errors?.['required']">
+              Email is required*
+            </div>
+            <div *ngIf="rf['regEmail'].errors?.['email']">
+              Email format is wrong
+            </div>
+          </div>
+        </div>
+        <div class="col-12 form-group">
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            formControlName="regMobile"
+            maxlength="10"
+            [ngClass]="{ 'is-invalid': regSubmitted && rf['regMobile'].errors }"
+          />
+          <div
+            *ngIf="regSubmitted && rf['regMobile'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="rf['regMobile'].errors?.['required']">
+              Phone number is required*
+            </div>
+            <div *ngIf="rf['regMobile'].errors?.['minlength']">
+              Phone number must be at 10 characters
+            </div>
+            <div *ngIf="rf['regMobile'].errors?.['pattern']">
+              Phone number must be a numeric..
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="button" (click)="Regiter()">Register</button>
+      </form>
+      <br />
+    </div>
+  </div>
+</div>
