@@ -1,0 +1,361 @@
+<div
+  class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+>
+  <div class="modal-content">
+    <div class="modal-header py-1 align-items-center">
+      <h5 class="modal-title" id="staticBackdropLabel">
+        {{ "Create Question" }}
+      </h5>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="modal"
+        aria-label="Close"
+        #closebutton
+        (click)="loadQues()"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form class="container">
+        <div *ngIf="errorShow != ''" class="alert alert-danger">
+          <div>
+            {{ errorShow }}
+          </div>
+        </div>
+        <div class="d-flex flex-row">
+          <input
+            class="form-control"
+            name="name"
+            id="name"
+            placeholder="Enter Question"
+            type="text"
+            [(ngModel)]="question"
+          />
+          <input
+            hidden
+            #file
+            type="file"
+            (change)="getQuesFileDetails($event)"
+          />
+          <button type="button" class="btn btn-default" (click)="file.click()">
+            <i class="bi bi-image-alt"></i>
+          </button>
+          &nbsp;
+          <select
+            placeholder="Select Level"
+            class="form-select"
+            aria-label="Default select example"
+            [(ngModel)]="level"
+          >
+            <option value="" disabled>Select Level</option>
+            <option [selected]="level == 'beginner'" value="beginner">
+              {{ "Beginner" }}
+            </option>
+            <option [selected]="level == 'intermediate'" value="intermediate">
+              {{ "Intermediate" }}
+            </option>
+            <option [selected]="level == 'advanced'" value="advanced">
+              {{ "Advanced" }}
+            </option>
+          </select>
+          <!-- &nbsp;
+          <button type="button" class="btn btn-success" (click)="addQues()">
+            Add
+          </button> -->
+        </div>
+        <div
+          class="mt-1"
+          style="text-align: center"
+          *ngIf="myQuesFile.length != 0"
+        >
+          <div class="preview">
+            <a type="button">
+              <span class="removeBadge" (click)="removeQuesFile()"
+                ><i class="bi bi-x"></i
+              ></span>
+              <div *ngIf="myQuesFile[0].type == 'image/png'">
+                <img [src]="QuesUrl" width="100" height="60" />
+              </div>
+              <div *ngIf="myQuesFile[0].type == 'video/mp4'">
+                <video width="100" height="60" controls>
+                  <source [src]="QuesUrl" type="video/mp4">
+                </video>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="mt-3 col-12 d-flex flex-row">
+          <input
+            class="form-control"
+            name="name"
+            id="name"
+            placeholder="Enter Option1"
+            type="text"
+            [(ngModel)]="option1"
+          />
+          <input
+            hidden
+            #file2
+            type="file"
+            (change)="getAnsFileDetails1($event)"
+          />
+          <button type="button" class="btn btn-default" (click)="file2.click()">
+            <i class="bi bi-image-alt"></i>
+          </button>
+
+          &nbsp;&nbsp;
+          <div class="col-3 mt-2">
+            <div class="form-check form-switch">
+              <input
+                mdbCheckbox
+                class="form-check-input"
+                type="checkbox"
+                id="flexSwitchCheckDefault"
+                (change)="toggleAns()"
+                [(ngModel)]="answer"
+              />
+              <label class="form-check-label" for="flexSwitchCheckDefault"
+                >Correct Answer</label
+              >
+            </div>
+          </div>
+          <!-- &nbsp;
+          <button type="button" class="btn btn-success" (click)="addOption()">
+            Add
+          </button> -->
+        </div>
+        <div
+          class="mt-1"
+          style="text-align: center"
+          *ngIf="myAnsFile1.length != 0"
+        >
+          <div class="preview">
+            <a type="button">
+              <span class="removeBadge" (click)="removeAnsFile1()"
+                ><i class="bi bi-x"></i
+              ></span>
+              <div *ngIf="myAnsFile1[0].type == 'image/png'">
+                <img [src]="AnsUrl1" width="100" height="60" />
+              </div>
+              <div *ngIf="myAnsFile1[0].type == 'video/mp4'">
+                <video width="100" height="60" controls>
+                  <source [src]="AnsUrl1" type="video/mp4">
+                </video>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="mt-3 col-12 d-flex flex-row">
+          <input
+            class="form-control"
+            name="name"
+            id="name"
+            placeholder="Enter Option2"
+            type="text"
+            [(ngModel)]="option2"
+          />
+          <input
+            hidden
+            #file3
+            type="file"
+            (change)="getAnsFileDetails2($event)"
+          />
+          <button type="button" class="btn btn-default" (click)="file3.click()">
+            <i class="bi bi-image-alt"></i>
+          </button>
+
+          &nbsp;&nbsp;
+          <div class="col-3 mt-2">
+            <div class="form-check form-switch">
+              <input
+                mdbCheckbox
+                class="form-check-input"
+                type="checkbox"
+                id="flexSwitchCheckDefault"
+                (change)="toggleAns()"
+                [(ngModel)]="answer"
+              />
+              <label class="form-check-label" for="flexSwitchCheckDefault"
+                >Correct Answer</label
+              >
+            </div>
+          </div>
+          <!-- &nbsp;
+          <button type="button" class="btn btn-success" (click)="addOption()">
+            Add
+          </button> -->
+        </div>
+        <div
+          class="mt-1"
+          style="text-align: center"
+          *ngIf="myAnsFile2.length != 0"
+        >
+          <div class="preview">
+            <a type="button">
+              <span class="removeBadge" (click)="removeAnsFile2()"
+                ><i class="bi bi-x"></i
+              ></span>
+              <div *ngIf="myAnsFile2[0].type == 'image/png'">
+                <img [src]="AnsUrl2" width="100" height="60" />
+              </div>
+              <div *ngIf="myAnsFile2[0].type == 'video/mp4'">
+                <video width="100" height="60" controls>
+                  <source [src]="AnsUrl2" type="video/mp4">
+                </video>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="mt-3 col-12 d-flex flex-row">
+          <input
+            class="form-control"
+            name="name"
+            id="name"
+            placeholder="Enter Option3 (optional)"
+            type="text"
+            [(ngModel)]="option3"
+          />
+          <input
+            hidden
+            #file3
+            type="file"
+            (change)="getAnsFileDetails3($event)"
+          />
+          <button type="button" class="btn btn-default" (click)="file3.click()">
+            <i class="bi bi-image-alt"></i>
+          </button>
+
+          &nbsp;&nbsp;
+          <div class="col-3 mt-2">
+            <div class="form-check form-switch">
+              <input
+                mdbCheckbox
+                class="form-check-input"
+                type="checkbox"
+                id="flexSwitchCheckDefault"
+                (change)="toggleAns()"
+                [(ngModel)]="answer"
+              />
+              <label class="form-check-label" for="flexSwitchCheckDefault"
+                >Correct Answer</label
+              >
+            </div>
+          </div>
+          <!-- &nbsp;
+          <button type="button" class="btn btn-success" (click)="addOption()">
+            Add
+          </button> -->
+        </div>
+        <div
+          class="mt-1"
+          style="text-align: center"
+          *ngIf="myAnsFile3.length != 0"
+        >
+          <div class="preview">
+            <a type="button">
+              <span class="removeBadge" (click)="removeAnsFile3()"
+                ><i class="bi bi-x"></i
+              ></span>
+              <div *ngIf="myAnsFile3[0].type == 'image/png'">
+                <img [src]="AnsUrl3" width="100" height="60" />
+              </div>
+              <div *ngIf="myAnsFile3[0].type == 'video/mp4'">
+                <video width="100" height="60" controls>
+                  <source [src]="AnsUrl3" type="video/mp4">
+                </video>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="mt-3 col-12 d-flex flex-row">
+          <input
+            class="form-control"
+            name="name"
+            id="name"
+            placeholder="Enter Option4 (optional)"
+            type="text"
+            [(ngModel)]="option4"
+          />
+          <input
+            hidden
+            #file4
+            type="file"
+            (change)="getAnsFileDetails4($event)"
+          />
+          <button type="button" class="btn btn-default" (click)="file4.click()">
+            <i class="bi bi-image-alt"></i>
+          </button>
+
+          &nbsp;&nbsp;
+          <div class="col-3 mt-2">
+            <div class="form-check form-switch">
+              <input
+                mdbCheckbox
+                class="form-check-input"
+                type="checkbox"
+                id="flexSwitchCheckDefault"
+                (change)="toggleAns()"
+                [(ngModel)]="answer"
+              />
+              <label class="form-check-label" for="flexSwitchCheckDefault"
+                >Correct Answer</label
+              >
+            </div>
+          </div>
+          <!-- &nbsp;
+          <button type="button" class="btn btn-success" (click)="addOption()">
+            Add
+          </button> -->
+        </div>
+        <div
+          class="mt-1"
+          style="text-align: center"
+          *ngIf="myAnsFile4.length != 0"
+        >
+          <div class="preview">
+            <a type="button">
+              <span class="removeBadge" (click)="removeAnsFile4()"
+                ><i class="bi bi-x"></i
+              ></span>
+              <div *ngIf="myAnsFile4[0].type == 'image/png'">
+                <img [src]="AnsUrl4" width="100" height="60" />
+              </div>
+              <div *ngIf="myAnsFile4[0].type == 'video/mp4'">
+                <video width="100" height="60" controls>
+                  <source [src]="AnsUrl4" type="video/mp4">
+                </video>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="mt-3" *ngIf="quesPreview != null">
+          <label>Question Preview</label><br />
+          <div *ngIf="quesPreview.questionUrl != null">
+            <img [src]="quesPreview.questionUrl" width="200" height="100" />
+          </div>
+          <p class="quesClass1">{{ quesPreview.question }}</p>
+          <div class="ansClass" *ngFor="let opt of quesPreview.option">
+            <input
+              type="radio"
+              [checked]="opt.crtAns === true"
+              id="{{ opt.optionName }}"
+              name="{{ opt.optionName }}"
+              value="{{ opt.optionName }}"
+            />
+            <label for="{{ opt.optionName }}">
+              {{ opt.optionName }}
+              <div *ngIf="opt.ansUrl != null">
+                <img [src]="opt.ansUrl" width="150" height="80" />
+              </div> </label
+            ><br />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="loadQues()" data-bs-dismiss="modal">
+        Close
+      </button>
+    </div>
+  </div>
+</div>

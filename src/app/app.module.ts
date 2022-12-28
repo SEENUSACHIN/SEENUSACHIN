@@ -74,6 +74,16 @@ import { OrgDashboardComponent } from './components/org_component/org-dashboard/
 import { OrgNavComponent } from './components/org_component/org-nav/org-nav.component';
 import { ViewSessionComponent } from './components/org_component/view-session/view-session.component';
 import { ViewQuestionComponent } from './components/org_component/view-question/view-question.component';
+import { QuestionRepositoryComponent } from './components/org_component/question-repository/question-repository.component';
+import { AddQuestionsComponent } from './components/org_component/add-questions/add-questions.component';
+import { NgxCopyToClipboardModule } from 'ngx-copy-to-clipboard';
+// Participant-comonent
+import { ParticipantRegisterComponent } from './components/participant_component/participant-register/participant-register.component';
+import { ParticipantGameListComponent } from './components/participant_component/participant-game-list/participant-game-list.component';
+import { ParticipantQuizLoginComponent } from './components/participant_component/participant-quiz-login/participant-quiz-login.component';
+import { ParticipantGameComponent } from './components/participant_component/participant-game/participant-game.component';
+import { ParticipantNavComponent } from './components/participant_component/participant-nav/participant-nav.component';
+import { SessionStatusComponent } from './components/participant_component/session-status/session-status.component';
 
 const routes: Routes = [
   // {path:'', redirectTo: localStorage.getItem('token') != null && localStorage.getItem('token') != '' ? 'admin_dashboard' : 'admin_signin', pathMatch: 'full'},
@@ -122,8 +132,13 @@ const routes: Routes = [
   {path:'org_signin' , component: OrgSigninComponent},
   {path:'org_dashboard' , component: OrgDashboardComponent},
   {path:'view_session/:session_id' , component: ViewSessionComponent},
-  {path:'view_question/:session_id' , component: ViewQuestionComponent}
-
+  {path:'view_question/:session_id' , component: ViewQuestionComponent},
+  {path:'question_repository' , component: QuestionRepositoryComponent},
+  {path:'participant_register/:name/:session_id' , component: ParticipantRegisterComponent},
+  {path:'participant_games' , component: ParticipantGameListComponent},
+  {path:'participant_quiz_login' , component: ParticipantQuizLoginComponent},
+  {path:'participant_quiz/:sessionId/:participantId' , component: ParticipantGameComponent},
+  {path:'session/:status/:session_id' , component: SessionStatusComponent}
 ];
 declare global {
   interface Window {
@@ -180,7 +195,15 @@ OrgSigninComponent,
 OrgDashboardComponent,
 OrgNavComponent,
 ViewSessionComponent,
-ViewQuestionComponent
+ViewQuestionComponent,
+QuestionRepositoryComponent,
+AddQuestionsComponent,
+ParticipantRegisterComponent,
+ParticipantGameListComponent,
+ParticipantQuizLoginComponent,
+ParticipantGameComponent,
+ParticipantNavComponent,
+SessionStatusComponent
 
   ],
   imports: [
@@ -203,8 +226,8 @@ ViewQuestionComponent
     DatepickerModule,
     NgxPaginationModule,
     TimelineModule,
-    CardModule
-
+    CardModule,
+    NgxCopyToClipboardModule
   ],
   providers: [
     { provide: Window, useValue: window },

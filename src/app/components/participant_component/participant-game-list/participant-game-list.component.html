@@ -1,0 +1,66 @@
+<div class="p-2 min-vh-100 orgDasboard">
+  <div class="container">
+    <div class="d-flex justify-content-between">
+      <div class="mt-1" id="pointer">
+        <h5><b class="headerText">Quiz</b></h5>
+      </div>
+    </div>
+    <div class="sessionList">
+      <!-- <div class="mt-2 d-flex flex-row justify-content-between mySessionHeader">
+        <h6><b class="headerText">Sessions</b></h6>
+      </div> -->
+      <div style="text-align: center" *ngIf="sessionList.length == 0">
+        No datas found.
+      </div>
+      <div
+        *ngIf="sessionList.length != 0"
+        class="d-flex flex-column align-items-center mySessioncards"
+      >
+        <div class="card mySessioncard" *ngFor="let item of sessionList">
+          <div class="area1 col-mod-12">
+            <div class="area col-mod-6" style="text-align: start">
+              <span [title]="item.name" class="canName">
+                <b>Name :</b> {{ item.name }}
+              </span>
+              <span
+                [title]="item.description"
+                class="canName"
+                style="
+                  max-width: 300px;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                  overflow: hidden;
+                "
+              >
+                <b>Description :</b>{{ item.description }}</span
+              >
+              <!-- <span [title]="item.meeting_link" class="canName"
+                ><b>Meeting Link : </b> <a target="_blank" [href]="item.meeting_link">{{ item.meeting_link }}</a></span
+              > -->
+              <span [title]="item.registration_fees" class="canName">
+                <b>Registration fees :</b> {{ item.registration_fees }}
+              </span>
+            </div>
+            <div class="area2 col-mod-3">
+              <span class="canName"
+                ><b>status : </b>{{ item.status == false ? "New" : "" }}</span
+              >
+            </div>
+            <div class="area3 col-mod-3">
+              <div [title]="item.date" class="canName">
+                <b>Date: </b> {{ item.start_datetime | date : "mediumDate" }} {{ item.start_datetime | date : "shortTime" }} -
+                {{ item.end_datetime | date : "shortTime" }} {{item.expired}}
+              </div>
+              <div *ngIf="item.expired != true" class="d-flex justify-content-between" style="float: right">
+                <button class="btn btn-success btn-sm" (click)="registerGame(item.id, item.name)">Register</button>
+              </div>
+              <div *ngIf="item.expired == true" class="d-flex justify-content-between" style="float: right">
+                <button class="btn btn-danger btn-sm">Expired</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

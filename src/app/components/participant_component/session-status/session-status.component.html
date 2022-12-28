@@ -1,0 +1,26 @@
+<div class="contentArea mt-5 py-5">
+  <div class="container pb-4">
+    <div class="form form--signup">
+      <div>
+        <div class="logoArea">
+          <i
+            style="color: #04445d; font-size: 64px"
+            class="bi bi-clock-history"
+          ></i>
+        </div>
+      </div>
+      <span *ngIf="status == 'pending'" class="form--heading"
+        ><h6>
+          {{ "Your Game session will start at" }}
+          {{ "Datetime" }}
+        </h6></span
+      >
+      <span *ngIf="status == 'expired'" class="form--heading"
+        ><h6>
+          {{ "Your Game session was expired at" }}
+          {{ "Datetime" }}
+        </h6></span
+      >
+    </div>
+  </div>
+</div>

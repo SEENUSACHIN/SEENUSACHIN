@@ -124,7 +124,7 @@ export class OrgServiceService {
       )
       .pipe(catchError(this.errorHandler));
   }
-  getAllQuestion() {
+  getAllQuestion(searchString: any) {
     var httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -132,8 +132,9 @@ export class OrgServiceService {
       }),
     };
     return this.http
-      .get(
-        this.apiURL + '/api/qa/question',
+      .post(
+        this.apiURL + '/api/qa/question/search',
+        JSON.stringify({search : searchString}),
         httpOptions
       )
       .pipe(catchError(this.errorHandler));
@@ -153,4 +154,76 @@ export class OrgServiceService {
       )
       .pipe(catchError(this.errorHandler));
   }
+  addQuestion(quesData : any) {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'enctype': 'multipart/form-data',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.http
+      .post(
+        this.apiURL + '/api/qa/question',
+        quesData,
+        httpOptions
+      )
+      .pipe(catchError(this.errorHandler));
+  }
+  addOption(optData : any, questionId : any) {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'enctype': 'multipart/form-data',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.http
+      .post(
+        this.apiURL + '/api/qa/' + questionId + '/option',
+        optData,
+        httpOptions
+      )
+      .pipe(catchError(this.errorHandler));
+  }
+  participantRegister(regdata: any, session_id: any) {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    return this.http
+      .post(
+        this.apiURL + '/api/qa/participant/' + session_id,
+        JSON.stringify(regdata),
+        httpOptions
+      )
+      .pipe(catchError(this.errorHandler));
+  }
+  getParticipantSession() {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.http
+      .get(
+        this.apiURL + '/api/qa/participant/session',
+        httpOptions
+      )
+      .pipe(catchError(this.errorHandler));
+  }
+  participantMakePayment(participant_id: any, session_id: any) {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    return this.http
+      .get(
+        this.apiURL + '/api/qa/participant/'+ participant_id + '/' + session_id,
+        httpOptions
+      )
+      .pipe(catchError(this.errorHandler));
+  }
+
 }

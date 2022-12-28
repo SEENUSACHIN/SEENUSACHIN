@@ -32,6 +32,7 @@ export class OrgDashboardComponent implements OnInit {
   ];
   sessionSubmitted = false;
   minTime: any;
+  copiedText = '';
   constructor(
     private route:Router,
     private org: OrgServiceService,
@@ -88,6 +89,14 @@ export class OrgDashboardComponent implements OnInit {
     this.org.getOrgSession().subscribe((response: any) => {
       if (response.success === true) {
         this.sessionList = response.session
+        var now_date = new Date()
+        for (var i = 0; i < this.sessionList.length; i++) {
+          var end_datetime = new Date(this.sessionList[i].end_datetime)
+          if(now_date >= end_datetime ) {
+            console.log("enter drfghj");
+            this.sessionList[i]['expired'] = true
+          }
+        }
       }
     });
   }
@@ -129,5 +138,28 @@ export class OrgDashboardComponent implements OnInit {
       })
     }
   }
+  goToCentralRep() {
+    this.route.navigate(['/question_repository']);
+  }
+  onSuccess(e: any) {
+    this.copiedText = e.text;
+    console.log('this.copiedText ', this.copiedText);
+  }
 
+  onError(e: any) {
+    this.copiedText = 'Error trying to copy your text';
+  }
+  copyText(val: string){
+  let selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+  }
 }

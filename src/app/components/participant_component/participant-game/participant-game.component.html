@@ -1,0 +1,31 @@
+<app-participant-nav></app-participant-nav>
+<div class="p-2 min-vh-100 orgDasboard">
+  <div class="container">
+    <div class="mt-1" id="pointer">
+      <h5><b class="headerText">{{'sessionName'}}</b></h5>
+    </div>
+    <div class="mt-2">
+      <div class="card quizCard">
+        <div class="card-body">
+          <p class="quesClass">{{ questionObj.ques }}</p>
+          <div class="ansClass" *ngFor="let item of questionObj.options">
+            <input type="radio" id="{{item}}" name="age" value="{{ item }}" />
+            <label for="{{ item }}">
+              {{ item }}
+            </label
+            ><br />
+          </div>
+        </div>
+        <div class="">
+          <div class="btnGrpClass">
+            <button
+              class="btn btn-sm quesBtn btn-success"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
