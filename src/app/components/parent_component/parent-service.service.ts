@@ -239,7 +239,7 @@ export class ParentServiceService {
       }),
     };
     return this.http
-      .get(this.apiURL + '/api/graduate/' + gId , httpOptions)
+      .get(this.apiURL + '/api/graduate/' + gId, httpOptions)
       .pipe(catchError(this.errorHandler));
   }
   editChild(data: any, editId: any) {
@@ -268,7 +268,7 @@ export class ParentServiceService {
   }
   editStudent(data: any) {
     var gId = localStorage.getItem('graduateUserId');
-    console.log("id",gId);
+    console.log('id', gId);
     const config = {
       headers: {
         enctype: 'multipart/form-data',
@@ -276,7 +276,7 @@ export class ParentServiceService {
       },
     };
     return this.http
-      .put(this.apiURL + '/api/graduate/' + gId , data, config)
+      .put(this.apiURL + '/api/graduate/' + gId, data, config)
       .pipe(catchError(this.errorHandler));
   }
   // editParent(data :any,editId:any) {
@@ -313,11 +313,40 @@ export class ParentServiceService {
     const config = {
       headers: {
         enctype: 'multipart/form-data',
-        Authorization: 'Bearer ' + localStorage.getItem('regToken')
+        Authorization: 'Bearer ' + localStorage.getItem('regToken'),
       },
     };
     return this.http
       .post(this.apiURL + '/api/graduate/' + gId, data, config)
+      .pipe(catchError(this.errorHandler));
+  }
+  forgotPassword(data: any) {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        // Authorization: 'Bearer ' + this.registerToken,
+      }),
+    };
+    return this.http
+      .post(
+        this.apiURL + '/api/forgot_password',data,
+        httpOptions
+      )
+      .pipe(catchError(this.errorHandler));
+  }
+  resetPassword(data: any) {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        // Authorization: 'Bearer ' + this.registerToken,
+      }),
+    };
+    return this.http
+      .post(
+        this.apiURL + '/api/reset_password',
+        JSON.stringify(data),
+        httpOptions
+      )
       .pipe(catchError(this.errorHandler));
   }
 }

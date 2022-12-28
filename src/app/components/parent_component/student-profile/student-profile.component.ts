@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output,EventEmitter } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -25,9 +25,11 @@ import * as $ from 'jquery';
   styleUrls: ['./student-profile.component.css'],
 })
 export class StudentProfileComponent implements OnInit {
+  // @Input("pic") public pic;
+  // @Output() public eventEmitter = new EventEmitter();
   @ViewChild('closebutton') closebutton: any;
   // @ViewChild('closebutton1') closebutton1: any;
-
+  profilePic:any = localStorage.getItem('studentPic');
   graduateform!: FormGroup;
   studentInfo:any = [];
   graduatedata = {
@@ -39,7 +41,6 @@ export class StudentProfileComponent implements OnInit {
     // mobile: '',
   };
   myFiles1: string[] = [];
-
   graduateUserId: any = '';
   studentprofileId: any = '';
   studentProfile: any = '';
@@ -154,4 +155,7 @@ export class StudentProfileComponent implements OnInit {
       }
     });
   }
+  // profilePicture() {
+  //   this.eventEmitter.emit()
+  // }
 }

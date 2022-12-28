@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   FormBuilder,
@@ -6,6 +6,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Output, EventEmitter } from '@angular/core';
+import { Observable,Subscriber, throwError } from 'rxjs';
+
 import { forbiddenNameValidator } from '../../../shared/forbidden-name.directive';
 import { identityRevealedValidator } from '../../../shared/identity-revealed.directive';
 import { UniqueAlterEgoValidator } from '../../../shared/alter-ego.directive';
@@ -20,21 +23,29 @@ import { NotificationService } from '../../../notification.service';
   styleUrls: ['./my-home.component.css'],
 })
 export class MyHomeComponent implements OnInit {
+  // @Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
+
+  @ViewChild('closebutton') closebutton: any;
   loginBtn: boolean = true;
   signupbtn: boolean = true;
   otpPage: boolean = false;
   registrationform!: FormGroup;
   signinform!: FormGroup;
   registerForm!: FormGroup;
+  forgotPassword!: FormGroup;
+  resetPassword!: FormGroup;
   otpform!: FormGroup;
   graduateform!: FormGroup;
   initialPage: boolean = true;
   graduate: boolean = false;
   data: any = { email: '', mobile: '', password: '', parentname: '', role: '' };
   signindata: any = { loginemail: '', loginpassword: '' };
+  forgotdata: any = { forgotemail: '' };
+  resetdata: any = { user_id: '', password: '', resetotp: '' };
   graduateData: any = { college_name: '', program: '', department: '' };
   otpdata: any = { name: '', otp: '' };
   otp: any;
+  resetotp: any;
   token: string = '';
   parentToken: any = '';
   groupId: any = '';
@@ -55,6 +66,12 @@ export class MyHomeComponent implements OnInit {
   submitted = false;
   loginsubmitted = false;
   graduateSubmitted = false;
+  forgotsubmitted = false;
+  resetsubmitted = false;
+  forgotpasswordPage = true;
+  resetpasswordPage = false;
+
+
   role: any = ['parent', 'graduate'];
   selected = '';
   graduateDetail: any = [];
@@ -66,6 +83,7 @@ export class MyHomeComponent implements OnInit {
   graduateUserId: any = '';
   stuPic: any = '';
   studentInfo: any = [];
+  myId: any = '';
   myFiles1: string[] = [];
 
   constructor(
@@ -108,6 +126,9 @@ export class MyHomeComponent implements OnInit {
   get loginemail() {
     return this.signinform.get('loginemail')!;
   }
+  get forgotemail() {
+    return this.forgotPassword.get('forgotemail')!;
+  }
 
   get mobile() {
     return this.registrationform.get('mobile')!;
@@ -118,10 +139,20 @@ export class MyHomeComponent implements OnInit {
   get myotp() {
     return this.otpform.get('otp')!;
   }
+  get resetOtp() {
+    return this.resetPassword.get('resetotp')!;
+  }
   get loginpassword() {
     return this.signinform.get('loginpassword')!;
   }
   ngOnInit(): void {
+    console.log('studentPic',this.studentPic);
+    this.forgotPassword = this.fb.group({
+      forgotemail: ['',[Validators.required, Validators.email]]
+    })
+    this.resetPassword = this.fb.group({
+      resetPassword: ['', [Validators.required, Validators.minLength(6)]],
+    })
     this.graduateform = this.fb.group({
       college_name: ['', [Validators.required]],
       program: ['', [Validators.required]],
@@ -183,6 +214,12 @@ export class MyHomeComponent implements OnInit {
   }
   get f() {
     return this.registerForm.controls;
+  }
+  get forgot() {
+    return this.forgotPassword.controls;
+  }
+  get reset() {
+    return this.resetPassword.controls;
   }
   get fd() {
     return this.signinform.controls;
@@ -320,6 +357,10 @@ export class MyHomeComponent implements OnInit {
     this.otp = otp;
     console.log(this.otp);
   }
+  resetOtpChange(otp: any) {
+    this.resetotp = otp;
+    console.log(this.otp);
+  }
   update(e: any) {
     this.selected = e.target.value;
   }
@@ -412,6 +453,15 @@ export class MyHomeComponent implements OnInit {
     //console.log (e.target.files);
     for (var j = 0; j < e.target.files.length; j++) {
       this.myFiles1.push(e.target.files[j]);
+
+      console.log('this.myFiles1 ', this.myFiles1);
+      var reader = new FileReader();
+
+      reader.readAsDataURL(e.target.files[j]); // read file as data url
+
+      reader.onload = (event: any) => { // called once readAsDataURL is completed
+        this.studentPic = event.target.result;
+      }
     }
   }
   getStudentInfo() {
@@ -426,4 +476,44 @@ export class MyHomeComponent implements OnInit {
       }
     });
   }
+  forgotpassword() {
+    this.forgotsubmitted = true
+    this.forgotpasswordPage = true
+    if (!this.forgotPassword.invalid) {
+    var data = {
+      email: this.forgotPassword.value.forgotemail,
+    };
+    this.parent.forgotPassword(data).subscribe((response: any) => {
+      if(response.success == true) {
+        this.myId = response.id
+        console.log("sadfasd",this.myId);
+        this.forgotpasswordPage = false
+        this.resetpasswordPage = true
+        this.notifyService.showSuccess(response.msg, '');
+      } else {
+        this.notifyService.showError(response.msg, '');
+      }    })
+  }
+  return
+  }
+  resetpassword() {
+    this.resetsubmitted = true
+    if (!this.resetPassword.invalid) {
+    var resetdata = {
+      user_id: this.myId,
+      password: this.resetPassword.value.resetPassword,
+      otp: this.resetotp
+    };
+    this.parent.resetPassword(resetdata).subscribe((response: any) => {
+      if(response.success == true) {
+        this.closebutton.nativeElement.click();
+        this.notifyService.showSuccess(response.msg, '');
+      }else {
+        this.notifyService.showError(response.msg, '');
+      }
+    })
+
+  }
+  return
+}
 }

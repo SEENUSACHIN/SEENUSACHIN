@@ -1,6 +1,9 @@
 <div class="contentArea py-5">
   <div class="container pb-4">
-    <div *ngIf="!initialPage && !otpPage && !graduate" class="form form--signup">
+    <div
+      *ngIf="!initialPage && !otpPage && !graduate"
+      class="form form--signup"
+    >
       <div>
         <div class="logoArea">
           <img class="mylogo" src="../assets/myLogo.png" alt="" />
@@ -19,8 +22,7 @@
             (change)="update($event)"
             [ngClass]="{ 'is-invalid': submitted && rf['role'].errors }"
           >
-            <option selected value="">Select Role
-            </option>
+            <option selected value="">Select Role</option>
             <option *ngFor="let list of role" [value]="list">{{ list }}</option>
           </select>
           <div *ngIf="submitted && rf['role'].errors" class="invalid-feedback">
@@ -232,7 +234,14 @@
             </div>
           </div>
         </div>
-
+        <div class="">
+          <a
+            class="d-flex justify-content-end"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+            >Forgot password?</a
+          >
+        </div>
         <button class="button" (click)="signin()">Login</button>
         <div class="center">
           <span>New to Pi-Hubs? </span>
@@ -265,10 +274,46 @@
         </form>
       </div>
     </div>
-    <div *ngIf="graduate" >
-      <h3 class='text-center'>Student Details</h3>
-      <form [formGroup]="graduateform" #formDir="ngForm" class='graduateForm w-75' >
-        <div class="row ">
+    <div *ngIf="graduate">
+      <h3 class="text-center">Student Details</h3>
+      <form
+        [formGroup]="graduateform"
+        #formDir="ngForm"
+        class="graduateForm w-75"
+      >
+        <div class="row">
+
+          <div class="image-upload">
+            <label for="file-input">
+            <div class="text-center" *ngIf="studentPic != null && studentPic != '' ">
+              <!-- <label>IMAGE</label> -->
+              <img
+                class="profile-user-img img-fluid img-circle"
+                [src]="studentPic"
+                alt=""
+              />
+            </div>
+            <div class="text-center" *ngIf="studentPic == null || studentPic == '' ">
+              <!-- <label>DEFAULT</label> -->
+              <img
+                class="profile-user-img img-fluid img-circle"
+                src="../../../../../assets/default.png"
+                alt=""
+              />
+            </div>
+          </label>
+            <input
+              type="file"
+              (click)="uploadFiles1()"
+              multiple
+              (change)="getFileDetails1($event)"
+              class="form-control"
+              id="file-input"
+              aria-describedby="inputGroupFileAddon04"
+              aria-label="Upload"
+            />
+          </div>
+
           <!-- <div>
           <div class="text-center" *ngIf="studentInfo.profile_pic != null">
             <img
@@ -304,64 +349,72 @@
                 </div> -->
           <div class="col-12 form-group pb-3">
             <input
-            type="text"
-            placeholder="College Name"
-            formControlName="college_name"
-            [ngClass]="{ 'is-invalid': graduateSubmitted && gR['college_name'].errors }"
-          />
-          <div
-            *ngIf="graduateSubmitted && gR['college_name'].errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="gR['college_name'].errors?.['required']">
-              College is required*
+              type="text"
+              placeholder="College Name"
+              formControlName="college_name"
+              [ngClass]="{
+                'is-invalid': graduateSubmitted && gR['college_name'].errors
+              }"
+            />
+            <div
+              *ngIf="graduateSubmitted && gR['college_name'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="gR['college_name'].errors?.['required']">
+                College is required*
+              </div>
             </div>
-          </div>
           </div>
           <div class="col-12 form-group pb-3">
             <input
-            type="text"
-            placeholder="Degree Name"
-            formControlName="program"
-            [ngClass]="{ 'is-invalid': graduateSubmitted && gR['program'].errors }"
-          />
-          <div
-            *ngIf="graduateSubmitted && gR['program'].errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="gR['program'].errors?.['required']">
-              Degree is required*
+              type="text"
+              placeholder="Degree Name"
+              formControlName="program"
+              [ngClass]="{
+                'is-invalid': graduateSubmitted && gR['program'].errors
+              }"
+            />
+            <div
+              *ngIf="graduateSubmitted && gR['program'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="gR['program'].errors?.['required']">
+                Degree is required*
+              </div>
             </div>
-          </div>
           </div>
           <div class="col-12 form-group pb-3">
             <input
-            type="text"
-            placeholder="Department Name"
-            formControlName="department"
-            [ngClass]="{ 'is-invalid': graduateSubmitted && gR['department'].errors }"
-          />
-          <div
-            *ngIf="graduateSubmitted && gR['department'].errors"
-            class="invalid-feedback"
-          >
-            <div *ngIf="gR['department'].errors?.['required']">
-              Department is required*
+              type="text"
+              placeholder="Department Name"
+              formControlName="department"
+              [ngClass]="{
+                'is-invalid': graduateSubmitted && gR['department'].errors
+              }"
+            />
+            <div
+              *ngIf="graduateSubmitted && gR['department'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="gR['department'].errors?.['required']">
+                Department is required*
+              </div>
             </div>
           </div>
-          </div>
-          <br>
+          <br />
           <div class="text-center">
-            <button type="button" class="btn btn-success" (click)="graduateReg( )">
+            <button
+              type="button"
+              class="btn btn-success"
+              (click)="graduateReg()"
+            >
               Submit
             </button>
           </div>
-
         </div>
-  </form>
+      </form>
     </div>
   </div>
-
 
   <!-- alternate validation  -->
   <!-- <div>
@@ -391,4 +444,137 @@
           </form>
     </div>
   </div> -->
+</div>
+<div
+  class="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog w-50">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+          Forgot Password
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          #closebutton
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body ">
+        <div class='forgotpage' *ngIf="forgotpasswordPage">
+          <!-- Forgot Passwrod  -->
+          <form
+            [formGroup]="forgotPassword"
+            #formDir="ngForm"
+            autocomplete="off"
+          >
+            <div><h5>Forgot Password?</h5></div>
+            <p>Enter the email address associated with account</p>
+            <div class="col-12 form-group">
+              <input
+                type="email"
+                placeholder="Email"
+                name="forgotemail"
+                id="forgotemail"
+                formControlName="forgotemail"
+                [ngClass]="{
+                  'is-invalid': forgotsubmitted && forgot['forgotemail'].errors
+                }"
+              />
+              <div
+                *ngIf="forgotsubmitted && forgot['forgotemail'].errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="forgot['forgotemail'].errors?.['required']">
+                  Email is required*
+                </div>
+                <div *ngIf="forgot['forgotemail'].errors?.['email']">
+                  Email must be a valid email address
+                </div>
+              </div>
+            </div>
+            <div>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="forgotpassword()"
+              >
+                Next
+              </button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <div class='forgotpage' *ngIf="resetpasswordPage">
+            <!-- Reset Password -->
+            <form
+              [formGroup]="resetPassword"
+              #formDir="ngForm"
+              autocomplete="off"
+            >
+              <div><h5>Reset Password?</h5></div>
+              <!-- <p>Enter the email address associated with account</p> -->
+              <div class="col-12 form-group">
+                <input
+                  type="password"
+                  placeholder="password"
+                  name="resetPassword"
+                  id="resetPassword"
+                  formControlName="resetPassword"
+                  [ngClass]="{
+                    'is-invalid':
+                      resetsubmitted && reset['resetPassword'].errors
+                  }"
+                />
+                <div
+                  *ngIf="resetsubmitted && reset['resetPassword'].errors"
+                  class="invalid-feedback"
+                >
+                  <div *ngIf="reset['resetPassword'].errors?.['required']">
+                    Password is required*
+                  </div>
+                  <!-- <div *ngIf="fd['resetPassword'].errors?.['email']">
+                  Email must be a valid email address
+                </div> -->
+                </div>
+              </div>
+              <div class="col-12 form-group">
+                <!-- <div class="myotp"> -->
+                  <label for="">Enter the Otp</label>
+                  <br>
+                  <ng-otp-input
+                    (onInputChange)="resetOtpChange($event)"
+                    [config]="config"
+                  ></ng-otp-input>
+                <!-- </div> -->
+              </div>
+              <!-- <div> <button type="button" class="btn btn-primary" (click)="resetpassword()">Next</button></div> -->
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+        *ngIf="resetpasswordPage"
+          type="button"
+          class="btn btn-primary"
+          #closebutton
+          (click)="resetpassword()"
+        >
+          Reset
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
