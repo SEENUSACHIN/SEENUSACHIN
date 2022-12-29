@@ -1,5 +1,5 @@
-/// <reference path="C:\Users\USER-TTS\PROJECTS\piehubs-web-piHubs\piehubs-web-piHubs\PIEHUBS-WEB\node_modules\@types\gapi.auth2\index.d.ts" />
-/// <reference path="C:\Users\USER-TTS\PROJECTS\piehubs-web-piHubs\piehubs-web-piHubs\PIEHUBS-WEB\node_modules\@types\gapi\index.d.ts" />
+/// <reference path="C:\Users\TTS-BUF-05\OneDrive\Desktop\pi-hubs\pi-hubs4\piehubs-web\node_modules\@types\gapi.auth2\index.d.ts" />
+/// <reference path="C:\Users\TTS-BUF-05\OneDrive\Desktop\pi-hubs\pi-hubs4\piehubs-web\node_modules\@types\gapi\index.d.ts" />
 import {Injectable, NgZone} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpRequest} from '@angular/common/http';
 import GoogleUser = gapi.auth2.GoogleUser;

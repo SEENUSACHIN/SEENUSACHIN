@@ -176,12 +176,20 @@
             Add Questions
           </button>
           <div ngbDropdownMenu="gfg">
-            <button
+            <!-- <button
               ngbDropdownItem
               data-bs-toggle="modal"
               id="crBtn"
               type="button"
               data-bs-target="#addQuestion"
+            >
+              Add Questions From Repository
+            </button> -->
+            <button
+              ngbDropdownItem
+              id="crBtn"
+              type="button"
+              (click)="addRepositoryQuestion()"
             >
               Add Questions From Repository
             </button>

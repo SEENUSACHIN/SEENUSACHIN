@@ -5,24 +5,47 @@
       <h5><b class="headerText">{{'sessionName'}}</b></h5>
     </div>
     <div class="mt-2">
-      <div class="card quizCard">
+      <div *ngIf="questionObj == null" class="mt-3" style="text-align:center">
+        Game will started within few seconds...
+      </div>
+      <div *ngIf="questionObj != null" class="card quizCard">
         <div class="card-body">
-          <p class="quesClass">{{ questionObj.ques }}</p>
-          <div class="ansClass" *ngFor="let item of questionObj.options">
-            <input type="radio" id="{{item}}" name="age" value="{{ item }}" />
-            <label for="{{ item }}">
-              {{ item }}
+          <div *ngIf="questionObj.question.type == 'image/png'">
+            <a target="_blank" [href]="questionObj.question.url"><img [src]="questionObj.question.url" width="300" height="150"/></a>
+          </div>
+          <div *ngIf="questionObj.question.type == 'video/mp4'">
+            <video width="300" height="150" controls>
+              <source [src]="questionObj.question.url" type="video/mp4">
+            </video>
+          </div>
+          <p class="quesClass">{{questionObj.question.name}}</p>
+          <div class="ansClass" *ngFor="let item of questionObj.question.option">
+            <input type="radio" [(ngModel)]="ans" id="{{ item.id }}" name="age" value="{{ item.id }}" />
+            <label for="{{ item.id }}">
+              {{ item.name }}
+              <div *ngIf="item.type == 'image/png'">
+                <a target="_blank" [href]="item.url"><img [src]="item.url" width="300" height="150"/></a>
+              </div>
+              <div *ngIf="item.type == 'video/mp4'">
+                <video width="300" height="150" controls>
+                  <source [src]="item.url" type="video/mp4">
+                </video>
+              </div>
             </label
             ><br />
           </div>
         </div>
         <div class="">
           <div class="btnGrpClass">
-            <button
+            <button *ngIf="enableSubmit"
               class="btn btn-sm quesBtn btn-success"
+              (click)="submitAns()"
             >
               Submit
             </button>
+            <div *ngIf="!enableSubmit">
+              <span><i style="color: green; font-size: 20px;" class="bi bi-check-circle-fill"></i> Answer Submitted Successfully.</span>
+            </div>
           </div>
         </div>
       </div>

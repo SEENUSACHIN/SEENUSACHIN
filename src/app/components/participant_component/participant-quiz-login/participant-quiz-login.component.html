@@ -12,7 +12,7 @@
         <div class="col-12 form-group">
           <input
             type="text"
-            placeholder="Meeting Id"
+            placeholder="Enter Room Id"
             formControlName="meeting_id"
             [ngClass]="{ 'is-invalid': regSubmitted && rf['meeting_id'].errors }"
           />
@@ -21,7 +21,7 @@
             class="invalid-feedback"
           >
             <div *ngIf="rf['meeting_id'].errors?.['required']">
-              Meeting ID is required*
+              Room ID is required*
             </div>
           </div>
         </div>

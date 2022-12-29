@@ -12,6 +12,11 @@ import { identityRevealedValidator } from '../../../shared/identity-revealed.dir
 import { UniqueAlterEgoValidator } from '../../../shared/alter-ego.directive';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NotificationService } from '../../../notification.service';
+// import { WebsocketService } from "../../participant_component/websocket.service";
+// import { ChatService } from "../../participant_component/chat.service";
+import { Socket } from 'ngx-socket-io';
+import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-view-session',
   templateUrl: './view-session.component.html',
@@ -60,22 +65,59 @@ export class ViewSessionComponent implements OnInit {
   resultShow: any = [false]
   overallResultShow: any = false
   session_id: any
+  room_id: any = ''
   sessionName =''
+  enableEndSessionButton = false
+  enableStartSessionButton = true
+  msg : any
   constructor(
     private routeP: ActivatedRoute,
     private route:Router,
     private org: OrgServiceService,
     private notifyService: NotificationService,
     private httpClient: HttpClient,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private socket: Socket
+  ) {
+  }
 
   ngOnInit(): void {
     this.session_id =this.routeP.snapshot.paramMap.get('session_id')
+    this.room_id =this.routeP.snapshot.paramMap.get('room_id')
     console.log('this.session_id ', this.session_id);
     this.getSessionById(this.session_id)
+
   }
-  goToHome () {
-    this.route.navigate(['/org_dashboard'], {replaceUrl:true});
+
+  private message = {
+    author: "tutorialedge",
+    message: "this is a test message"
+  };
+
+  startSession () {
+    this.quesInd = 0
+    this.quesShow = this.questionObj[this.quesInd]
+    this.disableShow[this.quesInd] = false
+    this.overallResultShow = false
+    this.resultShow[this.quesInd] = false
+
+    this.org.startSession(this.session_id).subscribe((response: any) => {
+      if (response.success === true) {
+        if(response.msg == "Session started") {
+          this.enableEndSessionButton = true
+          this.enableStartSessionButton = false
+          this.socket.emit("join_room", {room : this.room_id.toString()});
+        }
+      }
+    })
+  }
+  endSession () {
+    this.org.endSession(this.session_id).subscribe((response: any) => {
+      if (response.success === true) {
+        this.route.navigate(['/org_dashboard'], {replaceUrl:true});
+      }
+    })
+
   }
   getSessionById(session_id: any) {
     this.org.getSingleSession(session_id).subscribe((response: any) => {
@@ -104,6 +146,7 @@ export class ViewSessionComponent implements OnInit {
   }
   showQues (ind:any) {
     this.disableShow[ind] = true
+    this.socket.emit("send_message", {message : this.questionObj[ind], room : this.room_id.toString()});
   }
   showResult (ind:any) {
     this.resultShow[ind] = true

@@ -5,11 +5,12 @@
       <h5><b class="headerText">{{sessionName}}</b></h5>
     </div>
     <div class="mt-2">
+      <div>{{msg}}</div>
       <div *ngIf="questionObj.length != 0" class="card quizCard">
         <div class="btnTopGrpClass">
-          <!-- <button class="btn btn-success btn-sm">Show Result</button>
-          <button class="btn btn-success btn-sm">Show Overall Result</button> -->
-          <button class="btn btn-danger btn-sm" (click)="goToHome()">End Session</button>
+          <!-- <button class="btn btn-success btn-sm">Show Result</button> -->
+          <button class="btn btn-primary btn-sm" *ngIf="enableStartSessionButton" (click)="startSession()">Start Session</button>
+          <button class="btn btn-danger btn-sm" *ngIf="enableEndSessionButton" (click)="endSession()">End Session</button>
         </div>
         <div class="card-body" *ngIf="quesShow != null">
           <div *ngIf="quesShow.question.type == 'image/png'">
@@ -37,7 +38,19 @@
             ><br />
           </div>
         </div>
-        <div class="">
+        <div *ngIf="enableStartSessionButton" class="">
+          <div class="btnGrpClass">
+            <button
+              [disabled]="quesInd == questionObj.length - 1"
+              class="btn btn-sm quesBtn"
+              [ngClass]="quesInd == questionObj.length - 1 ? 'btn-default' : 'btn-success'"
+              (click)="goToNextQues()"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+        <div *ngIf="!enableStartSessionButton" class="">
           <div class="btnGrpClass">
             <button
               [disabled]="disableShow[quesInd]"

@@ -1,0 +1,24 @@
+<app-org-nav></app-org-nav>
+<div class="p-2 min-vh-100 orgDasboard">
+  <div class="p-2 min-vh-100 container">
+    <div class="mt-1" id="pointer">
+      <h5>
+        <b class="headerText">{{session_name}}</b>
+      </h5>
+    </div>
+    <div class="mt-4">
+      <div class="d-flex justify-content-between">
+        <h6>
+          <b class="headerText">{{ "Add Questions from Repositiry" }}</b>
+        </h6>
+      </div>
+      <div class="">
+        <div class="flexClass">
+          <span *ngFor="let item of categoryList" type="button" (click)="getCategoryQuestions(item)">
+            {{item}}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

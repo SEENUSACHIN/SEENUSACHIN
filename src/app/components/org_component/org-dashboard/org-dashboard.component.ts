@@ -13,6 +13,7 @@ import { UniqueAlterEgoValidator } from '../../../shared/alter-ego.directive';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NotificationService } from '../../../notification.service';
 import * as moment from 'moment';
+import { FrontURL } from '../../../classes';
 
 @Component({
   selector: 'app-org-dashboard',
@@ -21,6 +22,7 @@ import * as moment from 'moment';
 })
 export class OrgDashboardComponent implements OnInit {
   sessionform!: FormGroup;
+  frontURL = FrontURL
   @ViewChild('closebutton') closebutton: any;
   sessionList: any = [
     // { name: 'Session1', topic: 'Topic1', date: '10-10-2022 10.30am' },
@@ -33,13 +35,15 @@ export class OrgDashboardComponent implements OnInit {
   sessionSubmitted = false;
   minTime: any;
   copiedText = '';
+  current_date: any
   constructor(
     private route:Router,
     private org: OrgServiceService,
     private notifyService: NotificationService,
     private httpClient: HttpClient,
     private fb: FormBuilder
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     const d = new Date();
@@ -52,9 +56,11 @@ export class OrgDashboardComponent implements OnInit {
       registration_fees: ['', [Validators.required]],
       total_questions: ['', [Validators.required]],
       competition_type: ['', [Validators.required]],
+      // game_type: ['', [Validators.required]],
       meeting_link: ['', [Validators.required]],
       start_datetime: ['', [Validators.required]],
       end_datetime: ['', [Validators.required]],
+      room_id: ['', []]
     });
   }
   get name() {
@@ -81,6 +87,12 @@ export class OrgDashboardComponent implements OnInit {
   get end_datetime() {
     return this.sessionform.get('end_datetime')!;
   }
+  // get game_type() {
+  //   return this.sessionform.get('game_type')!;
+  // }
+  get room_id() {
+    return this.sessionform.get('room_id')!;
+  }
   get sf() {
     return this.sessionform.controls;
   }
@@ -91,9 +103,17 @@ export class OrgDashboardComponent implements OnInit {
         this.sessionList = response.session
         var now_date = new Date()
         for (var i = 0; i < this.sessionList.length; i++) {
+          const st_date = new Date(this.sessionList[i].start_datetime).toUTCString();
+          const ed_date = new Date(this.sessionList[i].end_datetime).toUTCString();
+          console.log('st_date1 ', st_date);
+          this.sessionList[i]['startDate'] = st_date
+          this.sessionList[i]['endDate'] = ed_date
           var end_datetime = new Date(this.sessionList[i].end_datetime)
-          if(now_date >= end_datetime ) {
-            console.log("enter drfghj");
+          var start_datetime = new Date(this.sessionList[i].start_datetime)
+          end_datetime.setHours(end_datetime.getHours() + 3);
+          if(now_date < end_datetime && now_date >= start_datetime) {
+            this.sessionList[i]['inprogress'] = true
+          } else if (now_date >= end_datetime ) {
             this.sessionList[i]['expired'] = true
           }
         }
@@ -110,6 +130,8 @@ export class OrgDashboardComponent implements OnInit {
   addSession () {
     this.sessionSubmitted = true;
     console.log("sessionform ", this.sessionform)
+    let start_datetime = (moment(new Date(this.sessionform.value.start_datetime))).format('YYYY-MM-DD HH:mm:ss')
+    console.log('start_datetime ', start_datetime);
     if (!this.sessionform.invalid) {
       this.closebutton.nativeElement.click();
       console.log("sessionform ", this.sessionform.value)
@@ -122,6 +144,7 @@ export class OrgDashboardComponent implements OnInit {
         registration_fees: this.sessionform.value.registration_fees,
         total_questions: this.sessionform.value.total_questions,
         competition_type: this.sessionform.value.competition_type,
+        // game_type: this.sessionform.value.game_type,
         start_datetime: start_datetime,
         end_datetime: end_datetime,
         org_id: localStorage.getItem('org_id'),

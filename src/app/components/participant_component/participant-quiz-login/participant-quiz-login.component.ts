@@ -25,6 +25,7 @@ export class ParticipantQuizLoginComponent implements OnInit {
   successMessage = ""
   showSuccess = false
   session_id : any
+  participant_id : any
   session_name : any
   constructor(
     private routeP: ActivatedRoute,
@@ -43,6 +44,8 @@ export class ParticipantQuizLoginComponent implements OnInit {
     return this.registerForm.controls;
   }
   ngOnInit(): void {
+    this.session_id = this.routeP.snapshot.paramMap.get('sessionId')
+    this.participant_id = this.routeP.snapshot.paramMap.get('participantId')
     this.registerForm = this.fb.group({
       meeting_id: ['', [Validators.required]]
     });
@@ -50,8 +53,10 @@ export class ParticipantQuizLoginComponent implements OnInit {
 
   login() {
     this.regSubmitted = true;
+    console.log(' this.registerForm ', this.registerForm);
     if (!this.registerForm.invalid) {
-      this.route.navigate(['/participant_quiz']);
+      localStorage.setItem("room_id",  this.registerForm.value.meeting_id)
+      this.route.navigate(['/participant_quiz_start/'+ this.session_id + '/' + this.participant_id]);
     }
   }
 }

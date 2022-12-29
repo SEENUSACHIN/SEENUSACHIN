@@ -40,7 +40,11 @@ export class AddQuestionsComponent implements OnInit {
   option4 : string = ''
   errorShow = ''
   questionId = ''
+  categoryList : any
+  category : string = ''
+  newCategory : string = ''
   answer : boolean = false
+  addCategory = false
   constructor(
     private route:Router,
     private org: OrgServiceService,
@@ -50,6 +54,7 @@ export class AddQuestionsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getCategory()
   }
 
   getQuesFileDetails(e: any) {
@@ -202,6 +207,23 @@ export class AddQuestionsComponent implements OnInit {
         this.notifyService.showSuccess(response.msg, '');
       } else {
         this.notifyService.showError(response.msg, '');
+      }
+    })
+  }
+
+  getCategory() {
+    this.org.getCategories().subscribe((response: any) => {
+      if (response.success === true) {
+        this.categoryList = response.category
+      }
+    })
+  }
+  addCetegoryList() {
+    this.org.addCategories(this.newCategory).subscribe((response: any) => {
+      if (response.success === true) {
+        this.addCategory = false;
+        this.getCategory()
+        this.category = this.newCategory
       }
     })
   }

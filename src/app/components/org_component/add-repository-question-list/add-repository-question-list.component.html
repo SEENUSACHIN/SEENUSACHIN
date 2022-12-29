@@ -1,0 +1,89 @@
+<app-org-nav></app-org-nav>
+<div class="p-2 min-vh-100 orgDasboard">
+  <div class="container">
+    <div class="mt-1" id="pointer">
+      <h5>
+        <b class="headerText">{{ category }}</b>
+      </h5>
+    </div>
+    <div class="mt-2">
+      <div class="d-flex justify-content-between">
+        <h6>
+          <b class="headerText">{{ "Questions" }}</b>
+        </h6>
+      </div>
+      <div *ngIf="questionObj.length == 0" class="mt-4" style="text-align: center;">
+        No Questions Found.
+      </div>
+      <div *ngIf="questionObj.length != 0" class="">
+        <div class="card mt-2 quizCard" *ngFor="let item of questionObj">
+          <div class="card-body">
+            <div class="col-12 row">
+              <div class="col-8">
+                <div *ngIf="item.type == 'image/png'">
+                  <a target="_blank" [href]="item.url"
+                    ><img [src]="item.url" width="200" height="100"
+                  /></a>
+                </div>
+                <div *ngIf="item.type == 'video/mp4'">
+                  <video width="200" height="100" controls>
+                    <source [src]="item.url" type="video/mp4">
+                  </video>
+                </div>
+                <p class="quesClass">{{ item.name }}</p>
+                <div class="ansClass" *ngFor="let opt of item.option">
+                  <input
+                    type="radio"
+                    [checked]="opt.answer === true"
+                    id="{{ opt.id }}"
+                    name="{{ opt.id }}"
+                    value="{{ opt.id }}"
+                  />
+                  <label for="{{ opt.id }}">
+                    {{ opt.name }}
+                    <div *ngIf="opt.type == 'image/png'">
+                      <a target="_blank" [href]="opt.url"
+                        ><img [src]="opt.url" width="150" height="80"
+                      /></a>
+                    </div>
+                    <div *ngIf="opt.type == 'video/mp4'">
+                      <video width="150" height="80" controls>
+                        <source [src]="opt.url" type="video/mp4">
+                      </video>
+                    </div>
+                  </label
+                  ><br />
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="canName">
+                  <b> Level : </b>
+                  <span class="level">{{ item.level }}</span>
+                </div>
+                <div class="canName">
+                  <b> Score : </b>
+                  <span class="level">{{ item.score }}</span>
+                </div>
+                <div class="canName">
+                  <b> Updated On : </b>
+                  <span class="level">{{
+                    item.updated_on | date : "medium"
+                  }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="text-align: end;">
+            <button class="btn btn-success btn-sm" data-bs-toggle="modal"
+              id="crBtn"
+              type="button"
+              style="padding: 6px 10px; border-radius: 50px;"
+              (click)="addQuestion(item.id)">
+              <i class="bi bi-plus-lg" style="font-weight: bold; font-size: 18px;"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

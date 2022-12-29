@@ -77,6 +77,9 @@ import { ViewQuestionComponent } from './components/org_component/view-question/
 import { QuestionRepositoryComponent } from './components/org_component/question-repository/question-repository.component';
 import { AddQuestionsComponent } from './components/org_component/add-questions/add-questions.component';
 import { NgxCopyToClipboardModule } from 'ngx-copy-to-clipboard';
+import { AddRepositoryQuestionComponent } from './components/org_component/add-repository-question/add-repository-question.component';
+import { AddRepositoryQuestionListComponent } from './components/org_component/add-repository-question-list/add-repository-question-list.component';
+
 // Participant-comonent
 import { ParticipantRegisterComponent } from './components/participant_component/participant-register/participant-register.component';
 import { ParticipantGameListComponent } from './components/participant_component/participant-game-list/participant-game-list.component';
@@ -84,7 +87,15 @@ import { ParticipantQuizLoginComponent } from './components/participant_componen
 import { ParticipantGameComponent } from './components/participant_component/participant-game/participant-game.component';
 import { ParticipantNavComponent } from './components/participant_component/participant-nav/participant-nav.component';
 import { SessionStatusComponent } from './components/participant_component/session-status/session-status.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
+const config: SocketIoConfig = {
+	// url: "http://localhost:3001", // socket server url;
+  url: "http://3.108.81.145:3001",
+	options: {
+		transports: ['websocket']
+	}
+}
 const routes: Routes = [
   // {path:'', redirectTo: localStorage.getItem('token') != null && localStorage.getItem('token') != '' ? 'admin_dashboard' : 'admin_signin', pathMatch: 'full'},
   {path:'', redirectTo: 'SignIn', pathMatch: 'full'},
@@ -131,14 +142,17 @@ const routes: Routes = [
   {path:'student_inventor' , component: StudentInventorComponent},
   {path:'org_signin' , component: OrgSigninComponent},
   {path:'org_dashboard' , component: OrgDashboardComponent},
-  {path:'view_session/:session_id' , component: ViewSessionComponent},
+  {path:'view_session/:session_id/:room_id' , component: ViewSessionComponent},
   {path:'view_question/:session_id' , component: ViewQuestionComponent},
   {path:'question_repository' , component: QuestionRepositoryComponent},
   {path:'participant_register/:name/:session_id' , component: ParticipantRegisterComponent},
   {path:'participant_games' , component: ParticipantGameListComponent},
-  {path:'participant_quiz_login' , component: ParticipantQuizLoginComponent},
-  {path:'participant_quiz/:sessionId/:participantId' , component: ParticipantGameComponent},
-  {path:'session/:status/:session_id' , component: SessionStatusComponent}
+  // {path:'participant_quiz_login' , component: ParticipantQuizLoginComponent},
+  {path:'participant_quiz_start/:sessionId/:participantId' , component: ParticipantGameComponent},
+  {path:'participant_quiz/:sessionId/:participantId' , component: ParticipantQuizLoginComponent},
+  {path:'session/:status/:session_id' , component: SessionStatusComponent},
+  {path:'add_repository_question/:session_name/:session_id' , component: AddRepositoryQuestionComponent},
+  {path:'add_repository_question_list/:category/:session_id' , component: AddRepositoryQuestionListComponent}
 ];
 declare global {
   interface Window {
@@ -203,7 +217,9 @@ ParticipantGameListComponent,
 ParticipantQuizLoginComponent,
 ParticipantGameComponent,
 ParticipantNavComponent,
-SessionStatusComponent
+SessionStatusComponent,
+AddRepositoryQuestionComponent,
+AddRepositoryQuestionListComponent
 
   ],
   imports: [
@@ -227,7 +243,8 @@ SessionStatusComponent
     NgxPaginationModule,
     TimelineModule,
     CardModule,
-    NgxCopyToClipboardModule
+    NgxCopyToClipboardModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [
     { provide: Window, useValue: window },
