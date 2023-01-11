@@ -210,6 +210,9 @@
           Add Questions
         </button> -->
       </div>
+      <div *ngIf="questionObj.length == 0" style="text-align: center;" class="mt-5">
+        No questions has added yet.
+      </div>
       <div *ngIf="questionObj.length != 0" class="">
         <div class="card mt-2 quizCard" *ngFor="let item of questionObj">
           <div class="card-body">

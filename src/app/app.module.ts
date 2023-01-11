@@ -91,6 +91,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 const config: SocketIoConfig = {
 	// url: "http://localhost:3001", // socket server url;
+  // url: "wss://3.108.81.145:3001",
   url: "http://3.108.81.145:3001",
 	options: {
 		transports: ['websocket']
@@ -152,7 +153,7 @@ const routes: Routes = [
   {path:'participant_quiz/:sessionId/:participantId' , component: ParticipantQuizLoginComponent},
   {path:'session/:status/:session_id' , component: SessionStatusComponent},
   {path:'add_repository_question/:session_name/:session_id' , component: AddRepositoryQuestionComponent},
-  {path:'add_repository_question_list/:category/:session_id' , component: AddRepositoryQuestionListComponent}
+  {path:'add_repository_question_list/:categoryId/:categoryName/:session_id' , component: AddRepositoryQuestionListComponent}
 ];
 declare global {
   interface Window {

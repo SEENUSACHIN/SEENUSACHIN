@@ -89,4 +89,5 @@ export class ViewQuestionComponent implements OnInit {
   addRepositoryQuestion () {
     this.route.navigate(['/add_repository_question/'+ this.sessionName + '/' + this.session_id]);
   }
+
 }

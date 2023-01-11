@@ -27,26 +27,18 @@
             <select
             placeholder="Select Cetegory"
             class="form-select"
-            aria-label="Default select example"
-            [(ngModel)]="category"
+            #categorySelect
+            (change)="category=categorySelect.value;onselectCategory($event);"
           >
-            <option value="" disabled>Select Category</option>
-            <option *ngFor="let item of categoryList" [selected]="category == item.category" [value]="item.category">
-              {{item.category}}
+            <option value="" disabled selected="selected">Select Category</option>
+            <option *ngFor="let item of categoryList" value="{{item.id}}">
+              {{item.name}}
             </option>
           </select>
           </div>
-          <div style="text-align: right;">
-            <a class="nav-link"
-            style="font-weight: bold; text-decoration: underline;"
-            type="button" (click)="addCategory = true"
-             >
-             <i style="font-weight: bold; text-decoration: underline;" class="bi bi-plus-lg"></i> Catrgory
-            </a>
-          </div>
         </div>
-        <div *ngIf="addCategory == true" class="mt-1 d-flex flex-row justify-content-between">
-          <div style="width: 90%;">
+        <div *ngIf="category=='d846df3d-7f13-4803-8c15-b18c0ec14157'" class="mt-3 d-flex flex-row justify-content-between">
+          <div style="width: 100%;">
             <input
             class="form-control"
             name="name"
@@ -55,10 +47,6 @@
             [(ngModel)]="newCategory"
             type="text"
           />
-          </div>
-          <div>
-            <button class="btn btn-success" (click)="addCetegoryList()"
-             >Add</button>
           </div>
         </div>
         <div class="d-flex flex-row mt-3">
@@ -97,10 +85,6 @@
               {{ "Advanced" }}
             </option>
           </select>
-          <!-- &nbsp;
-          <button type="button" class="btn btn-success" (click)="addQues()">
-            Add
-          </button> -->
         </div>
         <div
           class="mt-1"
@@ -123,6 +107,7 @@
             </a>
           </div>
         </div>
+        <!-- option1 -->
         <div class="mt-3 col-12 d-flex flex-row">
           <input
             class="form-control"
@@ -141,27 +126,6 @@
           <button type="button" class="btn btn-default" (click)="file2.click()">
             <i class="bi bi-image-alt"></i>
           </button>
-
-          &nbsp;&nbsp;
-          <div class="col-3 mt-2">
-            <div class="form-check form-switch">
-              <input
-                mdbCheckbox
-                class="form-check-input"
-                type="checkbox"
-                id="flexSwitchCheckDefault1"
-                (change)="toggleAns()"
-                [(ngModel)]="answer"
-              />
-              <label class="form-check-label" for="flexSwitchCheckDefault1"
-                >Correct Answer</label
-              >
-            </div>
-          </div>
-          <!-- &nbsp;
-          <button type="button" class="btn btn-success" (click)="addOption()">
-            Add
-          </button> -->
         </div>
         <div
           class="mt-1"
@@ -184,6 +148,7 @@
             </a>
           </div>
         </div>
+        <!-- option2 -->
         <div class="mt-3 col-12 d-flex flex-row">
           <input
             class="form-control"
@@ -202,27 +167,6 @@
           <button type="button" class="btn btn-default" (click)="file3.click()">
             <i class="bi bi-image-alt"></i>
           </button>
-
-          &nbsp;&nbsp;
-          <div class="col-3 mt-2">
-            <div class="form-check form-switch">
-              <input
-                mdbCheckbox
-                class="form-check-input"
-                type="checkbox"
-                id="flexSwitchCheckDefault2"
-                (change)="toggleAns()"
-                [(ngModel)]="answer"
-              />
-              <label class="form-check-label" for="flexSwitchCheckDefault2"
-                >Correct Answer</label
-              >
-            </div>
-          </div>
-          <!-- &nbsp;
-          <button type="button" class="btn btn-success" (click)="addOption()">
-            Add
-          </button> -->
         </div>
         <div
           class="mt-1"
@@ -245,6 +189,7 @@
             </a>
           </div>
         </div>
+        <!-- option3 -->
         <div class="mt-3 col-12 d-flex flex-row">
           <input
             class="form-control"
@@ -256,34 +201,13 @@
           />
           <input
             hidden
-            #file3
+            #file4
             type="file"
             (change)="getAnsFileDetails3($event)"
           />
-          <button type="button" class="btn btn-default" (click)="file3.click()">
+          <button type="button" class="btn btn-default" (click)="file4.click()">
             <i class="bi bi-image-alt"></i>
           </button>
-
-          &nbsp;&nbsp;
-          <div class="col-3 mt-2">
-            <div class="form-check form-switch">
-              <input
-                mdbCheckbox
-                class="form-check-input"
-                type="checkbox"
-                id="flexSwitchCheckDefault3"
-                (change)="toggleAns()"
-                [(ngModel)]="answer"
-              />
-              <label class="form-check-label" for="flexSwitchCheckDefault3"
-                >Correct Answer</label
-              >
-            </div>
-          </div>
-          <!-- &nbsp;
-          <button type="button" class="btn btn-success" (click)="addOption()">
-            Add
-          </button> -->
         </div>
         <div
           class="mt-1"
@@ -306,6 +230,7 @@
             </a>
           </div>
         </div>
+        <!-- option4 -->
         <div class="mt-3 col-12 d-flex flex-row">
           <input
             class="form-control"
@@ -317,34 +242,13 @@
           />
           <input
             hidden
-            #file4
+            #file5
             type="file"
             (change)="getAnsFileDetails4($event)"
           />
-          <button type="button" class="btn btn-default" (click)="file4.click()">
+          <button type="button" class="btn btn-default" (click)="file5.click()">
             <i class="bi bi-image-alt"></i>
           </button>
-
-          &nbsp;&nbsp;
-          <div class="col-3 mt-2">
-            <div class="form-check form-switch">
-              <input
-                mdbCheckbox
-                class="form-check-input"
-                type="checkbox"
-                id="flexSwitchCheckDefault4"
-                (change)="toggleAns()"
-                [(ngModel)]="answer"
-              />
-              <label class="form-check-label" for="flexSwitchCheckDefault4"
-                >Correct Answer</label
-              >
-            </div>
-          </div>
-          <!-- &nbsp;
-          <button type="button" class="btn btn-success" (click)="addOption()">
-            Add
-          </button> -->
         </div>
         <div
           class="mt-1"
@@ -367,26 +271,58 @@
             </a>
           </div>
         </div>
-        <div class="mt-3" *ngIf="quesPreview != null">
-          <label>Question Preview</label><br />
-          <div *ngIf="quesPreview.questionUrl != null">
-            <img [src]="quesPreview.questionUrl" width="200" height="100" />
+        <br>
+        <div class="row col-12">
+          <div class="col-3">
+            <b>Correct Answer</b>
           </div>
-          <p class="quesClass1">{{ quesPreview.question }}</p>
-          <div class="ansClass" *ngFor="let opt of quesPreview.option">
+          <div class="form-check col-1">
             <input
+              mdbRadio
+              class="form-check-input"
               type="radio"
-              [checked]="opt.crtAns === true"
-              id="{{ opt.optionName }}"
-              name="{{ opt.optionName }}"
-              value="{{ opt.optionName }}"
+              name="flexRadioDefault"
+              id="flexRadioDefault1"
+              value="a"
+              [(ngModel)]="answer"
             />
-            <label for="{{ opt.optionName }}">
-              {{ opt.optionName }}
-              <div *ngIf="opt.ansUrl != null">
-                <img [src]="opt.ansUrl" width="150" height="80" />
-              </div> </label
-            ><br />
+            <label class="form-check-label" for="flexRadioDefault1">A</label>
+          </div>
+          <div class="form-check col-1">
+            <input
+              mdbRadio
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault"
+              id="flexRadioDefault2"
+              value="b"
+              [(ngModel)]="answer"
+            />
+            <label class="form-check-label" for="flexRadioDefault2">B</label>
+          </div>
+          <div class="form-check col-1">
+            <input
+              mdbRadio
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault"
+              id="flexRadioDefault3"
+              value="c"
+              [(ngModel)]="answer"
+            />
+            <label class="form-check-label" for="flexRadioDefault3">C</label>
+          </div>
+          <div class="form-check col-1">
+            <input
+              mdbRadio
+              class="form-check-input"
+              type="radio"
+              name="flexRadioDefault"
+              id="flexRadioDefault4"
+              value="d"
+              [(ngModel)]="answer"
+            />
+            <label class="form-check-label" for="flexRadioDefault4">D</label>
           </div>
         </div>
       </form>
@@ -395,7 +331,7 @@
       <button type="button" class="btn btn-secondary" (click)="loadQues()" data-bs-dismiss="modal">
         Close
       </button>
-      <button type="button" class="btn btn-success" (click)="loadQues()" data-bs-dismiss="modal">
+      <button type="button" class="btn btn-success" (click)="addQues()">
         Submit
       </button>
     </div>

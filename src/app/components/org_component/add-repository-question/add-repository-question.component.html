@@ -11,11 +11,19 @@
         <h6>
           <b class="headerText">{{ "Add Questions from Repositiry" }}</b>
         </h6>
+        <button
+          class="btn btn-success btn-sm"
+          id="crBtn"
+          type="button"
+          (click)="goBack()"
+        >
+          Back
+        </button>
       </div>
       <div class="">
         <div class="flexClass">
-          <span *ngFor="let item of categoryList" type="button" (click)="getCategoryQuestions(item)">
-            {{item}}
+          <span *ngFor="let item of categoryList" type="button" (click)="getCategoryQuestions(item.id, item.name)">
+            {{item.name}}
           </span>
         </div>
       </div>

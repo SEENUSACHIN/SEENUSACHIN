@@ -6,4 +6,4 @@ export const BaseURL = 'http://3.108.81.145:5000'
 // export const BaseURL = 'http://localhost:5000'
 
 // export const FrontURL = 'http://localhost:4200/'
-export const FrontURL = 'http://dev.pihubsgroup.com'
+export const FrontURL = 'http://dev.pihubsgroup.com/'

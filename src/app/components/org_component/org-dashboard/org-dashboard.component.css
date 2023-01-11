@@ -122,6 +122,9 @@
   align-items:flex-start;
   width: 350px;
 }
+.area2 {
+  width: 100px;
+}
 .mySessionHeader {
   padding: 18px 18px 0px 18px;
 }

@@ -7,6 +7,7 @@
   height: 40px;
   position: relative;
   background: #05445E;
+  padding: 10px;
 }
 #pointer:after {
   content: "";
@@ -61,5 +62,13 @@
 .canName {
   font-size: 13px;
   padding: 3px;
+}
+.headerText1 {
+  /* margin: 10px; */
+  width: 230px;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 

@@ -148,7 +148,8 @@ export class OrgDashboardComponent implements OnInit {
         start_datetime: start_datetime,
         end_datetime: end_datetime,
         org_id: localStorage.getItem('org_id'),
-        meeting_link: this.sessionform.value.meeting_link
+        meeting_link: this.sessionform.value.meeting_link,
+        room_id: Number(this.sessionform.value.room_id),
       };
       this.org.createSession(sessionData).subscribe((response: any) => {
         if (response.success === true) {

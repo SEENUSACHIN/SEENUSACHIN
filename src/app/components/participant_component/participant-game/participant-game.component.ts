@@ -18,6 +18,7 @@ export class ParticipantGameComponent implements OnInit {
   participantId: any
   sessionId: any
   enableSubmit= true
+  sessionName: any
 
   constructor(
     private socket: Socket,
@@ -31,12 +32,23 @@ export class ParticipantGameComponent implements OnInit {
     this.room_id = localStorage.getItem("room_id")
     this.participantId = this.routeP.snapshot.paramMap.get('participantId')
     this.sessionId = this.routeP.snapshot.paramMap.get('sessionId')
+    this.getSessionDetails();
     this.socket.emit("join_room", {room : this.room_id});
     this.socket.on("received_message", (data : any) => {
       console.log("received_message ",data)
       this.questionObj = data.message
       this.enableSubmit = true
     });
+  }
+  getSessionDetails(){
+    this.org.getSingleSessionParticipant(this.routeP.snapshot.paramMap.get('sessionId')).subscribe((response: any) => {
+      if (response.success === true) {
+        console.log('response ', response);
+        this.sessionName = response.session[0].name
+      } else {
+        this.notifyService.showError(response.msg, '');
+      }
+    })
   }
   submitAns() {
     if(this.ans == null) {

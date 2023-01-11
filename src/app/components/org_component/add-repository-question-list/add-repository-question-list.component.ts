@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
+import { Location } from '@angular/common'
 import {
   FormBuilder,
   FormGroup,
@@ -19,7 +20,8 @@ import { NotificationService } from '../../../notification.service';
   styleUrls: ['./add-repository-question-list.component.css']
 })
 export class AddRepositoryQuestionListComponent implements OnInit {
-  category: any
+  categoryId : any
+  categoryName : any
   session_id: any
   questionObj : any = []
   constructor(
@@ -28,22 +30,31 @@ export class AddRepositoryQuestionListComponent implements OnInit {
     private org: OrgServiceService,
     private notifyService: NotificationService,
     private httpClient: HttpClient,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
-    this.category =this.routeP.snapshot.paramMap.get('category')
+    this.categoryId =this.routeP.snapshot.paramMap.get('categoryId')
+    this.categoryName =this.routeP.snapshot.paramMap.get('categoryName')
     this.session_id =this.routeP.snapshot.paramMap.get('session_id')
     this.getQuestionsByCategory()
   }
   getQuestionsByCategory() {
-    this.org.getQuesFromCategory(this.category).subscribe((response: any) => {
+    this.org.getQuesFromCategory(this.categoryId, this.session_id).subscribe((response: any) => {
       if (response.success === true) {
-        this.questionObj = response.question
+        this.questionObj = response.questions
+        for (let index = 0; index < this.questionObj.length; index++) {
+          this.questionObj[index]['selected'] = false;
+        }
       }
     })
   }
   addQuestion (quesId: any) {
+    var index = this.questionObj.findIndex((e : any) => e.id == quesId);
+    if(index != -1) {
+      this.questionObj[index]['selected'] = true;
+    }
     var sessionData = {
       question_id: quesId
     };
@@ -55,6 +66,9 @@ export class AddRepositoryQuestionListComponent implements OnInit {
         this.notifyService.showError(response.msg, '');
       }
     })
+  }
+  goBack() {
+    this.location.back()
   }
 
 }

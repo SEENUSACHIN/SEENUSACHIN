@@ -56,7 +56,17 @@ export class ParticipantQuizLoginComponent implements OnInit {
     console.log(' this.registerForm ', this.registerForm);
     if (!this.registerForm.invalid) {
       localStorage.setItem("room_id",  this.registerForm.value.meeting_id)
-      this.route.navigate(['/participant_quiz_start/'+ this.session_id + '/' + this.participant_id]);
+      this.org.participantAuth(this.participant_id).subscribe((response: any) => {
+        if (response.success === true) {
+          console.log('response ', response);
+          localStorage.setItem("participantToken", response.token)
+          this.notifyService.showSuccess(response.success, '');
+          this.route.navigate(['/participant_quiz_start/'+ this.session_id + '/' + this.participant_id]);
+        } else {
+          this.notifyService.showError(response.success, '');
+        }
+      })
+
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 import {
   FormBuilder,
@@ -21,6 +21,7 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class AddQuestionsComponent implements OnInit {
   @Output() newItemEvent = new EventEmitter<boolean>();
+  session_id: any
   myQuesFile : any[] = [];
   myAnsFile1 : any[] = [];
   myAnsFile2 : any[] = [];
@@ -43,9 +44,12 @@ export class AddQuestionsComponent implements OnInit {
   categoryList : any
   category : string = ''
   newCategory : string = ''
-  answer : boolean = false
+  answer : string = 'a'
+  crt_ans = 0
+  @ViewChild('closebutton') closebutton : any;
   addCategory = false
   constructor(
+    private routeP: ActivatedRoute,
     private route:Router,
     private org: OrgServiceService,
     private notifyService: NotificationService,
@@ -54,6 +58,8 @@ export class AddQuestionsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.session_id =this.routeP.snapshot.paramMap.get('session_id')
+    console.log("sessionId123123 ", this.session_id);
     this.getCategory()
   }
 
@@ -85,9 +91,6 @@ export class AddQuestionsComponent implements OnInit {
   }
   removeAnsFile4() {
     this.myAnsFile4 = []
-  }
-  toggleAns() {
-    this.answer = !this.answer
   }
   loadQues() {
     this.newItemEvent.emit(false);
@@ -185,26 +188,103 @@ export class AddQuestionsComponent implements OnInit {
     // })
   }
   addQues() {
-    if(this.question == '' && this.myQuesFile.length == 0) {
-      this.errorShow = "Please Enter the Question"
-      return
-    }
-    var formData = new FormData();
-    formData.append('name', this.question)
+    // if(this.question == '' && this.myQuesFile.length == 0) {
+    //   this.errorShow = "Please Enter the Question"
+    //   return
+    // }
+    console.log('this.category ', this.category);
+    const formData = new FormData();
+    formData.append('question', this.question)
+    console.log('formData question ', formData.getAll('question'));
     formData.append('level', this.level)
+    console.log('formData level ', formData.getAll('level'));
+    formData.append('a', this.option1)
+    formData.append('b', this.option2)
+    formData.append('c', this.option3)
+    formData.append('d', this.option4)
+    console.log('formData a ', formData.getAll('a'));
+    console.log('formData b ', formData.getAll('b'));
+    console.log('formData c ', formData.getAll('c'));
+    console.log('formData d ', formData.getAll('d'));
+    formData.append('category_id', this.category)
+    formData.append('category', this.newCategory)
+    formData.append('answer', this.answer)
+    console.log('formData answer ', formData.getAll('answer'));
+
     if(this.myQuesFile.length != 0) {
-      formData.append('image', this.myQuesFile[0])
+      formData.append('questionFile', this.myQuesFile[0])
     }
-    this.org.addQuestion(formData).subscribe((response: any) => {
+    console.log('formData question ', formData.getAll('questionFile'));
+
+    console.log('formData this.myAnsFile1 ', this.myAnsFile1);
+    console.log('formData this.myAnsFile2 ', this.myAnsFile2);
+    console.log('formData this.myAnsFile3 ', this.myAnsFile3);
+    console.log('formData this.myAnsFile4 ', this.myAnsFile4);
+
+    var optionFiles = []
+    if(this.myAnsFile1.length != 0) {
+      optionFiles.push(this.myAnsFile1[0])
+    }
+    if (this.myAnsFile1.length != 0 &&  this.answer == 'a') {
+      formData.append('ans', this.myAnsFile1[0])
+    }
+    if (this.myAnsFile1.length == 0) {
+      optionFiles.push("")
+    }
+    if(this.myAnsFile2.length != 0) {
+      optionFiles.push(this.myAnsFile2[0])
+    }
+    if (this.myAnsFile2.length != 0 &&  this.answer == 'b') {
+    }
+    if(this.myAnsFile2.length == 0) {
+      optionFiles.push("")
+    }
+    if(this.myAnsFile3.length != 0) {
+      optionFiles.push(this.myAnsFile3[0])
+    }
+    if (this.myAnsFile3.length != 0 &&  this.answer == 'c') {
+      formData.append('ans', this.myAnsFile3[0])
+    }
+    if (this.myAnsFile3.length == 0) {
+      optionFiles.push("")
+    }
+    if(this.myAnsFile4.length != 0) {
+      optionFiles.push(this.myAnsFile4[0])
+    }
+    if (this.myAnsFile4.length != 0 &&  this.answer == 'd') {
+      formData.append('ans', this.myAnsFile4[0])
+    }
+    if (this.myAnsFile4.length == 0) {
+      optionFiles.push("")
+    }
+    console.log('formData optionFiles ', optionFiles);
+    for (let i = 0; i < optionFiles.length; i++) {
+      if(optionFiles[i] != '') {
+        formData.append('option'+ (i+1) , optionFiles[i])
+      }
+    }
+    // formData.append('option',  JSON.stringify(optionFiles))
+    console.log('formData option1 ', formData.getAll('option'));
+    console.log('formData ans ', formData.getAll('ans'));
+
+    console.log('formData ', formData);
+    this.org.addQuestionWithOption(formData).subscribe((response: any) => {
       this.errorShow = ""
       if (response.success === true) {
-        console.log('response ', response);
-        this.quesPreview = {}
-        this.questionId = response.question.id
-        this.quesPreview['question'] = this.question
-        this.quesPreview['option'] = []
-        this.quesPreview['questionUrl'] = this.QuesUrl
-        this.notifyService.showSuccess(response.msg, '');
+        console.log('responsequest----- ', response);
+        var sessionData = {
+          question_id: response.question_id
+        };
+        this.org.addQuestiontoSession(sessionData, this.session_id).subscribe((response1: any) => {
+          this.errorShow = ""
+          if (response1.success === true) {
+            this.notifyService.showSuccess(response1.msg, '');
+          } else {
+            this.notifyService.showSuccess(response1.msg, '');
+          }
+          this.closebutton.nativeElement.click();
+        })
+        // this.notifyService.showSuccess(response.msg, '');
       } else {
         this.notifyService.showError(response.msg, '');
       }
@@ -226,6 +306,10 @@ export class AddQuestionsComponent implements OnInit {
         this.category = this.newCategory
       }
     })
+  }
+  onselectCategory(e: any) {
+    console.log('event ', e);
+    console.log('category ', this.category);
   }
 
 }

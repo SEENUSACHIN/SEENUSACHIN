@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
+import { Location } from '@angular/common'
 import {
   FormBuilder,
   FormGroup,
@@ -21,56 +22,7 @@ import { NotificationService } from '../../../notification.service';
 export class AddRepositoryQuestionComponent implements OnInit {
   session_id: any
   session_name: any
-  categoryList : string[] = [
-    'testing',
-    'abandon',
-    'ability',
-    'able',
-    'abortion',
-    'about',
-    'abroad',
-    'abandon',
-    'ability',
-    'able',
-    'abortion',
-    'about',
-    'abroad',
-    'abandon',
-    'African-American',
-    'able',
-    'abortion',
-    'about',
-    'abroad',
-    'abandon',
-    'ability',
-    'African-American',
-    'abortion',
-    'about',
-    'abroad',
-    'abandon',
-    'ability',
-    'able',
-    'abortion',
-    'African-American',
-    'abroad',
-    'abandon',
-    'ability',
-    'able',
-    'abortion',
-    'about',
-    'abroad',
-    'abandon',
-    'admire',
-    'able',
-    'abortion',
-    'about',
-    'adequate',
-    'abandon',
-    'ability',
-    'able',
-    'abortion',
-    'about',
-    'adjustment'
+  categoryList : any[] = [
   ]
   constructor(
     private routeP: ActivatedRoute,
@@ -78,7 +30,8 @@ export class AddRepositoryQuestionComponent implements OnInit {
     private org: OrgServiceService,
     private notifyService: NotificationService,
     private httpClient: HttpClient,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -90,11 +43,14 @@ export class AddRepositoryQuestionComponent implements OnInit {
   getCategories() {
     this.org.getCategories().subscribe((response: any) => {
       if (response.success === true) {
-        // this.categoryList = response.category
+        this.categoryList = response.category
       }
     })
   }
-  getCategoryQuestions(cat : any) {
-    this.route.navigate(['/add_repository_question_list/'+ cat + '/' + this.session_id]);
+  getCategoryQuestions(catId : any, catName: any) {
+    this.route.navigate(['/add_repository_question_list/'+ catId + '/' + catName + '/' + this.session_id]);
+  }
+  goBack() {
+    this.location.back()
   }
 }

@@ -110,6 +110,20 @@ export class OrgServiceService {
       )
       .pipe(catchError(this.errorHandler));
   }
+  getSingleSessionParticipant(session_id: any) {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('participantToken'),
+      }),
+    };
+    return this.http
+      .get(
+        this.apiURL + '/api/qa/session/' + session_id,
+        httpOptions
+      )
+      .pipe(catchError(this.errorHandler));
+  }
   getOverAllSessionDetails(session_id: any) {
     var httpOptions = {
       headers: new HttpHeaders({
@@ -257,7 +271,7 @@ export class OrgServiceService {
     var httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        // Authorization: 'Bearer ' + localStorage.getItem('token'),
+        Authorization: 'Bearer ' + localStorage.getItem('participantToken'),
       }),
     };
     return this.http
@@ -277,7 +291,7 @@ export class OrgServiceService {
     };
     return this.http
       .get(
-        this.apiURL + '/api/qa/question/category',
+        this.apiURL + '/api/qa/category',
         httpOptions
       )
       .pipe(catchError(this.errorHandler));
@@ -297,7 +311,7 @@ export class OrgServiceService {
       )
       .pipe(catchError(this.errorHandler));
   }
-  getQuesFromCategory(category: any) {
+  getQuesFromCategory(category: any, sessionId: any) {
     var httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -306,7 +320,36 @@ export class OrgServiceService {
     };
     return this.http
       .get(
-        this.apiURL + '/api/qa/question/category/'+ category,
+        this.apiURL + '/api/qa/question/category/'+ category + '/' + sessionId,
+        httpOptions
+      )
+      .pipe(catchError(this.errorHandler));
+  }
+  addQuestionWithOption(quesData: any) {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'enctype': 'multipart/form-data',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.http
+      .post(
+        this.apiURL + '/api/qa/question/add',
+        quesData,
+        httpOptions
+      )
+      .pipe(catchError(this.errorHandler));
+  }
+
+  participantAuth(part_id: any) {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    return this.http
+      .get(
+        this.apiURL + '/api/participant/'+ part_id,
         httpOptions
       )
       .pipe(catchError(this.errorHandler));
