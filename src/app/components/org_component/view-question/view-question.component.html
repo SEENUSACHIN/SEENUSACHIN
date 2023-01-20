@@ -217,6 +217,9 @@
         <div class="card mt-2 quizCard" *ngFor="let item of questionObj">
           <div class="card-body">
             <div class="col-12 row">
+              <div style="text-align: right;">
+                <button class="btn btn-sm btn-danger" (click)="deleteQuestion(item.question.id)">Delete</button>
+              </div>
               <div class="col-8">
                 <div *ngIf="item.question.type == 'image/png'">
                   <a target="_blank" [href]="item.question.url"

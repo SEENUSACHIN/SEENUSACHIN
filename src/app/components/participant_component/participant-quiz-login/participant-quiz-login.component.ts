@@ -60,7 +60,7 @@ export class ParticipantQuizLoginComponent implements OnInit {
         if (response.success === true) {
           console.log('response ', response);
           localStorage.setItem("participantToken", response.token)
-          this.notifyService.showSuccess(response.success, '');
+          // this.notifyService.showSuccess(response.success, '');
           this.route.navigate(['/participant_quiz_start/'+ this.session_id + '/' + this.participant_id]);
         } else {
           this.notifyService.showError(response.success, '');

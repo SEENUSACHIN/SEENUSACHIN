@@ -36,6 +36,7 @@ export class OrgDashboardComponent implements OnInit {
   minTime: any;
   copiedText = '';
   current_date: any
+  org_id : any
   constructor(
     private route:Router,
     private org: OrgServiceService,
@@ -47,6 +48,7 @@ export class OrgDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     const d = new Date();
+    this.org_id = localStorage.getItem('org_id');
     this.minTime = d.toISOString().substring(0, 16);
     console.log('this.minTime ', this.minTime);
     this.getSession()

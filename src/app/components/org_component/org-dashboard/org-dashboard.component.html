@@ -127,6 +127,7 @@
                   [min]='minTime'
                   name="start_datetime"
                   class="form-control"
+                  step="1800"
                   [formControlName]="'start_datetime'"
                   [ngClass]="{ 'is-invalid': sessionSubmitted && sf['start_datetime'].errors }"
                 />
@@ -147,6 +148,7 @@
                   id="end_datetime"
                   name="end_datetime"
                   class="form-control"
+                  step="1800"
                   [formControlName]="'end_datetime'"
                   [ngClass]="{ 'is-invalid': sessionSubmitted && sf['end_datetime'].errors }"
                 />
@@ -350,9 +352,9 @@
       </div>
       <div *ngIf="sessionList.length != 0" class="d-flex flex-column align-items-center mySessioncards">
         <div class="card mySessioncard" *ngFor="let item of sessionList">
-          <div class="area1 col-mod-12">
+          <div class="area1">
             <div
-              class="area col-mod-6"
+              class="area"
               style="text-align: start"
             >
               <span [title]="item.name" class="">
@@ -365,28 +367,17 @@
                 ><b>Meeting Link : </b> <a target="_blank" [href]="item.meeting_link">{{ item.meeting_link }}</a></span
               >
             </div>
-            <div class="area2 col-mod-3" *ngIf="item.status == false && item.expired != true">
-              <div class="canStatus" style="color: green; font-weight: bold;">New</div>
+            <div class="area2" >
+              <span *ngIf="item.status == false && item.expired != true" class="canStatus" style="color: green; font-weight: bold;">New</span>
+              <span *ngIf="item.status == true || item.expired == true" class="canStatus" style="color: red; font-weight: bold;">Completed</span>
+              <span *ngIf="item.inprogress == true && item.expired == true" class="canStatus" style="color: blue; font-weight: bold;">In Progress</span>
             </div>
-            <div class="area2 col-mod-3" *ngIf="item.status == true || item.expired == true">
-              <div class="canStatus" style="color: red; font-weight: bold;">Completed</div>
-            </div>
-            <div class="area2 col-mod-3" *ngIf="item.inprogress == true">
-              <div class="canStatus" style="color: blue; font-weight: bold;" *ngIf="item.expired == true">In Progress</div>
-            </div>
-            <div class="area3 col-mod-3">
+            <div class="area3">
               <div [title]="item.date" class="canName">
                 <b>Date: </b> {{ item.start_datetime | date : "mediumDate" }} {{ item.start_datetime | date : "shortTime" }} - {{ item.end_datetime | date:'shortTime'}}
               </div>
               <div class="d-flex justify-content-between" style="float: right">
-                <!-- <a
-                  class="nav-link canName"
-                  style="text-decoration: underline; font-weight: bold"
-                  (click)="viewSession(item.id)"
-                >
-                  View
-                </a> -->
-                <button *ngIf="item.expired != true" class="btn btn-default btn-sm" (click)="copyText( frontURL + '/#/view_session/' + item.id + '/' + item.room_id)" value="click to copy" ><i class="bi bi-back"></i></button>
+                <button *ngIf="item.expired != true" class="btn btn-default btn-sm" (click)="copyText( frontURL + '/#/view_session/' + org_id + '/' + item.id + '/' + item.room_id)" value="click to copy" ><i class="bi bi-back"></i></button>
                 <button
                   class="btn btn-success btn-sm"
                   (click)="viewSession(item.id)"

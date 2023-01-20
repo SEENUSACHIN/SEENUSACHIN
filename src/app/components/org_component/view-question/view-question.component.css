@@ -36,6 +36,12 @@
 .btn-success:hover {
   background-color: #16213E;
 }
+.btn-danger {
+  background-color: red;
+}
+.btn-danger:hover {
+  background-color: red;
+}
 .quizCard {
   /* min-height: 250px; */
   width: 100%;

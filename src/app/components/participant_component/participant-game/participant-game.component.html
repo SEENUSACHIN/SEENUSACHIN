@@ -8,7 +8,16 @@
       <div *ngIf="questionObj == null" class="mt-3" style="text-align:center">
         Game will started within few seconds...
       </div>
-      <div *ngIf="questionObj != null" class="card quizCard">
+      <div *ngIf="questionObj != null && questionObj == 'Session ended'" class="card quizCard">
+        <div class="card-body" style="text-align:center">
+          <div style="font-size: 18; font-weight: bold;">Thank You !!!</div>
+          <br>
+          <div style="font-size: 18; font-weight: bold;">You have completed the session successfully</div>
+          <br>
+          <div style="font-size: 16;">Your Total Score : {{score}}</div>
+        </div>
+      </div>
+      <div *ngIf="questionObj != null && questionObj != 'Session ended'" class="card quizCard">
         <div class="card-body">
           <div *ngIf="questionObj.question.type == 'image/png'">
             <a target="_blank" [href]="questionObj.question.url"><img [src]="questionObj.question.url" width="300" height="150"/></a>

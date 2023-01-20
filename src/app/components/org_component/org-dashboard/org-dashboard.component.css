@@ -90,6 +90,10 @@
     /* justify-content: space-between; */
     align-items: flex-start;
   }
+  .area3 {
+    text-align: start;
+    width: 300px;
+  }
 }
 @media screen and (max-width: 768px) {
   .area1 {
@@ -97,6 +101,10 @@
     flex-direction: column;
     /* justify-content: space-between; */
     align-items: flex-start;
+  }
+  .area3 {
+    text-align: start;
+    width: 300px;
   }
 }
 @media screen and (max-width: 480px) {
@@ -106,6 +114,10 @@
     /* justify-content: space-between; */
     align-items: flex-start;
   }
+  .area3 {
+    text-align: start;
+    width: 300px;
+  }
 }
 @media screen and (max-width: 575px) {
   .area1 {
@@ -114,16 +126,25 @@
     /* justify-content: space-between; */
     align-items: flex-start;
   }
+  .area3 {
+    text-align: start;
+    width: 300px;
+  }
 }
 .area {
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
   align-items:flex-start;
-  width: 350px;
+  width: 550px;
 }
 .area2 {
-  width: 100px;
+  text-align: start;
+  width: 300px;
+}
+.area3 {
+  text-align: end;
+  width: 300px;
 }
 .mySessionHeader {
   padding: 18px 18px 0px 18px;

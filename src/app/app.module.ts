@@ -88,11 +88,13 @@ import { ParticipantGameComponent } from './components/participant_component/par
 import { ParticipantNavComponent } from './components/participant_component/participant-nav/participant-nav.component';
 import { SessionStatusComponent } from './components/participant_component/session-status/session-status.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { DateAgoPipe } from './components/org_component/pipes/date-ago.pipe';
 
 const config: SocketIoConfig = {
 	// url: "http://localhost:3001", // socket server url;
-  // url: "wss://3.108.81.145:3001",
-  url: "http://3.108.81.145:3001",
+  // url: "http://3.108.81.145:3001",
+  url: "https://socket.pihubsgroup.com",
+  // url: "https://org.pihubsgroup.com",
 	options: {
 		transports: ['websocket']
 	}
@@ -143,7 +145,7 @@ const routes: Routes = [
   {path:'student_inventor' , component: StudentInventorComponent},
   {path:'org_signin' , component: OrgSigninComponent},
   {path:'org_dashboard' , component: OrgDashboardComponent},
-  {path:'view_session/:session_id/:room_id' , component: ViewSessionComponent},
+  {path:'view_session/:org_id/:session_id/:room_id' , component: ViewSessionComponent},
   {path:'view_question/:session_id' , component: ViewQuestionComponent},
   {path:'question_repository' , component: QuestionRepositoryComponent},
   {path:'participant_register/:name/:session_id' , component: ParticipantRegisterComponent},
@@ -220,7 +222,8 @@ ParticipantGameComponent,
 ParticipantNavComponent,
 SessionStatusComponent,
 AddRepositoryQuestionComponent,
-AddRepositoryQuestionListComponent
+AddRepositoryQuestionListComponent,
+DateAgoPipe
 
   ],
   imports: [

@@ -25,39 +25,6 @@ import { map } from 'rxjs/operators';
 export class ViewSessionComponent implements OnInit {
 
   questionObj : any = [
-    // {
-    //   ques : "Entomology is the science that studies",
-    //   options : [
-    //     "Behavior of human beings",
-    //     "Insects",
-    //     "The origin and history of technical and scientific terms",
-    //     "The formation of rocks"
-    //   ]
-    // },
-    // {
-    //   ques : "Eritrea, which became the 182nd member of the UN in 1993, is in the continent of",
-    //   options : [
-    //     "Asia",
-    //     "Africa",
-    //   ]
-    // },
-    // {
-    //   ques : "Garampani sanctuary is located at",
-    //   options : [
-    //     "Junagarh, Gujarat",
-    //     "Diphu, Assam",
-    //     "Kohima, Nagaland"
-    //   ]
-    // },
-    // {
-    //   ques : "For which of the following disciplines is Nobel Prize awarded?",
-    //   options : [
-    //     "Physics and Chemistry",
-    //     "Diphu, Assam",
-    //     "Kohima, Nagaland",
-    //     "Literature, Peace and Economics"
-    //   ]
-    // }
   ]
   quesInd = 0
   quesShow: any = {}
@@ -66,10 +33,14 @@ export class ViewSessionComponent implements OnInit {
   overallResultShow: any = false
   session_id: any
   room_id: any = ''
+  org_id: any
   sessionName =''
   enableEndSessionButton = false
   enableStartSessionButton = true
   msg : any
+  resultData: any = []
+  overallResultData: any = []
+  showOverallResultTable: boolean = false
   constructor(
     private routeP: ActivatedRoute,
     private route:Router,
@@ -82,11 +53,23 @@ export class ViewSessionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.org_id =this.routeP.snapshot.paramMap.get('org_id')
+    this.login();
     this.session_id =this.routeP.snapshot.paramMap.get('session_id')
     this.room_id =this.routeP.snapshot.paramMap.get('room_id')
     console.log('this.session_id ', this.session_id);
-    this.getSessionById(this.session_id)
-
+  }
+  login() {
+    this.org.participantAuth(this.org_id).subscribe((response: any) => {
+      if (response.success === true) {
+        console.log('response ', response);
+        localStorage.setItem("token", response.token)
+        this.getSessionById(this.session_id)
+        // this.notifyService.showSuccess(response.success, '');
+      } else {
+        this.notifyService.showError(response.success, '');
+      }
+    })
   }
 
   private message = {
@@ -112,12 +95,11 @@ export class ViewSessionComponent implements OnInit {
     })
   }
   endSession () {
+    this.socket.emit("send_message", {message : "Session ended", room : this.room_id.toString()});
     this.org.endSession(this.session_id).subscribe((response: any) => {
-      if (response.success === true) {
-        this.route.navigate(['/org_dashboard'], {replaceUrl:true});
-      }
+      this.showOverallResult ();
+      this.showOverallResultTable = true
     })
-
   }
   getSessionById(session_id: any) {
     this.org.getSingleSession(session_id).subscribe((response: any) => {
@@ -148,9 +130,15 @@ export class ViewSessionComponent implements OnInit {
     this.disableShow[ind] = true
     this.socket.emit("send_message", {message : this.questionObj[ind], room : this.room_id.toString()});
   }
-  showResult (ind:any) {
+  showResult (ind:any, question_id: any) {
     this.resultShow[ind] = true
     this.overallResultShow = false
+    this.org.participantDetailsForSingleQue(this.session_id, question_id).subscribe((response: any) => {
+      if (response.success === true) {
+        this.resultData = response.detail
+        console.log(' response ', response);
+      }
+    })
   }
   closeResult (ind:any) {
     this.resultShow[ind] = false
@@ -158,13 +146,18 @@ export class ViewSessionComponent implements OnInit {
   showOverallResult () {
     this.overallResultShow = true
     this.resultShow[this.quesInd] = false
-    this.org.getOverAllSessionDetails(this.session_id).subscribe((response: any) => {
+    this.org.participantDetailsForSession(this.session_id).subscribe((response: any) => {
       if (response.success === true) {
+        this.overallResultData = response.s_q
         console.log(' response ', response);
       }
     })
   }
   closeOverallResult () {
     this.overallResultShow = false
+  }
+  goToSignIn () {
+    localStorage.clear()
+    this.route.navigate(['/org_signin'], {replaceUrl:true});
   }
 }

@@ -355,5 +355,62 @@ export class OrgServiceService {
       .pipe(catchError(this.errorHandler));
   }
 
+  participantDetailsForSingleQue(session_id: any, question_id: any) {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'enctype': 'multipart/form-data',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.http
+      .get(
+        this.apiURL + '/api/qa/session/' + session_id + '/' + question_id,
+        httpOptions
+      )
+      .pipe(catchError(this.errorHandler));
+  }
+  participantDetailsForSession(session_id: any) {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'enctype': 'multipart/form-data',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.http
+      .get(
+        this.apiURL + '/api/qa/session/' + session_id + '/result',
+        httpOptions
+      )
+      .pipe(catchError(this.errorHandler));
+  }
+  deleteQueInSession(session_id: any, question_id: any) {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'enctype': 'multipart/form-data',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
+    };
+    return this.http
+      .delete(
+        this.apiURL + '/api/qa/session/' + session_id + '/' + question_id,
+        httpOptions
+      )
+      .pipe(catchError(this.errorHandler));
+  }
+  getParticipantScore(session_id: any, participant_id: any) {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'enctype': 'multipart/form-data',
+        Authorization: 'Bearer ' + localStorage.getItem('participantToken'),
+      }),
+    };
+    return this.http
+      .get(
+        this.apiURL + '/api/qa/' + session_id + '/' + participant_id + '/result',
+        httpOptions
+      )
+      .pipe(catchError(this.errorHandler));
+  }
+
 
 }

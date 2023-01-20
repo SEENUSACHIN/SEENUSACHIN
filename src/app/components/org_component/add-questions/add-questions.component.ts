@@ -280,7 +280,7 @@ export class AddQuestionsComponent implements OnInit {
           if (response1.success === true) {
             this.notifyService.showSuccess(response1.msg, '');
           } else {
-            this.notifyService.showSuccess(response1.msg, '');
+            this.notifyService.showError(response1.msg, '');
           }
           this.closebutton.nativeElement.click();
         })

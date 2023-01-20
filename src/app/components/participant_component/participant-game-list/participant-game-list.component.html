@@ -51,11 +51,14 @@
                 <b>Date: </b> {{ item.start_datetime | date : "mediumDate" }} {{ item.start_datetime | date : "shortTime" }} -
                 {{ item.end_datetime | date : "shortTime" }} {{item.expired}}
               </div>
-              <div *ngIf="item.expired != true" class="d-flex justify-content-between" style="float: right">
+              <!-- <div *ngIf="item.expired != true" class="d-flex justify-content-between" style="float: right">
                 <button class="btn btn-success btn-sm" (click)="registerGame(item.id, item.name)">Register</button>
               </div>
               <div *ngIf="item.expired == true" class="d-flex justify-content-between" style="float: right">
                 <button class="btn btn-danger btn-sm">Expired</button>
+              </div> -->
+              <div class="d-flex justify-content-between" style="float: right">
+                <button class="btn btn-success btn-sm" (click)="registerGame(item.id, item.name)">Register</button>
               </div>
             </div>
           </div>

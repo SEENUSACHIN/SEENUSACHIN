@@ -89,5 +89,15 @@ export class ViewQuestionComponent implements OnInit {
   addRepositoryQuestion () {
     this.route.navigate(['/add_repository_question/'+ this.sessionName + '/' + this.session_id]);
   }
-
+  deleteQuestion (question_id: any) {
+    this.org.deleteQueInSession(this.session_id, question_id).subscribe((response: any) => {
+      if (response.success === true) {
+        console.log('response ', response);
+        this.notifyService.showSuccess(response.msg, '');
+        this.getSessionById(this.session_id)
+      } else {
+        this.notifyService.showError(response.msg, '');
+      }
+    })
+  }
 }
