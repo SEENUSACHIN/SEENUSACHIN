@@ -11,14 +11,12 @@
       </div>
       <span *ngIf="status == 'pending'" class="form--heading"
         ><h6>
-          {{ "Your Game session will start at" }}
-          {{ "Datetime" }}
+          {{ "Your Game session not started yet." }}
         </h6></span
       >
       <span *ngIf="status == 'expired'" class="form--heading"
         ><h6>
-          {{ "Your Game session was expired at" }}
-          {{ "Datetime" }}
+          {{ "Your Game session was expired." }}
         </h6></span
       >
     </div>

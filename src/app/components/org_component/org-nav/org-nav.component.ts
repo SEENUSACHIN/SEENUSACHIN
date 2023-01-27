@@ -7,10 +7,11 @@ import {Router} from '@angular/router';
   styleUrls: ['./org-nav.component.css']
 })
 export class OrgNavComponent implements OnInit {
-
+  org_name: any = ''
   constructor(private route:Router) { }
 
   ngOnInit(): void {
+    this.org_name= localStorage.getItem('org_name');
   }
 
   logout() {
